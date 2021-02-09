@@ -18,6 +18,22 @@
     </q-img>
     <!-- /HERO -->
 
+    <!-- MAIN CAROUSEL -->
+    <div class="text-h5 q-pa-md">Destacados</div>
+    <carousel-3d style="height: 470px" :animationSpeed="200" :space="440">
+      <slide
+        v-for="(slide, i) in slides"
+        :index="i"
+        :key="i"
+        style="border: none; height: 469px"
+      >
+        <img
+          src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/upcoming-event-poster-template-4cb3419c3eb5816bb72a5c24a73de9bc_screen.jpg"
+        />
+      </slide>
+    </carousel-3d>
+    <!-- /MAIN CAROUSEL -->
+
     <!-- SEARCH DIALOG -->
     <q-dialog
       v-model="searchDialog"
@@ -88,6 +104,7 @@ export default {
   data() {
     return {
       searchDialog: false,
+      slides: 7,
     };
   },
   mounted() {
