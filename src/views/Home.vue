@@ -17,7 +17,7 @@
       :src="require('@/assets/full_flyer.webp')"
       class="text-white text-bold q-mb-md"
     >
-      <span class="absolute-full text-h4 flex flex-center">One<br />Spot</span>
+      <!-- <span class="absolute-full text-h4 flex flex-center">One<br />Spot</span> -->
     </q-img>
 
     <!-- <q-parallax
@@ -34,7 +34,7 @@
     <!-- SPOTLIGHT -->
     <div class="text-h6 q-pa-md">Destacados</div>
     <div class="row q-pa-md" v-for="(event, i) in 3" :key="i">
-      <q-card class="full-width" flat>
+      <q-card class="full-width" flat @click="$router.push('/event/asdf')">
         <q-img
           :src="require('@/assets/spotlight_tile.webp')"
           class="os-spotlight-tile"
@@ -109,7 +109,11 @@
               />
             </div>
             <div class="col">
-              <q-input borderless placeholder="Buscar evento" autofocus />
+              <q-input borderless placeholder="Buscar evento" autofocus>
+                <template v-slot:prepend>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
             </div>
           </div>
         </q-card-section>
