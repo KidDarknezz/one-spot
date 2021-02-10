@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <!-- EVEMT FLYER -->
-    <div style="height: 525px">
+    <div style="height: 490px">
       <q-img
         :src="require('@/assets/full_flyer.webp')"
         class="text-white text-bold fixed-top"
