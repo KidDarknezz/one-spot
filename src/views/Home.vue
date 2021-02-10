@@ -14,16 +14,16 @@
 
     <!-- HERO -->
     <q-img
-      :src="require('@/assets/hero.webp')"
+      :src="require('@/assets/full_flyer.webp')"
       class="text-white text-bold q-mb-md"
     >
       <span class="absolute-full text-h4 flex flex-center">One<br />Spot</span>
     </q-img>
 
     <!-- <q-parallax
-      :src="require('@/assets/hero.webp')"
+      :src="require('@/assets/full_flyer.webp')"
       :height="600"
-      :speed="0.5"
+      :speed="1"
       style="width: 100%"
     >
       <div class="text-h4 text-bold text-white">OneSpot</div>
@@ -34,8 +34,11 @@
     <!-- SPOTLIGHT -->
     <div class="text-h6 q-pa-md">Destacados</div>
     <div class="row q-pa-md" v-for="(event, i) in 3" :key="i">
-      <q-card flat>
-        <img src="@/assets/spotlight_tile.webp" class="os-spotlight-tile" />
+      <q-card class="full-width" flat>
+        <q-img
+          :src="require('@/assets/spotlight_tile.webp')"
+          class="os-spotlight-tile"
+        />
         <q-card-section>
           <div class="row">
             <div class="col">
@@ -69,6 +72,22 @@
       </slide>
     </carousel-3d> -->
     <!-- /SPOTLIGHT -->
+
+    <!-- RECENTLY ADDED -->
+    <div class="bg-grey-3 os-recent-section">
+      <div class="text-h6 q-pa-md">Recien agregados</div>
+      <div class="row">
+        <div class="col-xs-4 q-pa-md" v-for="(event, i) in 4" :key="i">
+          <q-img
+            :src="require('@/assets/event_thumbnail.webp')"
+            class="os-event-thumbnail q-mb-sm"
+          />
+          <div class="text-subtitle2">Music Event</div>
+          <div class="text-caption text-grey-6">Sum text</div>
+        </div>
+      </div>
+    </div>
+    <!-- /RECENTLU ADDED -->
 
     <!-- SEARCH DIALOG -->
     <q-dialog
@@ -165,5 +184,12 @@ export default {
 
 .os-spotlight-tile {
   border-radius: 15px !important;
+}
+.os-recent-section {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.os-event-thumbnail {
+  border-radius: 15px;
 }
 </style>

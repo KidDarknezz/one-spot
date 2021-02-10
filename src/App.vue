@@ -8,7 +8,7 @@
       >
         <div class="col">
           <div class="justify-center row">
-            <q-btn flat round dense icon="search" color="black" />
+            <q-btn flat round dense icon="o_home" color="black" />
           </div>
         </div>
         <div class="col">
