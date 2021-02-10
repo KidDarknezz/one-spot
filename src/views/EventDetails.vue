@@ -21,7 +21,7 @@
     <!-- /EVENT FLYER -->
 
     <!-- EVENT DETAILS -->
-    <q-card class="q-pa-md bg-grey-2 os-event-details" flat>
+    <q-card class="q-pa-md bg-grey-2 os-event-details">
       <q-card-section>
         <div class="text-h6">Music Event</div>
         <div class="text-subtitle">DJ NAME - DJ NAME</div>
