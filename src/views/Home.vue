@@ -3,17 +3,20 @@
     <!-- SEARCH BOX -->
     <div class="row fixed-top q-pa-md" style="z-index: 1" id="search-box">
       <div
-        class="bg-grey-2 full-width text-center q-pa-md text-bold os-search"
+        class="bg-grey-2 text-grey-6 full-width text-center q-pa-md os-search"
         @click="searchDialog = true"
       >
-        <q-icon name="fas fa-search" class="text-accent q-mr-xs" />
-        Eventos
+        <q-icon name="fas fa-search" class="q-mr-xs" />
+        Buscar evento
       </div>
     </div>
     <!-- /SEARCH BOX -->
 
     <!-- HERO -->
-    <q-img :src="require('@/assets/hero.webp')" class="text-white text-bold">
+    <q-img
+      :src="require('@/assets/hero.webp')"
+      class="text-white text-bold q-mb-md"
+    >
       <span class="absolute-full text-h4 flex flex-center">One<br />Spot</span>
     </q-img>
 
@@ -28,9 +31,32 @@
 
     <!-- /HERO -->
 
-    <!-- MAIN CAROUSEL -->
-    <div class="text-h5 q-pa-md">Destacados</div>
-    <carousel-3d :animationSpeed="200" :space="440" :height="470">
+    <!-- SPOTLIGHT -->
+    <div class="text-h6 q-pa-md">Destacados</div>
+    <div class="row q-pa-md" v-for="(event, i) in 3" :key="i">
+      <q-card flat>
+        <img src="@/assets/spotlight_tile.webp" class="os-spotlight-tile" />
+        <q-card-section>
+          <div class="row">
+            <div class="col">
+              <div class="text-subtitle2">Music Event</div>
+            </div>
+            <div class="col">
+              <div class="text-caption text-right text-grey-6">Taberna 21</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="text-caption text-grey-6">22 de Enero 2022</div>
+            </div>
+            <div class="col">
+              <div class="text-caption text-right text-grey-6">14 km</div>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </div>
+    <!-- <carousel-3d :animationSpeed="200" :space="440" :height="470">
       <slide
         v-for="(slide, i) in slides"
         :index="i"
@@ -41,43 +67,8 @@
           src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/upcoming-event-poster-template-4cb3419c3eb5816bb72a5c24a73de9bc_screen.jpg"
         />
       </slide>
-    </carousel-3d>
-    <!-- /MAIN CAROUSEL -->
-
-    <div class="row">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut
-      pretium erat. In non porttitor ante. Orci varius natoque penatibus et
-      magnis dis parturient montes, nascetur ridiculus mus. Quisque eu tincidunt
-      magna. Mauris ipsum nisi, facilisis feugiat libero non, tempus sodales
-      nisl. Proin mauris est, fermentum vel dui in, varius rutrum nibh. Nulla
-      vitae risus sit amet risus varius condimentum. Suspendisse pulvinar congue
-      ipsum, auctor dictum lacus. Sed elit quam, placerat vel vehicula in,
-      varius ac elit. Duis sit amet semper urna. Maecenas a dignissim mi.
-      Vivamus eget pellentesque tortor, id commodo nisl. Sed commodo ante in sem
-      cursus, vitae iaculis metus tempus. Mauris id turpis sit amet sapien
-      viverra fringilla. Vestibulum et massa non tortor luctus volutpat sit amet
-      vel urna. Proin porta pharetra neque facilisis auctor. Praesent mattis
-      aliquam risus vitae ullamcorper. Suspendisse elementum porta libero, non
-      convallis nisl mollis eget. Mauris porttitor vel purus eget aliquet.
-      Aliquam consectetur metus ac risus pretium, vel egestas sapien efficitur.
-      Donec ligula leo, ullamcorper et felis sed, convallis pretium sem. Morbi
-      mauris ligula, venenatis in iaculis quis, consequat ac risus. Nulla
-      convallis sagittis turpis, sed mattis metus tempus a. Donec tellus ipsum,
-      dignissim sed venenatis ac, suscipit vel felis. Morbi in egestas leo. Cras
-      eu quam condimentum, lacinia eros in, rhoncus felis. Praesent vulputate
-      sollicitudin elementum. Mauris ullamcorper rutrum odio non tristique.
-      Donec tristique sapien elit, et aliquam nisl rutrum a. Praesent urna
-      mauris, lobortis id sem ut, pellentesque porta sem. Etiam tristique ac
-      sapien in eleifend. Maecenas tristique risus eget efficitur malesuada.
-      Curabitur id imperdiet odio. Maecenas id efficitur nibh. Suspendisse
-      lobortis, urna at facilisis egestas, tellus urna volutpat ex, vitae
-      efficitur neque metus sit amet mi. Integer dapibus odio vel velit
-      elementum condimentum. Proin feugiat hendrerit euismod. Ut fermentum, mi
-      vel condimentum placerat, erat metus facilisis lacus, ut condimentum justo
-      libero sed nisl. Nulla sem nulla, tempor a diam et, rutrum luctus libero.
-      Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-      cubilia curae;
-    </div>
+    </carousel-3d> -->
+    <!-- /SPOTLIGHT -->
 
     <!-- SEARCH DIALOG -->
     <q-dialog
@@ -140,6 +131,10 @@
       </q-card>
     </q-dialog>
     <!-- /SEARCH DIALOG -->
+
+    <!-- BOTTOM SPACE -->
+    <div class="row" style="height: 40px" />
+    <!-- /BOTTOM SPACE -->
   </q-page>
 </template>
 
@@ -165,6 +160,10 @@ export default {
 
 <style>
 .os-search {
-  border-radius: 30px;
+  border-radius: 15px;
+}
+
+.os-spotlight-tile {
+  border-radius: 15px !important;
 }
 </style>
