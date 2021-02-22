@@ -50,7 +50,7 @@ const actions = {
         commit("setSponsoredEvent", { event: 'spotlight_3', data: ev })
       })
     })
-    firebase.firestore().collection('events').orderBy('createdAt', 'desc').limit(3).get().then(snapshot => {
+    firebase.firestore().collection('events').orderBy('createdAt', 'desc').limit(6).get().then(snapshot => {
       snapshot.docs.forEach(doc => {
         let d = doc.data()
         d.id = doc.id
