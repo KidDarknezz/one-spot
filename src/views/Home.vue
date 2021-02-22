@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <!-- SEARCH BOX -->
-    <div class="row fixed-top q-pa-md" style="z-index: 1" id="search-box">
+    <!-- <div class="row fixed-top q-pa-md" style="z-index: 1" id="search-box">
       <div
         class="bg-grey-2 text-grey-6 full-width text-center q-pa-md os-search"
         @click="searchDialog = true"
@@ -9,34 +9,22 @@
         <q-icon name="fas fa-search" class="q-mr-xs" />
         Buscar evento
       </div>
-    </div>
+    </div> -->
     <!-- /SEARCH BOX -->
 
     <!-- HERO -->
     <q-img
-      :src="require('@/assets/full_flyer.webp')"
-      class="text-white text-bold q-mb-md"
+      :src="require('@/assets/main_cover.jpg')"
+      class="text-white text-bold q-mb-md os-main-cover"
     >
-      <!-- <span class="absolute-full text-h4 flex flex-center">One<br />Spot</span> -->
     </q-img>
-
-    <!-- <q-parallax
-      :src="require('@/assets/full_flyer.webp')"
-      :height="600"
-      :speed="1"
-      style="width: 100%"
-    >
-      <div class="text-h4 text-bold text-white">OneSpot</div>
-    </q-parallax> -->
-
     <!-- /HERO -->
 
     <!-- SPOTLIGHT -->
-    <div class="text-h6 q-pa-md">Destacados</div>
     <div class="row q-pa-md" v-for="(event, i) in 3" :key="i">
       <q-card class="full-width" flat @click="$router.push('/event/asdf')">
         <q-img
-          :src="require('@/assets/spotlight_tile.webp')"
+          :src="require('@/assets/spotlight_tile_2.webp')"
           class="os-spotlight-tile"
         />
         <q-card-section>
@@ -59,22 +47,10 @@
         </q-card-section>
       </q-card>
     </div>
-    <!-- <carousel-3d :animationSpeed="200" :space="440" :height="470">
-      <slide
-        v-for="(slide, i) in slides"
-        :index="i"
-        :key="i"
-        style="border: none; height: 469px"
-      >
-        <img
-          src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/upcoming-event-poster-template-4cb3419c3eb5816bb72a5c24a73de9bc_screen.jpg"
-        />
-      </slide>
-    </carousel-3d> -->
     <!-- /SPOTLIGHT -->
 
     <!-- RECENTLY ADDED -->
-    <div class="bg-grey-3 os-recent-section">
+    <div class="os-recent-section q-ma-md text-white">
       <div class="text-h6 q-pa-md">Recien agregados</div>
       <div class="row">
         <div class="col-xs-4 q-pa-md" v-for="(event, i) in 4" :key="i">
@@ -156,7 +132,7 @@
     <!-- /SEARCH DIALOG -->
 
     <!-- BOTTOM SPACE -->
-    <div class="row" style="height: 40px" />
+    <div class="row" style="height: 50px" />
     <!-- /BOTTOM SPACE -->
   </q-page>
 </template>
@@ -171,17 +147,27 @@ export default {
     };
   },
   mounted() {
-    const searchbox = document.querySelector("#search-box");
-    window.addEventListener("scroll", () => {
-      let scroll = (window.scrollY || window.pageYOffset) / 150;
-      searchbox.style.backgroundColor = `rgba(255, 255, 255, ${scroll})`;
-      searchbox.style.boxShadow = `0 1px 5px 0px rgba(156, 156, 156, ${scroll})`;
-    });
+    // const searchbox = document.querySelector("#search-box");
+    // window.addEventListener("scroll", () => {
+    //   let scroll = (window.scrollY || window.pageYOffset) / 150;
+    //   searchbox.style.backgroundColor = `rgba(255, 255, 255, ${scroll})`;
+    //   searchbox.style.boxShadow = `0 1px 5px 0px rgba(156, 156, 156, ${scroll})`;
+    // });
   },
 };
 </script>
 
 <style>
+.os-main-cover {
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0, 0, 0, 1)),
+    to(rgba(0, 0, 0, 0))
+  );
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
 .os-search {
   border-radius: 15px;
 }
@@ -190,8 +176,8 @@ export default {
   border-radius: 15px !important;
 }
 .os-recent-section {
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-radius: 15px;
+  background-color: #242424;
 }
 .os-event-thumbnail {
   border-radius: 15px;
