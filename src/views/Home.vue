@@ -65,7 +65,6 @@
       </div>
     </div>
     <!-- /RECENTLY ADDED -->
-
     <loading-overlay :display="showLoading" />
   </q-page>
 </template>

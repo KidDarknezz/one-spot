@@ -77,6 +77,7 @@
       </q-card>
       <!-- /EVENT DETAILS -->
     </div>
+    <loading-overlay :display="showLoading" />
   </q-page>
 </template>
 
@@ -89,6 +90,11 @@ export default {
   },
   computed: {
     ...mapState("eventStore", ["selectedEvent"]),
+
+    showLoading() {
+      if (this.selectedEvent) return false;
+      else return true;
+    },
   },
   mounted() {
     window.scrollTo(0, 0);
