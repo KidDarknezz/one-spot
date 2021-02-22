@@ -15,7 +15,11 @@
       v-for="(event, i) in sponsoredEvents"
       :key="i"
     >
-      <q-card class="full-width" flat @click="$router.push('/event/asdf')">
+      <q-card
+        class="full-width"
+        flat
+        @click="$router.push(`/event/${event.id}`)"
+      >
         <q-img :src="event.assets.tile" class="os-spotlight-tile" />
         <q-card-section>
           <div class="row">
