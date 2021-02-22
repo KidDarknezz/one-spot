@@ -51,85 +51,19 @@
 
     <!-- RECENTLY ADDED -->
     <div class="os-recent-section q-ma-md text-white">
-      <div class="text-h6 q-pa-md">Recien agregados</div>
+      <div class="text-subtitle2 q-pa-md">Recien agregados</div>
       <div class="row">
         <div class="col-xs-4 q-pa-md" v-for="(event, i) in 4" :key="i">
           <q-img
             :src="require('@/assets/event_thumbnail.webp')"
             class="os-event-thumbnail q-mb-sm"
           />
-          <div class="text-subtitle2">Music Event</div>
+          <div class="text-caption">Music Event</div>
           <div class="text-caption text-grey-6">Sum text</div>
         </div>
       </div>
     </div>
-    <!-- /RECENTLU ADDED -->
-
-    <!-- SEARCH DIALOG -->
-    <q-dialog
-      v-model="searchDialog"
-      persistent
-      maximized
-      transition-show="slide-up"
-      transition-hide="slide-down"
-    >
-      <q-card class="bg-grey-2">
-        <q-card-section>
-          <div class="row">
-            <div class="col-xs-2">
-              <q-btn
-                icon="arrow_back"
-                round
-                flat
-                @click="searchDialog = false"
-              />
-            </div>
-            <div class="col">
-              <q-input borderless placeholder="Buscar evento" autofocus>
-                <template v-slot:prepend>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
-            </div>
-          </div>
-        </q-card-section>
-
-        <q-card-section>
-          <q-list separator>
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-avatar rounded>
-                  <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-                </q-avatar>
-              </q-item-section>
-              <q-item-section>Eventos cerca de mi</q-item-section>
-            </q-item>
-          </q-list>
-        </q-card-section>
-        <div class="q-px-lg text-caption text-bold text-grey-6">
-          Recomendados
-        </div>
-        <q-card-section>
-          <q-list separator>
-            <q-item
-              clickable
-              v-ripple
-              v-for="(event, i) in 7"
-              :key="i"
-              class="q-py-md"
-            >
-              <q-item-section avatar>
-                <q-avatar rounded>
-                  <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-                </q-avatar>
-              </q-item-section>
-              <q-item-section>Event name</q-item-section>
-            </q-item>
-          </q-list>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
-    <!-- /SEARCH DIALOG -->
+    <!-- /RECENTLY ADDED -->
 
     <!-- BOTTOM SPACE -->
     <div class="row" style="height: 50px" />
