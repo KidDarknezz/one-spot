@@ -67,10 +67,6 @@
       </q-card-actions>
     </q-card>
     <!-- /EVENT DETAILS -->
-
-    <!-- BOTTOM SPACE -->
-    <div class="row" style="height: 40px" />
-    <!-- /BOTTOM SPACE -->
   </q-page>
 </template>
 

@@ -64,10 +64,6 @@
       </div>
     </div>
     <!-- /RECENTLY ADDED -->
-
-    <!-- BOTTOM SPACE -->
-    <div class="row" style="height: 50px" />
-    <!-- /BOTTOM SPACE -->
   </q-page>
 </template>
 
