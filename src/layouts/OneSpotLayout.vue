@@ -28,7 +28,14 @@
         </div>
         <div class="col">
           <div class="justify-center row">
-            <q-btn flat round dense icon="perm_identity" color="black" />
+            <q-btn
+              flat
+              round
+              dense
+              icon="perm_identity"
+              color="black"
+              @click="logoutUser()"
+            />
           </div>
         </div>
       </div>
@@ -38,3 +45,13 @@
     </q-page-container>
   </q-layout>
 </template>
+
+<script>
+import { mapActions } from "vuex";
+
+export default {
+  methods: {
+    ...mapActions("authStore", ["logoutUser"]),
+  },
+};
+</script>

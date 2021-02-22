@@ -15,6 +15,7 @@
             color="black"
             dense
             class="full-width"
+            v-model="loginData.email"
           />
         </div>
         <div class="row q-mb-md">
@@ -25,10 +26,18 @@
             color="black"
             dense
             class="full-width"
+            v-model="loginData.password"
           />
         </div>
         <div class="row q-mb-md">
-          <q-btn label="login" color="pink" rounded push class="full-width" />
+          <q-btn
+            label="login"
+            color="pink"
+            rounded
+            push
+            class="full-width"
+            @click="loginUser(loginData)"
+          />
         </div>
         <div class="row q-mb-lg">
           <router-link to="/login" class="text-grey-7 text-center full-width">
@@ -45,3 +54,21 @@
     </div>
   </q-page>
 </template>
+
+<script>
+import { mapActions } from "vuex";
+
+export default {
+  data() {
+    return {
+      loginData: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    ...mapActions("authStore", ["loginUser"]),
+  },
+};
+</script>
