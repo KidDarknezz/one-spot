@@ -44,7 +44,10 @@
     <!-- /SPOTLIGHT -->
 
     <!-- RECENTLY ADDED -->
-    <div class="os-recent-section q-my-md q-mx-lg text-white">
+    <div
+      class="os-recent-section q-my-md q-mx-lg text-white"
+      v-if="createdRecently.length > 0"
+    >
       <div class="text-subtitle2 q-pa-md">Recien agregados</div>
       <div class="row">
         <div
@@ -62,6 +65,8 @@
       </div>
     </div>
     <!-- /RECENTLY ADDED -->
+
+    <loading-overlay :display="showLoading" />
   </q-page>
 </template>
 
@@ -85,6 +90,15 @@ export default {
       "sponsoredEvents",
       "createdRecently",
     ]),
+    showLoading() {
+      if (
+        this.mainCover &&
+        this.sponsoredEvents.length > 0 &&
+        this.createdRecently.length > 0
+      )
+        return false;
+      else return true;
+    },
   },
   mounted() {
     if (this.sponsoredEvents.length == 0) this.getHomeEvents();

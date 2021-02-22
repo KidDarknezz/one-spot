@@ -85,7 +85,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   methods: {
-    ...mapActions("eventStore", ["getSelectedEvent"]),
+    ...mapActions("eventStore", ["getSelectedEvent", "emptySelectedEvent"]),
   },
   computed: {
     ...mapState("eventStore", ["selectedEvent"]),
@@ -93,6 +93,9 @@ export default {
   mounted() {
     window.scrollTo(0, 0);
     this.getSelectedEvent(this.$route.params.eventId);
+  },
+  beforeDestroy() {
+    this.emptySelectedEvent();
   },
 };
 </script>

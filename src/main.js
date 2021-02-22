@@ -7,6 +7,8 @@ import './quasar'
 
 import firebase from 'firebase/app'
 
+import LoadingOverlay from '@/components/LoadingOverlayComponent'
+
 Vue.config.productionTip = false
 
 var firebaseConfig = {
@@ -20,6 +22,8 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+Vue.component('loading-overlay', LoadingOverlay)
 
 new Vue({
   router,

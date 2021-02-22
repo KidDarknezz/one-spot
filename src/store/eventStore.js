@@ -14,6 +14,9 @@ const actions = {
     firebase.firestore().collection('events').doc(payload).get().then(snapshot => {
       commit("setSelectedEvent", snapshot.data())
     })
+  },
+  emptySelectedEvent({ commit }) {
+    commit("setSelectedEvent", null)
   }
 }
 const getters = {}
