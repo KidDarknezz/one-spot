@@ -31,13 +31,15 @@
         </div>
         <div class="row q-mb-md">
           <q-btn
-            label="login"
             color="pink"
             rounded
             push
             class="full-width"
             @click="loginUser(loginData)"
-          />
+          >
+            <template v-if="!loadingStatus"> Login </template>
+            <q-spinner-dots color="white" size="1em" v-else />
+          </q-btn>
         </div>
         <div class="row q-mb-lg">
           <router-link to="/login" class="text-grey-7 text-center full-width">
@@ -56,7 +58,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   data() {
@@ -69,6 +71,9 @@ export default {
   },
   methods: {
     ...mapActions("authStore", ["loginUser"]),
+  },
+  computed: {
+    ...mapState("authStore", ["loadingStatus"]),
   },
 };
 </script>

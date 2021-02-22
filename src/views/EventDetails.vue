@@ -3,7 +3,7 @@
     <!-- EVEMT FLYER -->
     <div style="height: 490px">
       <q-img
-        :src="require('@/assets/full_flyer.webp')"
+        :src="require('@/assets/event_1_cover.webp')"
         class="text-white text-bold fixed-top"
       >
         <div class="row full-width">

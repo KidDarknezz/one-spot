@@ -1,36 +1,26 @@
 <template>
   <q-page>
-    <!-- SEARCH BOX -->
-    <!-- <div class="row fixed-top q-pa-md" style="z-index: 1" id="search-box">
-      <div
-        class="bg-grey-2 text-grey-6 full-width text-center q-pa-md os-search"
-        @click="searchDialog = true"
-      >
-        <q-icon name="fas fa-search" class="q-mr-xs" />
-        Buscar evento
-      </div>
-    </div> -->
-    <!-- /SEARCH BOX -->
-
     <!-- HERO -->
     <q-img
-      :src="require('@/assets/main_cover.jpg')"
+      :src="mainCover.assets.cover"
       class="text-white text-bold q-mb-md os-main-cover"
+      v-if="mainCover"
     >
     </q-img>
     <!-- /HERO -->
 
     <!-- SPOTLIGHT -->
-    <div class="row q-pa-md" v-for="(event, i) in 3" :key="i">
+    <div
+      class="row q-py-md q-px-lg"
+      v-for="(event, i) in sponsoredEvents"
+      :key="i"
+    >
       <q-card class="full-width" flat @click="$router.push('/event/asdf')">
-        <q-img
-          :src="require('@/assets/spotlight_tile_2.webp')"
-          class="os-spotlight-tile"
-        />
+        <q-img :src="event.assets.tile" class="os-spotlight-tile" />
         <q-card-section>
           <div class="row">
             <div class="col">
-              <div class="text-subtitle2">Music Event</div>
+              <div class="text-subtitle2">{{ event.name }}</div>
             </div>
             <div class="col">
               <div class="text-caption text-right text-grey-6">Taberna 21</div>
@@ -50,15 +40,19 @@
     <!-- /SPOTLIGHT -->
 
     <!-- RECENTLY ADDED -->
-    <div class="os-recent-section q-ma-md text-white">
+    <div class="os-recent-section q-my-md q-mx-lg text-white">
       <div class="text-subtitle2 q-pa-md">Recien agregados</div>
       <div class="row">
-        <div class="col-xs-4 q-pa-md" v-for="(event, i) in 4" :key="i">
+        <div
+          class="col-xs-4 q-pa-md"
+          v-for="(event, i) in createdRecently"
+          :key="i"
+        >
           <q-img
-            :src="require('@/assets/event_thumbnail.webp')"
+            :src="event.assets.thumbnail"
             class="os-event-thumbnail q-mb-sm"
           />
-          <div class="text-caption">Music Event</div>
+          <div class="text-caption">{{ event.name }}</div>
           <div class="text-caption text-grey-6">Sum text</div>
         </div>
       </div>
@@ -69,6 +63,8 @@
 
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -76,7 +72,18 @@ export default {
       slides: 7,
     };
   },
+  methods: {
+    ...mapActions("homeStore", ["getHomeEvents"]),
+  },
+  computed: {
+    ...mapState("homeStore", [
+      "mainCover",
+      "sponsoredEvents",
+      "createdRecently",
+    ]),
+  },
   mounted() {
+    if (this.sponsoredEvents.length == 0) this.getHomeEvents();
     // const searchbox = document.querySelector("#search-box");
     // window.addEventListener("scroll", () => {
     //   let scroll = (window.scrollY || window.pageYOffset) / 150;

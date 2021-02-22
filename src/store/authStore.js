@@ -3,17 +3,24 @@ import 'firebase/firebase-auth'
 
 import router from '@/router'
 
-const state = {}
-const mutations = {}
+const state = {
+  loadingStatus: false
+}
+const mutations = {
+  setLoadingStatus(state, payload) {
+    state.loadingStatus = payload
+  }
+}
 const actions = {
-  loginUser({ }, payload) {
+  loginUser({ commit }, payload) {
+    commit("setLoadingStatus", true)
     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then(credentials => {
-        console.log(credentials)
         router.replace('/')
+        commit("setLoadingStatus", false)
       })
       .catch(err => {
-        console.log(err)
+        commit("setLoadingStatus", true)
         alert(err.message)
       })
   },
