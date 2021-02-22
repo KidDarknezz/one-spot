@@ -2,10 +2,11 @@
   <q-page>
     <div v-if="selectedEvent">
       <!-- EVEMT FLYER -->
-      <div style="height: 490px">
+      <div style="height: 60vh">
         <q-img
           :src="selectedEvent.assets.cover"
           class="text-white text-bold fixed-top"
+          id="eventCover"
         >
           <div class="row full-width">
             <div class="col-xs-1">
@@ -23,7 +24,9 @@
       <!-- EVENT DETAILS -->
       <q-card class="q-pa-md bg-grey-2 os-event-details">
         <q-card-section>
-          <div class="text-h6">{{ selectedEvent.name }}</div>
+          <div class="text-h6">
+            {{ selectedEvent.name }}
+          </div>
           <div class="text-subtitle">DJ NAME - DJ NAME</div>
           <div class="text-caption">24 de Enero 2022</div>
         </q-card-section>
