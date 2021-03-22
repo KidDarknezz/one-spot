@@ -9,6 +9,8 @@ import OneSpotLayout from '@/layouts/OneSpotLayout'
 import Home from '../views/Home.vue'
 import EventDetails from '@/views/EventDetails'
 import LoginView from '@/views/LoginView'
+import RegisterView from '@/views/RegisterView'
+import EmailValidation from '@/views/EmailValidation'
 
 //FIREBASE
 import firebase from 'firebase/app'
@@ -25,6 +27,16 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: LoginView
+      },
+      {
+        path: '/register',
+        name: 'Register',
+        component: RegisterView
+      },
+      {
+        path: '/email-validation',
+        name: 'EmailValidation',
+        component: EmailValidation
       }
     ]
   },

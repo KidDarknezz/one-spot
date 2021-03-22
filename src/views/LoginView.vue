@@ -47,7 +47,10 @@
           </router-link>
         </div>
         <div class="row">
-          <router-link to="/login" class="text-grey-7 text-center full-width">
+          <router-link
+            to="/register"
+            class="text-grey-7 text-center full-width"
+          >
             Register here
           </router-link>
         </div>
