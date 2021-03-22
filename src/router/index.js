@@ -1,85 +1,79 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
 //LAYOUTS
-import AuthLayout from '@/layouts/AuthLayout'
-import OneSpotLayout from '@/layouts/OneSpotLayout'
+import AuthLayout from "@/layouts/AuthLayout";
+import OneSpotLayout from "@/layouts/OneSpotLayout";
 
 //VIEWS
-import Home from '../views/Home.vue'
-import EventDetails from '@/views/EventDetails'
-import LoginView from '@/views/LoginView'
-import RegisterView from '@/views/RegisterView'
-import EmailValidation from '@/views/EmailValidation'
+import Home from "../views/Home.vue";
+import EventDetails from "@/views/EventDetails";
+import LoginView from "@/views/LoginView";
+import RegisterView from "@/views/RegisterView";
 
 //FIREBASE
-import firebase from 'firebase/app'
-import 'firebase/firebase-auth'
+import firebase from "firebase/app";
+import "firebase/firebase-auth";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/login',
+    path: "/login",
     component: AuthLayout,
     children: [
       {
-        path: '/login',
-        name: 'Login',
-        component: LoginView
+        path: "/login",
+        name: "Login",
+        component: LoginView,
       },
       {
-        path: '/register',
-        name: 'Register',
-        component: RegisterView
+        path: "/register",
+        name: "Register",
+        component: RegisterView,
       },
-      {
-        path: '/email-validation',
-        name: 'EmailValidation',
-        component: EmailValidation
-      }
-    ]
+    ],
   },
   {
-    path: '/',
+    path: "/",
     component: OneSpotLayout,
     children: [
       {
-        path: '/',
-        name: 'OneSpot',
+        path: "/",
+        name: "OneSpot",
         component: Home,
         meta: {
           requiresAuth: true,
         },
       },
       {
-        path: '/event/:eventId',
-        name: 'Event Details',
+        path: "/event/:eventId",
+        name: "Event Details",
         component: EventDetails,
         meta: {
           requiresAuth: true,
         },
-      }
-    ]
+      },
+    ],
   },
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   if (requiresAuth) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) next()
-      else next('/login')
-    })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) next();
+      else next("/login");
+    });
   } else {
-    next()
+    next();
   }
-})
+});
 
-export default router
+export default router;
