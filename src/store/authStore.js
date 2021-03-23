@@ -32,6 +32,7 @@ const actions = {
       })
       .catch((err) => {
         alert(err);
+        commit("setLoadingStatus", false);
       });
   },
   logoutUser({ commit }) {
