@@ -1,7 +1,9 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-page-container>
-      <router-view />
+      <router-view
+        v-if="activeUser.emailVerification && activeUser.completeRegistration"
+      />
       <div
         class="row fixed-bottom bg-grey-2 q-py-sm"
         v-if="!$route.fullPath.includes('/event/')"
@@ -69,15 +71,19 @@ export default {
     ...mapState("authStore", ["activeUser"]),
 
     displayCompleteRegistrationDialog() {
-      if (
-        !this.activeUser.emailVerification ||
-        !this.activeUser.completeRegistration
-      )
-        return true;
-      else return false;
+      try {
+        if (
+          !this.activeUser.emailVerification ||
+          !this.activeUser.completeRegistration
+        )
+          return true;
+        else return false;
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
-  mounted() {
+  beforeMount() {
     this.getUserData();
   },
   components: {

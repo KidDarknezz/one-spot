@@ -78,17 +78,24 @@ const actions = {
       .firestore()
       .collection("users")
       .doc(firebase.auth().currentUser.uid)
-      .onSnapshot((doc) => {
-        commit("setActiveUser", doc.data());
-      });
+      .onSnapshot(
+        (doc) => {
+          commit("setActiveUser", doc.data());
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   },
   completeUserRegistration({}, payload) {
-    console.log("finishing");
     firebase
       .firestore()
       .collection("users")
       .doc(firebase.auth().currentUser.uid)
-      .update({ completeRegistration: true });
+      .update({
+        completeRegistration: true,
+        interests: payload.selectedCategories,
+      });
   },
 };
 const getters = {};
