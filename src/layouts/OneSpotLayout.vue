@@ -1,9 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-page-container>
-      <router-view
-        v-if="activeUser.emailVerification && activeUser.completeRegistration"
-      />
+      <router-view />
       <div
         class="row fixed-bottom bg-grey-2 q-py-sm"
         v-if="!$route.fullPath.includes('/event/')"
@@ -41,7 +39,10 @@
           </div>
         </div>
       </div>
-      <CompleteRegistrationOverlayComponent :userData="activeUser" />
+      <CompleteRegistrationOverlayComponent
+        :userData="activeUser"
+        :display="displayCompleteRegistrationDialog"
+      />
       <!-- BOTTOM SPACE -->
       <div
         class="row"
@@ -59,15 +60,22 @@ import CompleteRegistrationOverlayComponent from "@/components/CompleteRegistrat
 
 export default {
   data() {
-    return {
-      completeRegistrationDialog: true,
-    };
+    return {};
   },
   methods: {
     ...mapActions("authStore", ["logoutUser", "getUserData"]),
   },
   computed: {
     ...mapState("authStore", ["activeUser"]),
+
+    displayCompleteRegistrationDialog() {
+      if (
+        !this.activeUser.emailVerification ||
+        !this.activeUser.completeRegistration
+      )
+        return true;
+      else return false;
+    },
   },
   mounted() {
     this.getUserData();

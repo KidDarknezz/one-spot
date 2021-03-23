@@ -13,6 +13,7 @@ const mutations = {
     state.loadingStatus = payload;
   },
   setActiveUser(state, payload) {
+    payload.emailVerification = firebase.auth().currentUser.emailVerified;
     state.activeUser = payload;
   },
 };
@@ -38,9 +39,9 @@ const actions = {
       .auth()
       .signOut()
       .then(() => {
+        router.replace("/login");
         console.log("logout succesfull");
         commit("setActiveUser", null);
-        router.replace("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -60,8 +61,13 @@ const actions = {
         name: payload.name,
         lastName: payload.lastName,
         email: payload.email,
-        emailVerification: false,
         completeRegistration: false,
+      });
+    firebase
+      .auth()
+      .currentUser.sendEmailVerification()
+      .catch((err) => {
+        console.log(err);
       });
     commit("setLoadingStatus", false);
     router.push("/");
