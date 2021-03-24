@@ -1,12 +1,11 @@
 <template>
   <q-page>
     <!-- HERO -->
-    <q-img
+    <img
       :src="mainCover.assets.cover"
-      class="text-white text-bold q-mb-md os-main-cover"
+      class="text-white text-bold q-mb-md os-main-cover full-width"
       v-if="mainCover"
-    >
-    </q-img>
+    />
     <!-- /HERO -->
 
     <!-- SPOTLIGHT -->
@@ -20,7 +19,7 @@
         flat
         @click="$router.push(`/event/${event.id}`)"
       >
-        <q-img :src="event.assets.tile" class="os-spotlight-tile" />
+        <img :src="event.assets.tile" class="os-spotlight-tile" />
         <q-card-section>
           <div class="row">
             <div class="col">
@@ -55,9 +54,9 @@
           v-for="(event, i) in createdRecently"
           :key="i"
         >
-          <q-img
+          <img
             :src="event.assets.thumbnail"
-            class="os-event-thumbnail q-mb-sm"
+            class="os-event-thumbnail q-mb-sm full-width"
           />
           <div class="text-caption">{{ event.name }}</div>
           <div class="text-caption text-grey-6">Sum text</div>
@@ -68,7 +67,6 @@
     <loading-overlay :display="showLoading" />
   </q-page>
 </template>
-
 
 <script>
 import { mapState, mapActions } from "vuex";
