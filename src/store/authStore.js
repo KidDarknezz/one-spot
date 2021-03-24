@@ -53,7 +53,13 @@ const actions = {
     commit("setLoadingStatus", true);
     const resp = await firebase
       .auth()
-      .createUserWithEmailAndPassword(sanitizedEmail, payload.password);
+      .createUserWithEmailAndPassword(sanitizedEmail, payload.password)
+      .catch((e) => {
+        commit("setLoadingStatus", false);
+        alert(e);
+        return e;
+      });
+    if (resp.constructor.name == "E") return;
     await firebase
       .firestore()
       .collection("users")

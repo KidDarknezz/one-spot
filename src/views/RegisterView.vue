@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="row q-pa-lg">
-      <q-btn icon="navigate_before" flat round size="sm" to="/login" />
+      <q-btn icon="navigate_before" flat round to="/login" />
     </div>
     <div class="row">
       <q-form

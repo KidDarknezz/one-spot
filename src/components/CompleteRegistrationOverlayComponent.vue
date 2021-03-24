@@ -100,12 +100,6 @@
               </div>
             </div>
             <div class="row" style="height: 50vh; overflow-y: scroll">
-              <!-- <q-option-group
-                :options="options"
-                type="checkbox"
-                v-model="group"
-                color="pink"
-              /> -->
               <div
                 class="col-xs-4 q-pa-sm"
                 v-for="cat in categoriesOptions"
@@ -162,7 +156,6 @@ export default {
     return {
       registrationStep: 0,
       profile: null,
-      group: [],
       selected: [],
       categoriesOptions: [
         { label: "Musica", value: "music" },
@@ -217,8 +210,6 @@ export default {
           if (this.selected[i] == cat) this.selected.splice(i, 1);
         }
       }
-
-      console.log(this.selected);
     },
     submitCompleteRegistration() {
       if (this.selected.length == 0) {
