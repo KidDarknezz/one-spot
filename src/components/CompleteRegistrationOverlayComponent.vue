@@ -111,7 +111,7 @@
             </div>
             <div class="row" style="height: 50vh; overflow-y: scroll">
               <div
-                class="col-xs-4 q-pa-sm"
+                class="col-xs-4 q-pa-xs"
                 v-for="cat in categoriesOptions"
                 :key="cat.value"
               >
