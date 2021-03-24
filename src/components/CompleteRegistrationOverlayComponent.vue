@@ -96,16 +96,32 @@
             </div>
             <div class="row q-mb-md">
               <div class="text-subtitle2 text-grey-7 text-center full-width">
-                {{ group.length }}/5
+                {{ selected.length }}/5
               </div>
             </div>
             <div class="row" style="height: 50vh; overflow-y: scroll">
-              <q-option-group
+              <!-- <q-option-group
                 :options="options"
                 type="checkbox"
                 v-model="group"
                 color="pink"
-              />
+              /> -->
+              <div
+                class="col-xs-4 q-pa-sm"
+                v-for="cat in categoriesOptions"
+                :key="cat.value"
+              >
+                <div
+                  :class="
+                    selected.includes(cat.value)
+                      ? 'os-cat-cta-selected'
+                      : 'os-cat-cta'
+                  "
+                  @click="addRemoveCategoryToList(cat.value)"
+                >
+                  {{ cat.label }}
+                </div>
+              </div>
             </div>
           </q-card-section>
           <q-card-actions>
@@ -147,7 +163,8 @@ export default {
       registrationStep: 0,
       profile: null,
       group: [],
-      options: [
+      selected: [],
+      categoriesOptions: [
         { label: "Musica", value: "music" },
         { label: "Fiestas", value: "party" },
         { label: "Deportes", value: "sports" },
@@ -159,6 +176,7 @@ export default {
         { label: "Familia", value: "family" },
         { label: "Arte", value: "art" },
         { label: "Turismo", value: "tourism" },
+        { label: "Discotecas", value: "clubs" },
         { label: "Bares", value: "bars" },
         { label: "Nightlife", value: "nightlife" },
         { label: "Festivales", value: "festivals" },
@@ -187,14 +205,29 @@ export default {
       this.profile = null;
       this.registrationStep++;
     },
+    addRemoveCategoryToList(cat) {
+      if (!this.selected.includes(cat)) {
+        if (this.selected.length == 5) {
+          alert("Solo puedes elegir 5 categorias.");
+          return;
+        }
+        this.selected.push(cat);
+      } else {
+        for (let i = 0; i <= this.selected.length; i++) {
+          if (this.selected[i] == cat) this.selected.splice(i, 1);
+        }
+      }
+
+      console.log(this.selected);
+    },
     submitCompleteRegistration() {
-      if (this.group.length > 5) {
-        alert("Solo puedes elegir 5 categorias.");
+      if (this.selected.length == 0) {
+        alert("Debes elegir por lo menos una categoria.");
         return;
       }
       this.completeUserRegistration({
         profilePic: this.profile,
-        selectedCategories: this.group,
+        selectedCategories: this.selected,
       });
     },
   },
