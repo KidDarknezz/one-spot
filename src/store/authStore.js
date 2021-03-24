@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firebase-auth";
 import "firebase/firestore";
+import "firebase/storage";
 
 import router from "@/router";
 
@@ -93,15 +94,30 @@ const actions = {
         }
       );
   },
-  completeUserRegistration({}, payload) {
-    firebase
+  async completeUserRegistration({ commit }, payload) {
+    commit("setLoadingStatus", true);
+    let pp = "";
+    if (payload.profilePic != null) {
+      pp = payload.profilePic.name;
+      const storageRef = firebase
+        .storage()
+        .ref(
+          `users-profile/${firebase.auth().currentUser.uid}/${
+            payload.profilePic.name
+          }`
+        );
+      await storageRef.put(payload.profilePic);
+    }
+    await firebase
       .firestore()
       .collection("users")
       .doc(firebase.auth().currentUser.uid)
       .update({
         completeRegistration: true,
         interests: payload.selectedCategories,
+        profilePic: pp,
       });
+    commit("setLoadingStatus", false);
   },
 };
 const getters = {};

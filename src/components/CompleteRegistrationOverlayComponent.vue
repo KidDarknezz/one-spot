@@ -48,7 +48,16 @@
               </div>
             </div>
             <div class="row">
-              <q-file filled v-model="profile" color="black">
+              <q-file
+                filled
+                v-model="profile"
+                color="black"
+                :rules="[
+                  (val) =>
+                    validateProfilePicExtension(val) ||
+                    'Este formato de archivo no es permitido.',
+                ]"
+              >
                 <template v-slot:prepend>
                   <q-icon name="attach_file" />
                 </template>
@@ -63,6 +72,7 @@
               push
               @click="registrationStep++"
               v-if="profile"
+              :disable="!validateProfilePicExtension(profile)"
             />
             <q-btn
               label="Skip"
@@ -120,12 +130,14 @@
           </q-card-section>
           <q-card-actions>
             <q-btn
-              label="Finalizar"
               color="pink"
               class="full-width"
               push
               @click="submitCompleteRegistration()"
-            />
+            >
+              <template v-if="!loadingStatus"> Finalizar </template>
+              <q-spinner-dots color="white" size="1em" v-else />
+            </q-btn>
           </q-card-actions>
         </div>
       </q-card>
@@ -134,7 +146,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   props: {
@@ -194,6 +206,13 @@ export default {
         this.registrationStep++;
       }
     },
+    validateProfilePicExtension(file) {
+      const validExtensions = ["jpg", "jpeg", "png", "gif"];
+      if (!file) return false;
+      const extension = file.name.split(".")[1];
+      if (validExtensions.includes(extension)) return true;
+      else return false;
+    },
     skipProfilePic() {
       this.profile = null;
       this.registrationStep++;
@@ -221,6 +240,9 @@ export default {
         selectedCategories: this.selected,
       });
     },
+  },
+  computed: {
+    ...mapState("authStore", ["loadingStatus"]),
   },
 };
 </script>
