@@ -12,6 +12,12 @@
 .os-font {
   font-family: "Poppins", sans-serif;
 }
+.os-bold {
+  font-weight: 700;
+}
+.os-semibold {
+  font-weight: 600 !important;
+}
 .os-cat-cta {
   border: solid 1px black;
   border-radius: 10px;

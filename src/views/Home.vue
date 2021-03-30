@@ -1,69 +1,145 @@
 <template>
   <q-page>
     <!-- HERO -->
-    <img
-      :src="mainCover.assets.cover"
-      class="text-white text-bold q-mb-md os-main-cover full-width"
-      v-if="mainCover"
-    />
-    <!-- /HERO -->
-
-    <!-- SPOTLIGHT -->
-    <div
-      class="row q-py-md q-px-lg"
-      v-for="(event, i) in sponsoredEvents"
-      :key="i"
-    >
-      <q-card
-        class="full-width"
-        flat
-        @click="$router.push(`/event/${event.id}`)"
-      >
-        <img :src="event.assets.tile" class="os-spotlight-tile" />
-        <q-card-section>
-          <div class="row">
-            <div class="col">
-              <div class="text-subtitle2">{{ event.name }}</div>
-            </div>
-            <div class="col">
-              <div class="text-caption text-right text-grey-6">Taberna 21</div>
-            </div>
+    <div style="height: 100vh">
+      <div class="q-px-lg flex flex-center" style="height: 100%">
+        <div>
+          <div class="text-h5 text-bold q-mb-lg">Lo más HOT</div>
+          <q-card class="os-rounded-border q-mb-lg">
+            <q-card-section>
+              <img
+                src="@/assets/event_2_thumbnail.webp"
+                width="100%"
+                class="os-rounded-border"
+              />
+            </q-card-section>
+            <q-card-section>
+              <div class="row">
+                <div>
+                  <div class="text-subtitle2 os-semibold">Event Title</div>
+                  <div class="text-caption text-grey-9">Event Sub-Title</div>
+                </div>
+                <q-space />
+                <div class="text-caption text-grey-6">24 de enero 2022</div>
+              </div>
+            </q-card-section>
+            <q-card-section class="q-pt-none">
+              <div class="text-caption os-semibold">
+                Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+                used in laying out print, graphic or web designs.
+              </div>
+            </q-card-section>
+          </q-card>
+          <div class="text-subtitle2 q-px-md">
+            Quote del día: Sal y disfruta lo más que puedas que en un parpadeo
+            es lunes denuevo
           </div>
-          <div class="row">
-            <div class="col">
-              <div class="text-caption text-grey-6">22 de Enero 2022</div>
-            </div>
-            <div class="col">
-              <div class="text-caption text-right text-grey-6">14 km</div>
-            </div>
-          </div>
-        </q-card-section>
-      </q-card>
-    </div>
-    <!-- /SPOTLIGHT -->
-
-    <!-- RECENTLY ADDED -->
-    <div
-      class="os-recent-section q-my-md q-mx-lg text-white"
-      v-if="createdRecently.length > 0"
-    >
-      <div class="text-subtitle2 q-pa-md">Recien agregados</div>
-      <div class="row">
-        <div
-          class="col-xs-4 q-pa-md"
-          v-for="(event, i) in createdRecently"
-          :key="i"
-        >
-          <img
-            :src="event.assets.thumbnail"
-            class="os-event-thumbnail q-mb-sm full-width"
-          />
-          <div class="text-caption">{{ event.name }}</div>
-          <div class="text-caption text-grey-6">Sum text</div>
         </div>
       </div>
     </div>
-    <!-- /RECENTLY ADDED -->
+    <!-- <img
+      :src="mainCover.assets.cover"
+      class="text-white text-bold q-mb-md os-main-cover full-width"
+      v-if="mainCover"
+    /> -->
+    <!-- /HERO -->
+
+    <!-- SPOTLIGHT -->
+    <div class="bg-pink q-px-lg ">
+      <div class="row q-py-lg q-px-sm">
+        <div class="text-white text-subtitle2 os-semibold">Destacados</div>
+        <q-space />
+        <q-btn
+          flat
+          rounded
+          label="Ver mas"
+          dense
+          size="sm"
+          color="white"
+          class="q-px-sm os-semibold"
+          no-caps
+        />
+      </div>
+      <div class="row q-pb-lg">
+        <div
+          class="col-6 q-px-sm q-mb-md text-white"
+          v-for="(highlight, i) in 6"
+          :key="i"
+        >
+          <img
+            src="@/assets/event_4_thumbnail.webp"
+            width="100%"
+            class="os-rounded-border"
+          />
+          <div class="text-subtitle2 os-semibold">Event Title</div>
+          <div class="text-caption">Event Sub-Title</div>
+        </div>
+      </div>
+    </div>
+    <!-- /SPOTLIGHT -->
+
+    <!-- THIS WEEK -->
+    <div class="os-recent-section q-my-md q-mx-lg q-mt-lg text-white">
+      <div class="row q-pa-md">
+        <div class="text-subtitle2  os-semibold">Esta semana</div>
+        <q-space />
+        <q-btn
+          flat
+          rounded
+          label="Ver mas"
+          dense
+          size="sm"
+          color="white"
+          class="q-px-sm os-semibold"
+          no-caps
+        />
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4 q-pa-md" v-for="(event, i) in 6" :key="i">
+          <img
+            src="@/assets/event_3_thumbnail.webp"
+            class="os-event-thumbnail q-mb-sm full-width"
+          />
+          <div class="text-caption">Event Title</div>
+          <div class="text-caption text-grey-6">Event SubTitle</div>
+        </div>
+      </div>
+    </div>
+    <!-- /THIS WEEK -->
+
+    <!-- RECOMMENDED -->
+    <div class="q-pa-lg">
+      <div class="row q-mb-lg">
+        <div class="text-h5 os-semibold">Recomendado</div>
+        <q-space />
+        <q-btn
+          flat
+          rounded
+          label="Ver mas"
+          dense
+          size="sm"
+          color="pink"
+          class="q-px-sm os-semibold"
+          no-caps
+        />
+      </div>
+      <div class="row q-mb-md" v-for="(recommended, i) in 4" :key="i">
+        <div class="col-4">
+          <img
+            src="@/assets/event_2_thumbnail.webp"
+            width="100%"
+            class="os-rounded-border"
+          />
+        </div>
+        <div class="col-8 q-pa-md">
+          <div class="text-subtitle2 os-semibold">Event Title</div>
+          <div class="text-caption text-grey-9">Event Sub-Title</div>
+          <div class="text-caption text-grey-6">24 de enero 2022</div>
+        </div>
+      </div>
+    </div>
+    <!-- /RECOMMENDED -->
     <loading-overlay :display="showLoading" />
   </q-page>
 </template>
@@ -110,6 +186,10 @@ export default {
 </script>
 
 <style>
+.os-rounded-border {
+  border-radius: 20px !important;
+}
+/* ---- */
 .os-main-cover {
   -webkit-mask-image: -webkit-gradient(
     linear,
