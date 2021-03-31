@@ -235,9 +235,6 @@ export default {
 </script>
 
 <style>
-.os-rounded-border {
-  border-radius: 20px !important;
-}
 /* ---- */
 .os-main-cover {
   -webkit-mask-image: -webkit-gradient(
@@ -249,13 +246,7 @@ export default {
   );
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
-.os-search {
-  border-radius: 15px;
-}
 
-.os-spotlight-tile {
-  border-radius: 15px !important;
-}
 .os-recent-section {
   border-radius: 15px;
   background-color: #242424;

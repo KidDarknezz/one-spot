@@ -4,12 +4,14 @@ import VueRouter from "vue-router";
 //LAYOUTS
 import AuthLayout from "@/layouts/AuthLayout";
 import OneSpotLayout from "@/layouts/OneSpotLayout";
+import DashboardLayout from '@/layouts/DashboardLayout'
 
 //VIEWS
 import Home from "../views/Home.vue";
 import EventDetails from "@/views/EventDetails";
 import LoginView from "@/views/LoginView";
 import RegisterView from "@/views/RegisterView";
+import MyEventsViews from '@/views/MyEventsView'
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -50,6 +52,20 @@ const routes = [
         path: "/event/:eventId",
         name: "Event Details",
         component: EventDetails,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    component: DashboardLayout,
+    children: [
+      {
+        path: "/dashboard",
+        name: "MyEvents",
+        component: MyEventsViews,
         meta: {
           requiresAuth: true,
         },

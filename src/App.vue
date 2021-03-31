@@ -18,6 +18,9 @@
 .os-semibold {
   font-weight: 600 !important;
 }
+.os-rounded-border {
+  border-radius: 20px !important;
+}
 .os-cat-cta {
   border: solid 1px black;
   border-radius: 10px;
