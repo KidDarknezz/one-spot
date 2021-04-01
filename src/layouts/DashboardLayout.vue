@@ -30,16 +30,22 @@
 
     <q-page-container>
       <router-view />
+      <loading-overlay :display="loadingStatus" />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   data() {
     return {
       left: false,
     };
+  },
+  computed: {
+    ...mapState("dashboardStore", ["loadingStatus"]),
   },
 };
 </script>

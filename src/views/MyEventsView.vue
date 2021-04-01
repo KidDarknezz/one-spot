@@ -1,12 +1,15 @@
 <template>
   <q-page class="q-pa-lg">
     <div class="row q-mb-xl">
-      <div class="text-h5 os-semibold">Mis Eventos Proximos (3)</div>
+      <div class="text-h5 os-semibold">
+        Mis Eventos Proximos ({{ myEvents.length }})
+      </div>
       <q-space />
       <q-btn
         label="Nuevo evento"
         no-caps
         rounded
+        icon-right="event"
         color="black"
         unelevated
         class="os-semibold"
@@ -15,21 +18,35 @@
     </div>
 
     <div class="row q-mb-lg">
-      <div class="col-lg-2 col-xs-12" v-for="(openEvent, i) in 3" :key="i">
+      <div
+        class="col-lg-2 col-xs-12"
+        v-for="(openEvent, i) in myEvents"
+        :key="i"
+      >
         <div class="row">
           <div class="col-lg-4 col-xs-3 q-mb-lg">
             <img
-              src="@/assets/event_1_thumbnail.webp"
+              :alt="
+                returnEventAsset(openEvent.owner, openEvent.flyer, openEvent.id)
+              "
+              :id="openEvent.id"
               width="100%"
               class="os-rounded-border"
             />
           </div>
-          <div class="col-lg-8 q-pa-sm">
-            <div class="text-subtitle2 os-semibold">Event Title</div>
-            <div class="text-caption text-grey-9">
-              Event Sub-Title
+          <div class="col-lg-8 q-pl-sm">
+            <div class="text-caption os-semibold text-amber">
+              {{ returnStatusName(openEvent.status) }}
             </div>
-            <div class="text-caption text-grey-6">24 de enero 2022</div>
+            <div class="text-subtitle2 os-semibold">
+              {{ openEvent.name }}
+            </div>
+            <div class="text-caption text-grey-9">
+              {{ openEvent.subtitle }}
+            </div>
+            <div class="text-caption text-grey-6">
+              {{ openEvent.dateAndTime[0].startDate }}
+            </div>
           </div>
         </div>
       </div>
@@ -45,7 +62,7 @@
               class="os-rounded-border"
             />
           </div>
-          <div class="col-lg-8 q-pa-sm">
+          <div class="col-lg-8 q-pl-sm">
             <div class="text-subtitle2 os-semibold">Event Title</div>
             <div class="text-caption text-grey-9">
               Event Sub-Title
@@ -76,7 +93,9 @@
               />
             </q-card-actions>
             <q-card-section>
-              New event form will go here
+              <NewEventFormComponent
+                @closeNewEventDialog="newEventDialog = false"
+              />
             </q-card-section>
           </div>
           <q-space />
@@ -87,11 +106,46 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/storage";
+
+import { mapState, mapActions } from "vuex";
+import NewEventFormComponent from "@/components/NewEventFormComponent";
+
 export default {
   data() {
     return {
       newEventDialog: false,
     };
+  },
+  methods: {
+    ...mapActions("dashboardStore", ["getMyEvents"]),
+
+    returnStatusName(status) {
+      return status;
+    },
+    returnEventAsset(owner, ref, id) {
+      firebase
+        .storage()
+        .ref()
+        .child(`events-assets/${owner}/${ref}`)
+        .getDownloadURL()
+        .then((url) => {
+          document.getElementById(id).setAttribute("src", url);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  computed: {
+    ...mapState("dashboardStore", ["myEvents"]),
+  },
+  mounted() {
+    this.getMyEvents();
+  },
+  components: {
+    NewEventFormComponent,
   },
 };
 </script>

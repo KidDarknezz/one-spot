@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 import authStore from './authStore'
 import homeStore from './homeStore'
-import eventStore from './eventStore'
+import dashboardStore from './dashboardStore'
 
 Vue.use(Vuex)
 
@@ -12,7 +12,7 @@ export default function () {
     modules: {
       authStore,
       homeStore,
-      eventStore
+      dashboardStore
     },
     strict: process.env.DEV,
   });

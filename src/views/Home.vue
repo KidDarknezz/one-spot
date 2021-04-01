@@ -20,7 +20,7 @@
             navigation-active-icon="radio_button_checked"
           >
             <q-carousel-slide :name="1" class="">
-              <q-card class="os-rounded-border q-mb-lg">
+              <q-card class="os-rounded-border q-mb-lg" flat>
                 <q-card-section>
                   <img
                     src="@/assets/event_2_thumbnail.webp"
@@ -49,7 +49,7 @@
               </q-card>
             </q-carousel-slide>
             <q-carousel-slide :name="2" class="">
-              <q-card class="os-rounded-border q-mb-lg">
+              <q-card class="os-rounded-border q-mb-lg" flat>
                 <q-card-section>
                   <img
                     src="@/assets/event_1_thumbnail.webp"
@@ -223,7 +223,7 @@ export default {
     },
   },
   mounted() {
-    if (this.sponsoredEvents.length == 0) this.getHomeEvents();
+    // if (this.sponsoredEvents.length == 0) this.getHomeEvents();
     // const searchbox = document.querySelector("#search-box");
     // window.addEventListener("scroll", () => {
     //   let scroll = (window.scrollY || window.pageYOffset) / 150;
