@@ -17,6 +17,9 @@ const mutations = {
   },
   setAllMyEvents(state, payload) {
     state.myEvents = payload
+  },
+  setAddNewEvent(state, payload) {
+    state.myEvents.push(payload)
   }
 }
 const actions = {
@@ -55,14 +58,14 @@ const actions = {
   },
   getMyEvents({commit}) {
     const uid = firebase.auth().currentUser.uid
-    let events = []
-    firebase.firestore().collection('events').where('owner', '==', uid).onSnapshot(doc => {
-      doc.docs.forEach(doc => {
-        let evnt = doc.data()
-        evnt.id = doc.id
-        events.push(evnt)
+    firebase.firestore().collection('events').where('owner', '==', uid).onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        if (change.type == 'added') {
+          let ev = change.doc.data()
+          ev.id = change.doc.id
+          commit('setAddNewEvent', ev)
+        }
       })
-      commit('setAllMyEvents', events)
     })
   }
     

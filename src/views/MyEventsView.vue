@@ -35,8 +35,14 @@
             />
           </div>
           <div class="col-lg-8 q-pl-sm">
-            <div class="text-caption os-semibold text-amber">
-              {{ returnStatusName(openEvent.status) }}
+            <div
+              :class="
+                `text-caption os-semibold text-${
+                  returnStatusNameAndColor(openEvent.status).color
+                }`
+              "
+            >
+              {{ returnStatusNameAndColor(openEvent.status).status }}
             </div>
             <div class="text-subtitle2 os-semibold">
               {{ openEvent.name }}
@@ -121,8 +127,17 @@ export default {
   methods: {
     ...mapActions("dashboardStore", ["getMyEvents"]),
 
-    returnStatusName(status) {
-      return status;
+    returnStatusNameAndColor(status) {
+      switch (status) {
+        case "review":
+          return { status: "En revision", color: "amber" };
+        case "public":
+          return { status: "Publico", color: "green" };
+        case "ended":
+          return { status: "Terminado", color: "grey-7" };
+        case "rejected":
+          return { status: "Rechazado", color: "red-7" };
+      }
     },
     returnEventAsset(owner, ref, id) {
       firebase
