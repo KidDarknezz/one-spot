@@ -2,7 +2,7 @@
   <q-page class="q-pa-lg">
     <div class="row q-mb-xl">
       <div class="text-h5 os-semibold">
-        Clientes
+        Administradores
       </div>
     </div>
     <div class="row">
@@ -12,7 +12,7 @@
           <q-card flat class="bg-grey-2">
             <q-card-section>
               <div class="text-subtitle2 os-semibold">
-                Crear nueva cuenta de cliente
+                Crear nueva cuenta de administrador
               </div>
             </q-card-section>
             <q-card-section>
@@ -71,7 +71,7 @@ export default {
         name: "",
         email: "",
         password: "",
-        type: "client",
+        type: "admin",
       },
     };
   },
