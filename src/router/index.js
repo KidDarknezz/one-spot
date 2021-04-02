@@ -14,6 +14,7 @@ import RegisterView from "@/views/RegisterView";
 import MyEventsViews from '@/views/MyEventsView'
 import ClientsAccountsView from '@/views/ClientsAccountsView'
 import AdminsAccountsView from '@/views/AdminsAccountsView'
+import onReviewEventsView from '@/views/OnReviewEventsView'
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -84,6 +85,14 @@ const routes = [
         path: "/admins-accounts",
         name: "AdminsAccounts",
         component: AdminsAccountsView,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/review-events",
+        name: "ReviewEvents",
+        component: onReviewEventsView,
         meta: {
           requiresAuth: true,
         },

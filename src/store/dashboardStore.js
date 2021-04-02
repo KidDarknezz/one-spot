@@ -9,7 +9,8 @@ const state = {
   loadingStatus: false,
   myEvents: [],
   clientsAccounts: [],
-  adminsAccounts: []
+  adminsAccounts: [],
+  onReviewEvents: []
 }
 const mutations = {
   setLoadingStatus(state, payload) {
@@ -29,7 +30,10 @@ const mutations = {
   },
   setAdminsAccounts(state, payload) {
     state.adminsAccounts = payload
-    console.log(state.clientsAccounts)
+  },
+  setOnReviewEvents(state, payload) {
+    state.onReviewEvents = payload
+    console.log(state.onReviewEvents)
   }
 }
 const actions = {
@@ -57,6 +61,17 @@ const actions = {
       })
     })
     commit('setClientsAccounts', clients)
+  },
+  getOnReviewEvents({commit}, payload) {
+    let reviewEvents = []
+    firebase.firestore().collection('events').where('status', '==', 'review').get().then(snapshot => {
+      snapshot.forEach(event => {
+        let e = event.data()
+        e.id = event.id
+        reviewEvents.push(e)
+      })
+    })
+    commit('setOnReviewEvents', reviewEvents)
   },
   getAdminsAccounts({commit}, payload) {
     let admins = []

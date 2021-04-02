@@ -21,6 +21,19 @@
         <q-item
           clickable
           v-ripple
+          to="/review-events"
+          v-if="activeUser && activeUser.role == 'admin'"
+        >
+          <q-item-section avatar>
+            <q-icon color="black" name="event" />
+          </q-item-section>
+          <q-item-section class="text-black"
+            >Eventos en Revision</q-item-section
+          >
+        </q-item>
+        <q-item
+          clickable
+          v-ripple
           to="/dashboard"
           v-if="activeUser && activeUser.role == 'client'"
         >
