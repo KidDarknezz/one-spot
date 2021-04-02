@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import "firebase/storage";
+import 'firebase/functions'
 
 const state = {
   selectedEvent: null,
@@ -30,6 +31,12 @@ const actions = {
   },
   emptySelectedEvent({ commit }) {
     commit("setSelectedEvent", null)
+  },
+  createManagerAccount({}, payload) {
+    const createAccount = firebase.functions().httpsCallable('createUser')
+    createAccount(payload).then(result => {
+      console.log(result)
+    })
   },
   async createEvent({commit}, payload) {
     if (confirm('Esta seguro que desea crear este evento?')) {

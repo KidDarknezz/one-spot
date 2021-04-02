@@ -12,6 +12,7 @@ import EventDetails from "@/views/EventDetails";
 import LoginView from "@/views/LoginView";
 import RegisterView from "@/views/RegisterView";
 import MyEventsViews from '@/views/MyEventsView'
+import ClientsAccountsView from '@/views/ClientsAccountsView'
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -66,6 +67,14 @@ const routes = [
         path: "/dashboard",
         name: "MyEvents",
         component: MyEventsViews,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/clients-accounts",
+        name: "ClientsAccounts",
+        component: ClientsAccountsView,
         meta: {
           requiresAuth: true,
         },

@@ -28,6 +28,9 @@ const actions = {
         payload.password
       )
       .then((resp) => {
+        firebase.auth().currentUser.getIdTokenResult().then(idTokenResult => {
+          console.log(idTokenResult.claims.isClient)
+        })
         router.push("/");
         commit("setLoadingStatus", false);
       })

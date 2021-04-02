@@ -25,6 +25,12 @@
           </q-item-section>
           <q-item-section class="text-black">Mis Eventos</q-item-section>
         </q-item>
+        <q-item clickable v-ripple to="/clients-accounts">
+          <q-item-section avatar>
+            <q-icon color="black" name="supervised_user_circle" />
+          </q-item-section>
+          <q-item-section class="text-black">Clientes</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
