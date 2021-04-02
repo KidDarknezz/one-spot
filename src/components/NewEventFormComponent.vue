@@ -1,5 +1,6 @@
 <template>
   <q-form @submit="postEvent()">
+    {{ activeUser }}
     <q-card flat>
       <q-card-section>
         <div class="text-h6 os-font os-semibold q-px-sm">Nuevo evento</div>
@@ -331,9 +332,12 @@ export default {
       this.newEvent.dateAndTime.splice(i, 1);
     },
     async postEvent() {
-      await this.createEvent(this.newEvent);
+      await this.createEvent({ event: this.newEvent, owner: this.activeUser });
       this.$emit("closeNewEventDialog");
     },
+  },
+  computed: {
+    ...mapState("authStore", ["activeUser"]),
   },
 };
 </script>

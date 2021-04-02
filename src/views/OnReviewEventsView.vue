@@ -28,7 +28,7 @@
           />
           <q-card-section>
             <div class="text-subtitle2 os-semibold">{{ event.name }}</div>
-            <div class="text-caption">{{ event.owner }}</div>
+            <div class="text-caption">{{ event.ownerName }}</div>
           </q-card-section>
         </q-card>
       </div>

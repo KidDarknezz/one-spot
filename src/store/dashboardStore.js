@@ -88,23 +88,25 @@ const actions = {
     if (confirm('Esta seguro que desea crear este evento?')) {
       commit('setLoadingStatus', true)
       const event = {
-        name: payload.name,
-          subtitle: payload.subtitle,
-          description: payload.description,
-          selectedCategories: payload.selectedCategories,
-          dateAndTime: payload.dateAndTime,
+        name: payload.event.name,
+          subtitle: payload.event.subtitle,
+          description: payload.event.description,
+          selectedCategories: payload.event.selectedCategories,
+          dateAndTime: payload.event.dateAndTime,
           status: 'review',
+          flyer: payload.event.flyer.name,
           owner: firebase.auth().currentUser.uid,
-          flyer: payload.flyer.name
+          ownerName: payload.owner.name,
+          ownerProfile: payload.owner.profile
       }
       const storageRef = firebase
         .storage()
         .ref(
           `events-assets/${firebase.auth().currentUser.uid}/${
-            payload.flyer.name
+            payload.event.flyer.name
           }`
         );
-      await storageRef.put(payload.flyer);
+      await storageRef.put(payload.event.flyer);
       await firebase.firestore().collection('events').add(event)
       commit('setLoadingStatus', false)
     }
