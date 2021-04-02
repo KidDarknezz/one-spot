@@ -8,7 +8,8 @@ const state = {
   selectedEvent: null,
   loadingStatus: false,
   myEvents: [],
-  clientsAccounts: []
+  clientsAccounts: [],
+  adminsAccounts: []
 }
 const mutations = {
   setLoadingStatus(state, payload) {
@@ -25,6 +26,9 @@ const mutations = {
   },
   setClientsAccounts(state, payload) {
     state.clientsAccounts = payload
+  },
+  setAdminsAccounts(state, payload) {
+    state.adminsAccounts = payload
     console.log(state.clientsAccounts)
   }
 }
@@ -53,6 +57,17 @@ const actions = {
       })
     })
     commit('setClientsAccounts', clients)
+  },
+  getAdminsAccounts({commit}, payload) {
+    let admins = []
+    firebase.firestore().collection('users').where('role', '==', 'admin').get().then(snapshot => {
+      snapshot.forEach(admin => {
+        let a = admin.data()
+        a.id = admin.id
+        admins.push(a)
+      })
+    })
+    commit('setAdminsAccounts', admins)
   },
   async createEvent({commit}, payload) {
     if (confirm('Esta seguro que desea crear este evento?')) {

@@ -6,8 +6,46 @@
       </div>
     </div>
     <div class="row">
-      <q-space />
-      <div class="col-lg-4">
+      <div class="col-lg-8 q-px-sm">
+        <q-table
+          title="Cuentas de clientes"
+          :data="adminsAccounts"
+          :columns="columns"
+          row-key="name"
+          flat
+          class="bg-grey-2"
+        >
+          <template v-slot:header="props">
+            <q-tr :props="props">
+              <q-th auto-width />
+              <q-th v-for="col in props.cols" :key="col.name" :props="props">
+                {{ col.label }}
+              </q-th>
+            </q-tr>
+          </template>
+
+          <template v-slot:body="props">
+            <q-tr :props="props">
+              <q-td auto-width>
+                <!-- <img
+                  src="https://lh3.googleusercontent.com/proxy/RAYNXbmozflmUnN01TFP-wIsEYhBmelKJqD723Slpv-A__HjmxwJMNtJwhTwD62-X0wksSNqXb6S5HrLAGZUCDujKI3fBkc6ck3BCFctXQRrSGvkvqZ9wk8Z7sjysO8"
+                  width="60px;"
+                  style=""
+                /> -->
+                <q-avatar>
+                  <img
+                    src="http://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,f_auto,h_3000,q_90,w_1200/81906/B-0hcmTXEAECuwS_fdfnve.jpg"
+                  />
+                </q-avatar>
+              </q-td>
+              <q-td v-for="col in props.cols" :key="col.name" :props="props">
+                {{ col.value }}
+              </q-td>
+            </q-tr>
+          </template>
+        </q-table>
+      </div>
+      <div class="col-lg-4 q-px-sm">
         <q-form @submit="createManagerAccount(newAccount)">
           <q-card flat class="bg-grey-2">
             <q-card-section>
@@ -17,7 +55,7 @@
             </q-card-section>
             <q-card-section>
               <q-input
-                label="Empresa"
+                label="Nombre completo"
                 filled
                 color="pink"
                 v-model="newAccount.name"
@@ -73,10 +111,42 @@ export default {
         password: "",
         type: "admin",
       },
+      columns: [
+        {
+          name: "name",
+          align: "center",
+          label: "Nombre",
+          field: "name",
+          sortable: true,
+        },
+        {
+          name: "email",
+          align: "center",
+          label: "Correo",
+          field: "email",
+          sortable: true,
+        },
+        {
+          name: "createdAt",
+          align: "center",
+          label: "Creado el",
+          field: "createdAt",
+          sortable: true,
+        },
+      ],
     };
   },
   methods: {
-    ...mapActions("dashboardStore", ["createManagerAccount"]),
+    ...mapActions("dashboardStore", [
+      "createManagerAccount",
+      "getAdminsAccounts",
+    ]),
+  },
+  computed: {
+    ...mapState("dashboardStore", ["adminsAccounts"]),
+  },
+  mounted() {
+    this.getAdminsAccounts();
   },
 };
 </script>
