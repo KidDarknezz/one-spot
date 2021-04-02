@@ -14,7 +14,7 @@ exports.createUser = functions.https.onCall((data, context) => {
   })
   .then((userRecord) => {
     console.log('Successfully created new user:', userRecord.uid);
-    admin.firestore().collection('users').doc(userRecord.uid).set({name: data.name, email: data.email, role: data.type}).then(writeResult => {
+    admin.firestore().collection('users').doc(userRecord.uid).set({name: data.name, email: data.email, role: data.type, createdAt: Date.now()}).then(writeResult => {
       console.log(`Document written at: ${writeResult.writeTime.toDate()}`)
     })
     if (data.type == 'client')

@@ -7,7 +7,8 @@ import 'firebase/functions'
 const state = {
   selectedEvent: null,
   loadingStatus: false,
-  myEvents: []
+  myEvents: [],
+  clientsAccounts: []
 }
 const mutations = {
   setLoadingStatus(state, payload) {
@@ -21,6 +22,10 @@ const mutations = {
   },
   setAddNewEvent(state, payload) {
     state.myEvents.push(payload)
+  },
+  setClientsAccounts(state, payload) {
+    state.clientsAccounts = payload
+    console.log(state.clientsAccounts)
   }
 }
 const actions = {
@@ -37,6 +42,17 @@ const actions = {
     createAccount(payload).then(result => {
       console.log(result)
     })
+  },
+  getClientsAccounts({commit}, payload) {
+    let clients = []
+    firebase.firestore().collection('users').where('role', '==', 'client').get().then(snapshot => {
+      snapshot.forEach(client => {
+        let c = client.data()
+        c.id = client.id
+        clients.push(c)
+      })
+    })
+    commit('setClientsAccounts', clients)
   },
   async createEvent({commit}, payload) {
     if (confirm('Esta seguro que desea crear este evento?')) {

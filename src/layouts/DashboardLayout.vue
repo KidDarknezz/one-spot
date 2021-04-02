@@ -22,7 +22,7 @@
           clickable
           v-ripple
           to="/dashboard"
-          v-if="activeUser.role == 'client'"
+          v-if="activeUser && activeUser.role == 'client'"
         >
           <q-item-section avatar>
             <q-icon color="black" name="event" />
@@ -33,7 +33,7 @@
           clickable
           v-ripple
           to="/clients-accounts"
-          v-if="activeUser.role == 'admin'"
+          v-if="activeUser && activeUser.role == 'admin'"
         >
           <q-item-section avatar>
             <q-icon color="black" name="supervised_user_circle" />
@@ -44,7 +44,7 @@
           clickable
           v-ripple
           to="/admins-accounts"
-          v-if="activeUser.role == 'admin'"
+          v-if="activeUser && activeUser.role == 'admin'"
         >
           <q-item-section avatar>
             <q-icon color="black" name="manage_accounts" />
