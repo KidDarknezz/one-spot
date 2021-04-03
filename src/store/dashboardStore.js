@@ -4,6 +4,8 @@ import 'firebase/auth'
 import "firebase/storage";
 import 'firebase/functions'
 
+import router from "@/router";
+
 const state = {
   selectedEvent: null,
   loadingStatus: false,
@@ -33,17 +35,26 @@ const mutations = {
   },
   setOnReviewEvents(state, payload) {
     state.onReviewEvents = payload
-    console.log(state.onReviewEvents)
   }
 }
 const actions = {
   getSelectedEvent({ commit }, payload) {
     firebase.firestore().collection('events').doc(payload).get().then(snapshot => {
-      commit("setSelectedEvent", snapshot.data())
+      commit('setSelectedEvent', snapshot.data())
     })
   },
   emptySelectedEvent({ commit }) {
     commit("setSelectedEvent", null)
+  },
+  updateEventStatus({commit}, payload) {
+    if(confirm('Deseas aprobar este evento?')) {
+      commit('setLoadingStatus', true)
+      firebase.firestore().collection('events').doc(payload.event).update({status: payload.status}).then(resp => {
+        commit('setLoadingStatus', false)
+        router.push("/review-events");
+      })
+    }
+    
   },
   createManagerAccount({}, payload) {
     const createAccount = firebase.functions().httpsCallable('createUser')
@@ -122,8 +133,7 @@ const actions = {
         }
       })
     })
-  }
-    
+  },    
 }
 const getters = {}
 

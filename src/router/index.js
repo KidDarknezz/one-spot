@@ -15,6 +15,7 @@ import MyEventsViews from '@/views/MyEventsView'
 import ClientsAccountsView from '@/views/ClientsAccountsView'
 import AdminsAccountsView from '@/views/AdminsAccountsView'
 import onReviewEventsView from '@/views/OnReviewEventsView'
+import ReviewEventView from '@/views/ReviewEventView'
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -93,6 +94,14 @@ const routes = [
         path: "/review-events",
         name: "ReviewEvents",
         component: onReviewEventsView,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/review-events/:id",
+        name: "Review",
+        component: ReviewEventView,
         meta: {
           requiresAuth: true,
         },

@@ -21,7 +21,12 @@
         v-for="event in onReviewEvents"
         :key="event.id"
       >
-        <q-card flat class="bg-grey-2">
+        <q-card
+          flat
+          class="bg-grey-2"
+          @click="$router.push(`/review-events/${event.id}`)"
+          style="cursor: pointer"
+        >
           <img
             :alt="returnEventAsset(event.owner, event.flyer, event.id)"
             :id="event.id"
