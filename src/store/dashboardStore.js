@@ -4,6 +4,12 @@ import "firebase/auth";
 import "firebase/storage";
 import "firebase/functions";
 
+import {
+  geohashForLocation,
+  geohashQueryBounds,
+  distanceBetween,
+} from "geofire-common";
+
 import router from "@/router";
 
 const state = {
@@ -135,6 +141,10 @@ const actions = {
         ownerProfile: payload.owner.profile,
         place: payload.event.place,
         coords: payload.event.coords,
+        geohash: geohashForLocation([
+          payload.event.coords.lat,
+          payload.event.coords.lng,
+        ]),
       };
       const storageRef = firebase
         .storage()
@@ -164,6 +174,45 @@ const actions = {
             ev.id = change.doc.id;
             commit("setAddNewEvent", ev);
           }
+        });
+      });
+  },
+  getGeoEvents() {
+    //8.986327, -79.514733
+    const center = [8.986327, -79.514733];
+    const radiusInM = 2 * 1000;
+    const bounds = geohashQueryBounds(center, radiusInM);
+    const promises = [];
+    for (const b of bounds) {
+      const q = firebase
+        .firestore()
+        .collection("events")
+        .orderBy("geohash")
+        .startAt(b[0])
+        .endAt(b[1]);
+
+      promises.push(q.get());
+    }
+    Promise.all(promises)
+      .then((snapshots) => {
+        const matchingDocs = [];
+        for (const snap of snapshots) {
+          for (const doc of snap.docs) {
+            const lat = doc.data().coords.lat;
+            const lng = doc.data().coords.lng;
+            const distanceInKm = distanceBetween([lat, lng], center);
+            console.log(distanceInKm);
+            const distanceInM = distanceInKm * 1000;
+            if (distanceInM <= radiusInM) {
+              matchingDocs.push(doc);
+            }
+          }
+        }
+        return matchingDocs;
+      })
+      .then((matchingDocs) => {
+        matchingDocs.forEach((match) => {
+          console.log(match.data());
         });
       });
   },

@@ -125,7 +125,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("dashboardStore", ["getMyEvents"]),
+    ...mapActions("dashboardStore", ["getMyEvents", "getGeoEvents"]),
 
     returnStatusNameAndColor(status) {
       switch (status) {
@@ -158,6 +158,7 @@ export default {
   },
   mounted() {
     this.getMyEvents();
+    this.getGeoEvents();
   },
   components: {
     NewEventFormComponent,
