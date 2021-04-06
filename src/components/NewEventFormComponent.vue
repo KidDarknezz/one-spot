@@ -1,6 +1,5 @@
 <template>
   <q-form @submit="postEvent()">
-    {{ activeUser }}
     <q-card flat>
       <q-card-section>
         <div class="text-h6 os-font os-semibold q-px-sm">Nuevo evento</div>
@@ -218,6 +217,23 @@
             />
           </div>
         </div>
+        <q-input
+          label="Lugar"
+          filled
+          color="pink"
+          :rules="[(val) => !!val || 'Este campo es requerido']"
+          class="q-px-sm q-mb-md"
+          v-model="newEvent.place"
+        />
+        <div class="q-px-sm q-mb-lg">
+          <GoogleMaps
+            @markerPosition="setMarkerPosition"
+            @newMarkerPosition="setNewMarkerPosition"
+            :editable="true"
+            :markers="markers"
+            :mapCenter="center"
+          ></GoogleMaps>
+        </div>
         <q-file
           v-model="newEvent.flyer"
           label="Adjuntar flyer"
@@ -269,6 +285,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import GoogleMaps from "@/components/GoogleMaps";
 
 export default {
   data() {
@@ -278,6 +295,7 @@ export default {
         subtitle: "",
         description: "",
         selectedCategories: [],
+        place: "",
         dateAndTime: [
           {
             startDate: "",
@@ -289,6 +307,10 @@ export default {
         flyer: null,
         thumbnail: null,
       },
+      location: [],
+      markers: [],
+      center: {},
+      locationVerified: false,
       categories: [
         {
           label: "Cat 1",
@@ -332,12 +354,50 @@ export default {
       this.newEvent.dateAndTime.splice(i, 1);
     },
     async postEvent() {
-      await this.createEvent({ event: this.newEvent, owner: this.activeUser });
+      let ev = this.newEvent;
+      ev.coords = this.markers[0].position;
+      await this.createEvent({ event: ev, owner: this.activeUser });
       this.$emit("closeNewEventDialog");
+    },
+    setMarkerPosition(event) {
+      this.locationVerified = false;
+      this.location = event;
+    },
+    setNewMarkerPosition(event) {
+      this.locationVerified = false;
+      this.markers = [{ position: event }];
+      this.location = event;
+    },
+    geolocate() {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.center = {
+            lat: parseFloat(position.coords.latitude),
+            lng: parseFloat(position.coords.longitude),
+          };
+          this.markers.push({ position: this.center });
+        },
+        (error) => {
+          this.center = {
+            lat: parseFloat(9.068463),
+            lng: parseFloat(-79.452694),
+          };
+          this.markers.push({ position: this.center });
+        }
+      );
+    },
+    printLatLng() {
+      console.log(this.markers);
     },
   },
   computed: {
     ...mapState("authStore", ["activeUser"]),
+  },
+  mounted() {
+    this.geolocate();
+  },
+  components: {
+    GoogleMaps,
   },
 };
 </script>
