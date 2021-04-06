@@ -180,7 +180,7 @@ const actions = {
   getGeoEvents() {
     //8.986327, -79.514733
     const center = [8.986327, -79.514733];
-    const radiusInM = 2 * 1000;
+    const radiusInM = 5 * 1000;
     const bounds = geohashQueryBounds(center, radiusInM);
     const promises = [];
     for (const b of bounds) {
