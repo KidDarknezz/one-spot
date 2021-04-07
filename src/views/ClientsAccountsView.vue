@@ -77,7 +77,22 @@
                 color="pink"
                 v-model="newAccount.password"
                 :rules="[(val) => !!val || 'Este campo es requerido']"
+                class="q-mb-md"
               />
+              <q-file
+                v-model="newAccount.profile"
+                label="Adjuntar profile"
+                filled
+                color="pink"
+                :rules="[(val) => !!val || 'Este campo es requerido']"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="attach_file" />
+                </template>
+                <template v-slot:hint>
+                  50 x 50 px
+                </template>
+              </q-file>
             </q-card-section>
             <q-card-actions class="q-px-md">
               <q-space />
@@ -110,6 +125,7 @@ export default {
         email: "",
         password: "",
         type: "client",
+        profile: null,
       },
       columns: [
         {
