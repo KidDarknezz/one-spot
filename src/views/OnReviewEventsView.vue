@@ -38,6 +38,27 @@
         </q-card>
       </div>
     </div>
+    <div class="row q-px-lg q-mt-xl">
+      <GmapMap
+        :center="{
+          lat: 8.9834698,
+          lng: -79.5170736,
+        }"
+        :zoom="17"
+        map-type-id="roadmap"
+        style="width: 100%; height: 400px"
+      >
+        <!-- <GmapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            @click="center = m.position"
+          /> -->
+        <!-- <GmapMarker :position="selectedEvent.coords" /> -->
+      </GmapMap>
+    </div>
   </q-page>
 </template>
 
@@ -52,7 +73,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions("dashboardStore", ["getOnReviewEvents"]),
+    ...mapActions("dashboardStore", ["getOnReviewEvents", "getGeoEvents"]),
 
     returnEventAsset(owner, ref, id) {
       firebase
@@ -74,6 +95,7 @@ export default {
 
   mounted() {
     this.getOnReviewEvents();
+    this.getGeoEvents();
   },
 };
 </script>

@@ -125,7 +125,7 @@
         </q-card>
       </div>
       <div class="col-lg-4">
-        <q-card flat class="bg-grey-2">
+        <q-card flat class="bg-grey-2 q-mb-md">
           <q-card-section>
             <q-input
               label="Lugar"
@@ -136,6 +136,25 @@
             />
           </q-card-section>
         </q-card>
+        <GmapMap
+          :center="{
+            lat: selectedEvent.coords.lat,
+            lng: selectedEvent.coords.lng,
+          }"
+          :zoom="17"
+          map-type-id="roadmap"
+          style="width: 100%; height: 400px"
+        >
+          <!-- <GmapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            @click="center = m.position"
+          /> -->
+          <GmapMarker :position="selectedEvent.coords" />
+        </GmapMap>
       </div>
       <div class="col-lg-3 q-px-sm">
         <img

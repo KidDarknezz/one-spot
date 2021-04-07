@@ -158,7 +158,6 @@ export default {
   },
   mounted() {
     this.getMyEvents();
-    this.getGeoEvents();
   },
   components: {
     NewEventFormComponent,
