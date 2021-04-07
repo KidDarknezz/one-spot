@@ -18,8 +18,8 @@ const mutations = {
     state.activeUser = payload;
   },
   setUserRole(state, payload) {
-    state.activeUser.role = payload
-  }
+    state.activeUser.role = payload;
+  },
 };
 const actions = {
   loginUser({ commit }, payload) {
@@ -31,10 +31,15 @@ const actions = {
         payload.password
       )
       .then((resp) => {
-        firebase.auth().currentUser.getIdTokenResult().then(idTokenResult => {
-          if (idTokenResult.claims.isClient || idTokenResult.claims.isAdmin) router.push("/dashboard");
-          else router.push("/");
-        })
+        firebase
+          .auth()
+          .currentUser.getIdTokenResult()
+          .then((idTokenResult) => {
+            if (idTokenResult.claims.isClient) router.push("/dashboard");
+            if (idTokenResult.claims.isAdmin) router.push("/review-events");
+            if (!idTokenResult.claims.isClient && !idTokenResult.claims.isAdmin)
+              router.push("/");
+          });
         commit("setLoadingStatus", false);
       })
       .catch((err) => {
@@ -94,10 +99,14 @@ const actions = {
       .onSnapshot(
         (doc) => {
           commit("setActiveUser", doc.data());
-          firebase.auth().currentUser.getIdTokenResult().then(idTokenResult => {
-            if (idTokenResult.claims.isClient) commit('setUserRole', 'client')
-            if (idTokenResult.claims.isAdmin) commit('setUserRole', 'admin')
-          })
+          firebase
+            .auth()
+            .currentUser.getIdTokenResult()
+            .then((idTokenResult) => {
+              if (idTokenResult.claims.isClient)
+                commit("setUserRole", "client");
+              if (idTokenResult.claims.isAdmin) commit("setUserRole", "admin");
+            });
         },
         (err) => {
           console.log(err);
