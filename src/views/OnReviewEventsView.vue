@@ -39,25 +39,22 @@
       </div>
     </div>
     <div class="row q-px-lg q-mt-xl">
-      <GmapMap
-        :center="{
-          lat: 8.9834698,
-          lng: -79.5170736,
-        }"
-        :zoom="17"
-        map-type-id="roadmap"
-        style="width: 100%; height: 400px"
-      >
-        <!-- <GmapMarker
+      <div class="col-lg-4">
+        <GmapMap
+          :center="mapCenter"
+          :zoom="13"
+          style="width: 100%; height: 600px"
+        >
+          <GmapMarker
             :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
+            v-for="(m, index) in nearByEvents"
+            :position="m.coords"
             :clickable="true"
-            :draggable="true"
-            @click="center = m.position"
-          /> -->
-        <!-- <GmapMarker :position="selectedEvent.coords" /> -->
-      </GmapMap>
+            @click="mapCenter = m.coords"
+          >
+          </GmapMarker>
+        </GmapMap>
+      </div>
     </div>
   </q-page>
 </template>
@@ -70,7 +67,12 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+      mapCenter: {
+        lat: 8.9834698,
+        lng: -79.5170736,
+      },
+    };
   },
   methods: {
     ...mapActions("dashboardStore", ["getOnReviewEvents", "getGeoEvents"]),
@@ -90,7 +92,7 @@ export default {
     },
   },
   computed: {
-    ...mapState("dashboardStore", ["onReviewEvents"]),
+    ...mapState("dashboardStore", ["onReviewEvents", "nearByEvents"]),
   },
 
   mounted() {

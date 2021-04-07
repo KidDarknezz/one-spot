@@ -19,6 +19,7 @@ const state = {
   clientsAccounts: [],
   adminsAccounts: [],
   onReviewEvents: [],
+  nearByEvents: [],
 };
 const mutations = {
   setLoadingStatus(state, payload) {
@@ -41,6 +42,9 @@ const mutations = {
   },
   setOnReviewEvents(state, payload) {
     state.onReviewEvents = payload;
+  },
+  setNearByEvents(state, payload) {
+    state.nearByEvents.push(payload);
   },
 };
 const actions = {
@@ -177,7 +181,7 @@ const actions = {
         });
       });
   },
-  getGeoEvents() {
+  getGeoEvents({ commit }) {
     //8.986327, -79.514733
     const center = [8.986327, -79.514733];
     const radiusInM = 5 * 1000;
@@ -212,7 +216,8 @@ const actions = {
       })
       .then((matchingDocs) => {
         matchingDocs.forEach((match) => {
-          console.log(match.data());
+          commit("setNearByEvents", match.data());
+          // console.log(match.data());
         });
       });
   },
