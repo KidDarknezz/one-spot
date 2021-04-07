@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-lg-8 q-px-sm">
         <q-table
-          title="Cuentas de clientes"
+          title="Cuentas de administradores"
           :data="adminsAccounts"
           :columns="columns"
           row-key="name"
@@ -17,7 +17,6 @@
         >
           <template v-slot:header="props">
             <q-tr :props="props">
-              <q-th auto-width />
               <q-th v-for="col in props.cols" :key="col.name" :props="props">
                 {{ col.label }}
               </q-th>
@@ -26,18 +25,6 @@
 
           <template v-slot:body="props">
             <q-tr :props="props">
-              <q-td auto-width>
-                <!-- <img
-                  src="https://lh3.googleusercontent.com/proxy/RAYNXbmozflmUnN01TFP-wIsEYhBmelKJqD723Slpv-A__HjmxwJMNtJwhTwD62-X0wksSNqXb6S5HrLAGZUCDujKI3fBkc6ck3BCFctXQRrSGvkvqZ9wk8Z7sjysO8"
-                  width="60px;"
-                  style=""
-                /> -->
-                <q-avatar>
-                  <img
-                    src="http://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,f_auto,h_3000,q_90,w_1200/81906/B-0hcmTXEAECuwS_fdfnve.jpg"
-                  />
-                </q-avatar>
-              </q-td>
               <q-td v-for="col in props.cols" :key="col.name" :props="props">
                 {{ col.value }}
               </q-td>
@@ -46,7 +33,12 @@
         </q-table>
       </div>
       <div class="col-lg-4 q-px-sm">
-        <q-form @submit="createManagerAccount(newAccount)">
+        <q-form
+          @submit="
+            createManagerAccount(newAccount);
+            newAccountDialog = true;
+          "
+        >
           <q-card flat class="bg-grey-2">
             <q-card-section>
               <div class="text-subtitle2 os-semibold">
@@ -96,6 +88,31 @@
         </q-form>
       </div>
     </div>
+    <q-dialog v-model="newAccountDialog" persistent>
+      <q-card flat>
+        <q-card-section>
+          <div class="text-h6 os-font os-semibold">Enviado</div>
+        </q-card-section>
+        <q-card-section>
+          <div class="text-subtitle2 os-font">
+            La creacion de cuenta ha sido enviada al servidor<br />Regresa en
+            unos <strong>5 minutos</strong> mientras es procesada.
+          </div>
+        </q-card-section>
+        <q-card-actions>
+          <q-space />
+          <q-btn
+            label="Aceptar"
+            no-caps
+            flat
+            rounded
+            color="pink"
+            class="os-font os-semibold"
+            @click="emptyForm()"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -105,6 +122,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
+      newAccountDialog: false,
       newAccount: {
         name: "",
         email: "",
@@ -141,6 +159,16 @@ export default {
       "createManagerAccount",
       "getAdminsAccounts",
     ]),
+
+    emptyForm() {
+      this.newAccount = {
+        name: "",
+        email: "",
+        password: "",
+        type: "admin",
+      };
+      this.newAccountDialog = false;
+    },
   },
   computed: {
     ...mapState("dashboardStore", ["adminsAccounts"]),

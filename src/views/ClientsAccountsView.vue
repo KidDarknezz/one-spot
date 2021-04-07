@@ -46,7 +46,12 @@
         </q-table>
       </div>
       <div class="col-lg-4 q-px-sm">
-        <q-form @submit="createManagerAccount(newAccount)">
+        <q-form
+          @submit="
+            createManagerAccount(newAccount);
+            newAccountDialog = true;
+          "
+        >
           <q-card flat class="bg-grey-2">
             <q-card-section>
               <div class="text-subtitle2 os-semibold">
@@ -90,7 +95,7 @@
                   <q-icon name="attach_file" />
                 </template>
                 <template v-slot:hint>
-                  50 x 50 px
+                  50 x 50 (px)
                 </template>
               </q-file>
             </q-card-section>
@@ -111,6 +116,31 @@
         </q-form>
       </div>
     </div>
+    <q-dialog v-model="newAccountDialog" persistent>
+      <q-card flat>
+        <q-card-section>
+          <div class="text-h6 os-font os-semibold">Enviado</div>
+        </q-card-section>
+        <q-card-section>
+          <div class="text-subtitle2 os-font">
+            La creacion de cuenta ha sido enviada al servidor<br />Regresa en
+            unos <strong>5 minutos</strong> mientras es procesada.
+          </div>
+        </q-card-section>
+        <q-card-actions>
+          <q-space />
+          <q-btn
+            label="Aceptar"
+            no-caps
+            flat
+            rounded
+            color="pink"
+            class="os-font os-semibold"
+            @click="emptyForm()"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -120,6 +150,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
+      newAccountDialog: false,
       newAccount: {
         name: "",
         email: "",
@@ -157,6 +188,17 @@ export default {
       "createManagerAccount",
       "getClientsAccounts",
     ]),
+
+    emptyForm() {
+      this.newAccount = {
+        name: "",
+        email: "",
+        password: "",
+        type: "client",
+        profile: null,
+      };
+      this.newAccountDialog = false;
+    },
   },
   computed: {
     ...mapState("dashboardStore", ["clientsAccounts"]),

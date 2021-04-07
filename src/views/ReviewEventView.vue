@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-lg">
+  <q-page class="q-pa-lg" v-if="selectedEvent">
     <div class="row q-mb-xl">
       <q-btn
         label="Regresar"
@@ -114,13 +114,26 @@
             <div class="text-body2 q-mb-sm">Categorias</div>
             <div class="row">
               <div
-                class="os-cat-cta"
+                class="os-cat-cta on-left"
                 v-for="cat in selectedEvent.selectedCategories"
                 :key="cat"
               >
                 {{ cat }}
               </div>
             </div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-lg-4">
+        <q-card flat class="bg-grey-2">
+          <q-card-section>
+            <q-input
+              label="Lugar"
+              filled
+              readonly
+              v-model="selectedEvent.place"
+              class="q-mb-md"
+            />
           </q-card-section>
         </q-card>
       </div>
