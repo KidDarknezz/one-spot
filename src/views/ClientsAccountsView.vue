@@ -27,14 +27,12 @@
           <template v-slot:body="props">
             <q-tr :props="props">
               <q-td auto-width>
-                <!-- <img
-                  src="https://lh3.googleusercontent.com/proxy/RAYNXbmozflmUnN01TFP-wIsEYhBmelKJqD723Slpv-A__HjmxwJMNtJwhTwD62-X0wksSNqXb6S5HrLAGZUCDujKI3fBkc6ck3BCFctXQRrSGvkvqZ9wk8Z7sjysO8"
-                  width="60px;"
-                  style=""
-                /> -->
-                <q-avatar>
+                <q-avatar
+                  v-if="props.row.profile || props.row.profile != 'img'"
+                >
                   <img
-                    src="http://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,f_auto,h_3000,q_90,w_1200/81906/B-0hcmTXEAECuwS_fdfnve.jpg"
+                    :id="props.row.id"
+                    :alt="returnClientProfile(props.row.profile, props.row.id)"
                   />
                 </q-avatar>
               </q-td>
@@ -145,6 +143,8 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/storage";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -198,6 +198,21 @@ export default {
         profile: null,
       };
       this.newAccountDialog = false;
+    },
+    returnClientProfile(file, id) {
+      // console.log(file);
+      // return file.row.profile;
+      firebase
+        .storage()
+        .ref()
+        .child(`clients-profile/${file}`)
+        .getDownloadURL()
+        .then((url) => {
+          document.getElementById(id).setAttribute("src", url);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   computed: {

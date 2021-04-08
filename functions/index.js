@@ -25,7 +25,7 @@ exports.createUser = functions.https.onCall((data, context) => {
           email: data.email,
           role: data.type,
           createdAt: Date.now(),
-          profile: data.profile ? data.profile.name : "",
+          profile: data.profile,
         })
         .then((writeResult) => {
           console.log(`Document written at: ${writeResult.writeTime.toDate()}`);
@@ -34,19 +34,6 @@ exports.createUser = functions.https.onCall((data, context) => {
         admin.auth().setCustomUserClaims(userRecord.uid, { isClient: true });
       if (data.type == "admin")
         admin.auth().setCustomUserClaims(userRecord.uid, { isAdmin: true });
-
-      if (data.profile) {
-        const bucket = admin
-          .storage()
-          .bucket(`users-profile/${userRecord.uid}`);
-        const file = bucket.file(data.profile.name);
-        const contents = JSON.stringify(data.profile.name, null, 2);
-        file.save(contents, function(err) {
-          if (!err) {
-            console.log("profile created");
-          }
-        });
-      }
     })
     .catch((error) => {
       console.log("Error creating new user:", error);

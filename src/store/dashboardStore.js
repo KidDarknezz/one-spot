@@ -75,9 +75,27 @@ const actions = {
         });
     }
   },
-  createManagerAccount({}, payload) {
+  async createManagerAccount({ commit }, payload) {
+    commit("setLoadingStatus", true);
+    let accData = {
+      email: payload.email,
+      name: payload.name,
+      password: payload.password,
+      type: payload.type,
+    };
+    if (payload.profile) {
+      let randomNum = Math.floor(1000 + Math.random() * 9000);
+      accData.profile = `${randomNum}_${payload.profile.name}`;
+      const storageRef = firebase
+        .storage()
+        .ref(`clients-profile/${accData.profile}`);
+      await storageRef.put(payload.profile);
+    } else {
+      accData.profile = "";
+    }
+    commit("setLoadingStatus", false);
     const createAccount = firebase.functions().httpsCallable("createUser");
-    createAccount(payload).then((result) => {
+    createAccount(accData).then((result) => {
       console.log(result);
     });
   },
