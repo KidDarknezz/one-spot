@@ -4,8 +4,7 @@
       v-if="userLocation"
       :center="mapCenter"
       :zoom="13"
-      style="width: 100%; height: 600px;"
-      class="absolute-top"
+      style="width: 100%; height: 60vh"
     >
       <GmapMarker :position="userLocation"> </GmapMarker>
       <div :key="index" v-for="(m, index) in nearByEvents">
@@ -27,7 +26,7 @@
     <div class="row q-px-lg q-py-md">
       <div>
         <div class="text-caption os-semibold on-left">
-          Distancia: <span class="text-pink">{{ filterRange }}</span> kms
+          Distancia: <span class="text-pink">{{ filterRange }}</span> km
         </div>
         <div class="text-caption os-semibold">
           Categoria:
