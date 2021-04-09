@@ -26,7 +26,7 @@
         <div class="row">
           <div class="col-lg-4 col-xs-3 q-mb-lg">
             <img
-              :alt="
+              :src="
                 returnEventAsset(openEvent.owner, openEvent.flyer, openEvent.id)
               "
               :id="openEvent.id"

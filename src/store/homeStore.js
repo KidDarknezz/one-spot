@@ -140,7 +140,9 @@ const actions = {
       .then((matchingDocs) => {
         let events = [];
         matchingDocs.forEach((match) => {
-          events.push(match.data());
+          let e = match.data();
+          e.id = match.id;
+          events.push(e);
         });
         commit("setNearByEvents", events);
       });
