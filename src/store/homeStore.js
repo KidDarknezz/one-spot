@@ -13,6 +13,7 @@ const state = {
   createdRecently: [],
   userLocation: null,
   nearByEvents: [],
+  searchRadius: 1,
 };
 const mutations = {
   setMainCoverEvent(state, payload) {
@@ -33,6 +34,9 @@ const mutations = {
   },
   setNearByEvents(state, payload) {
     state.nearByEvents = payload;
+  },
+  setNewSearchRadius(state, payload) {
+    state.searchRadius = payload;
   },
 };
 const actions = {
@@ -108,13 +112,14 @@ const actions = {
   },
   getGeoEvents({ commit }, payload) {
     const center = [payload.lat, payload.lng];
-    const radiusInM = 5 * 1000;
+    const radiusInM = state.searchRadius * 1000;
     const bounds = geohashQueryBounds(center, radiusInM);
     const promises = [];
     for (const b of bounds) {
       const q = firebase
         .firestore()
         .collection("events")
+        .where("status", "==", "public")
         .orderBy("geohash")
         .startAt(b[0])
         .endAt(b[1]);
@@ -146,6 +151,9 @@ const actions = {
         });
         commit("setNearByEvents", events);
       });
+  },
+  updateSearchRadius({ commit }, payload) {
+    commit("setNewSearchRadius", payload);
   },
 };
 const getters = {};
