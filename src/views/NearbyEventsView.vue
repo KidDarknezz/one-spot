@@ -4,7 +4,7 @@
       v-if="userLocation"
       :center="mapCenter"
       :zoom="13"
-      style="width: 100%; height: 600px"
+      style="width: 100%; height: 400px"
     >
       <GmapMarker
         :key="index"
