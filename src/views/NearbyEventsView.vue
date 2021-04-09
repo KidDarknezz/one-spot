@@ -3,7 +3,7 @@
     <GmapMap
       v-if="userLocation"
       :center="mapCenter"
-      :zoom="13"
+      :zoom="12"
       style="width: 100%; height: 400px"
     >
       <GmapMarker
