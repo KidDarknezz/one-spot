@@ -66,7 +66,15 @@
       </q-card>
     </div>
     <div class="q-pa-lg">
-      <div class="row q-py-sm" v-for="(event, i) in nearByEvents" :key="i">
+      <div
+        class="row q-py-sm"
+        v-for="(event, i) in nearByEvents"
+        :key="i"
+        v-show="
+          event.selectedCategories.includes(selectedCategory) ||
+            !selectedCategory
+        "
+      >
         <div class="col-xs-2 q-pr-sm">
           <img
             :src="returnEventAsset(event.owner, event.flyer, event.id)"
@@ -81,6 +89,9 @@
           </div>
           <div class="text-caption text-grey-7">{{ event.subtitle }}</div>
           <div class="text-caption text-grey-7">{{ event.ownerName }}</div>
+          <div class="text-caption text-grey-7">
+            {{ event.selectedCategories }}
+          </div>
         </div>
       </div>
     </div>
@@ -90,8 +101,9 @@
           <div class="text-h6 os-semibold">Filtros</div>
         </q-card-section>
         <q-card-section>
-          <div class="text-subtitle2 os-semibold q-mb-sm">
-            Rango de busqueda (km)
+          <div class="text-subtitle2 os-semibold q-mb-sm os-font">
+            Rango de busqueda
+            <span class="text-pink">{{ filterRange }}</span> km
           </div>
           <q-slider
             v-model="filterRange"
@@ -105,10 +117,12 @@
           />
           <q-select
             label="Categorias"
-            :options="[1, 2, 3]"
+            :options="categories"
             filled
             color="pink"
             v-model="selectedCategory"
+            emit-value
+            map-options
           />
         </q-card-section>
         <q-card-actions>
@@ -120,13 +134,7 @@
             rounded
             color="pink"
             class="os-font os-semibold"
-            @click="
-              filterDialog = false;
-              updateSearchRadius(filterRange);
-              getGeoEvents(userLocation);
-              selectedEvent = null;
-              mapCenter = userLocation;
-            "
+            @click="applyFilter()"
           />
         </q-card-actions>
       </q-card>
@@ -153,6 +161,32 @@ export default {
       filterDialog: false,
       filterRange: 1,
       selectedCategory: "",
+      categories: [
+        { label: "Todas", value: "" },
+        { label: "Musica", value: "music" },
+        { label: "Fiestas", value: "party" },
+        { label: "Deportes", value: "sports" },
+        { label: "Cultura", value: "culture" },
+        { label: "Teatro", value: "theatre" },
+        { label: "Conciertos", value: "concerts" },
+        { label: "Ferias", value: "carnivals" },
+        { label: "Aire Libre", value: "open-air" },
+        { label: "Familia", value: "family" },
+        { label: "Arte", value: "art" },
+        { label: "Turismo", value: "tourism" },
+        { label: "Discotecas", value: "clubs" },
+        { label: "Bares", value: "bars" },
+        { label: "Nightlife", value: "nightlife" },
+        { label: "Festivales", value: "festivals" },
+        { label: "Motivacional", value: "motivational" },
+        { label: "Conferencias", value: "conferences" },
+        { label: "Seminarios", value: "seminars" },
+        { label: "Networking", value: "networking" },
+        { label: "Expos", value: "expos" },
+        { label: "Galas", value: "galas" },
+        { label: "Gaming", value: "gaming" },
+        { label: "Trending", value: "trending" },
+      ],
     };
   },
   computed: {
@@ -187,6 +221,13 @@ export default {
         [this.userLocation.lat, this.userLocation.lng]
       );
       return distance.toFixed(2);
+    },
+    applyFilter() {
+      this.filterDialog = false;
+      this.updateSearchRadius(this.filterRange);
+      this.getGeoEvents(this.userLocation);
+      this.selectedEvent = null;
+      this.mapCenter = this.userLocation;
     },
   },
   mounted() {
