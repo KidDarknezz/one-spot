@@ -2,7 +2,11 @@
   <q-layout view="hHh lpR fFf">
     <q-page-container>
       <router-view
-        v-if="activeUser.emailVerification && activeUser.completeRegistration"
+        v-if="
+          activeUser &&
+            activeUser.emailVerification &&
+            activeUser.completeRegistration
+        "
       />
       <div
         class="row fixed-bottom bg-grey-2 q-py-sm"

@@ -7,7 +7,7 @@
     persistent
     class="os-font"
   >
-    <q-card v-if="!userData.emailVerification">
+    <q-card v-if="userData && !userData.emailVerification">
       <div class="full-width absolute-center q-px-lg">
         <q-card-section>
           <div class="text-subtitle2 text-center">
