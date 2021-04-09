@@ -4,18 +4,19 @@ import VueRouter from "vue-router";
 //LAYOUTS
 import AuthLayout from "@/layouts/AuthLayout";
 import OneSpotLayout from "@/layouts/OneSpotLayout";
-import DashboardLayout from '@/layouts/DashboardLayout'
+import DashboardLayout from "@/layouts/DashboardLayout";
 
 //VIEWS
 import Home from "../views/Home.vue";
 import EventDetails from "@/views/EventDetails";
 import LoginView from "@/views/LoginView";
 import RegisterView from "@/views/RegisterView";
-import MyEventsViews from '@/views/MyEventsView'
-import ClientsAccountsView from '@/views/ClientsAccountsView'
-import AdminsAccountsView from '@/views/AdminsAccountsView'
-import onReviewEventsView from '@/views/OnReviewEventsView'
-import ReviewEventView from '@/views/ReviewEventView'
+import MyEventsViews from "@/views/MyEventsView";
+import ClientsAccountsView from "@/views/ClientsAccountsView";
+import AdminsAccountsView from "@/views/AdminsAccountsView";
+import onReviewEventsView from "@/views/OnReviewEventsView";
+import ReviewEventView from "@/views/ReviewEventView";
+import EditMyEventView from "@/views/EditMyEventView";
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -102,6 +103,14 @@ const routes = [
         path: "/review-events/:id",
         name: "Review",
         component: ReviewEventView,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/review-my-event/:id",
+        name: "ReviewMyEvent",
+        component: EditMyEventView,
         meta: {
           requiresAuth: true,
         },

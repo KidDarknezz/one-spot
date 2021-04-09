@@ -32,6 +32,8 @@
               :id="openEvent.id"
               width="100%"
               class="os-rounded-border"
+              style="cursor: pointer"
+              @click="$router.push(`/review-my-event/${openEvent.id}`)"
             />
           </div>
           <div class="col-lg-8 q-pl-sm">
@@ -157,7 +159,7 @@ export default {
     ...mapState("dashboardStore", ["myEvents"]),
   },
   mounted() {
-    this.getMyEvents();
+    if (this.myEvents.length <= 0) this.getMyEvents();
   },
   components: {
     NewEventFormComponent,
