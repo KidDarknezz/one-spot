@@ -1,15 +1,5 @@
 <template>
   <q-page>
-    <div class="row q-pa-sm">
-      <q-space />
-      <q-btn
-        icon="filter_list"
-        flat
-        color="pink"
-        round
-        @click="filterDialog = true"
-      />
-    </div>
     <GmapMap
       v-if="userLocation"
       :center="mapCenter"
@@ -30,6 +20,28 @@
       >
       </GmapMarker>
     </GmapMap>
+    <div class="row q-px-lg q-py-md">
+      <div>
+        <div class="text-caption os-semibold on-left">
+          Distancia: <span class="text-pink">{{ filterRange }}</span> km
+        </div>
+        <div class="text-caption os-semibold">
+          Categoria:
+          <span class="text-pink">{{
+            selectedCategory ? selectedCategory : "-"
+          }}</span>
+        </div>
+      </div>
+
+      <q-space />
+      <q-btn
+        icon="filter_list"
+        flat
+        color="pink"
+        round
+        @click="filterDialog = true"
+      />
+    </div>
     <div class="q-pa-lg" v-if="selectedEvent != null">
       <q-card class="os-rounded-border">
         <q-card-section>
