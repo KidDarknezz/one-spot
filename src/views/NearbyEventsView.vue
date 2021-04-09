@@ -7,18 +7,21 @@
       style="width: 100%; height: 400px"
     >
       <GmapMarker :position="userLocation"> </GmapMarker>
-      <GmapMarker
-        :key="index"
-        v-for="(m, index) in nearByEvents"
-        :position="m.coords"
-        :clickable="true"
-        @click="
-          mapCenter = m.coords;
-          selectEvent(index);
-        "
-        :icon="{ url: require('@/assets/MapMarker.png') }"
-      >
-      </GmapMarker>
+      <div :key="index" v-for="(m, index) in nearByEvents">
+        <GmapMarker
+          :position="m.coords"
+          :clickable="true"
+          @click="
+            mapCenter = m.coords;
+            selectEvent(index);
+          "
+          :icon="{ url: require('@/assets/MapMarker.png') }"
+          v-if="
+            !selectedCategory || m.selectedCategories.includes(selectedCategory)
+          "
+        >
+        </GmapMarker>
+      </div>
     </GmapMap>
     <div class="row q-px-lg q-py-md">
       <div>
