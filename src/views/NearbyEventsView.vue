@@ -1,28 +1,33 @@
 <template>
   <q-page>
-    <GmapMap
-      v-if="userLocation"
-      :center="mapCenter"
-      :zoom="12"
-      style="width: 100%; height: 400px"
-    >
-      <GmapMarker :position="userLocation"> </GmapMarker>
-      <div :key="index" v-for="(m, index) in nearByEvents">
-        <GmapMarker
-          :position="m.coords"
-          :clickable="true"
-          @click="
-            mapCenter = m.coords;
-            selectEvent(index);
-          "
-          :icon="{ url: require('@/assets/MapMarker.png') }"
-          v-if="
-            !selectedCategory || m.selectedCategories.includes(selectedCategory)
-          "
-        >
-        </GmapMarker>
-      </div>
-    </GmapMap>
+    <div style="height: 400px;">
+      <GmapMap
+        v-if="userLocation"
+        :center="mapCenter"
+        :zoom="12"
+        style="width: 100%; height: 400px"
+        class="absolute-top"
+      >
+        <GmapMarker :position="userLocation"> </GmapMarker>
+        <div :key="index" v-for="(m, index) in nearByEvents">
+          <GmapMarker
+            :position="m.coords"
+            :clickable="true"
+            @click="
+              mapCenter = m.coords;
+              selectEvent(index);
+            "
+            :icon="{ url: require('@/assets/MapMarker.png') }"
+            v-if="
+              !selectedCategory ||
+                m.selectedCategories.includes(selectedCategory)
+            "
+          >
+          </GmapMarker>
+        </div>
+      </GmapMap>
+    </div>
+
     <div class="row q-px-lg q-py-md">
       <div>
         <div class="text-caption os-semibold on-left">

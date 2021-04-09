@@ -9,7 +9,7 @@
         "
       />
       <div
-        class="row fixed-bottom bg-grey-2 q-py-sm"
+        class="row fixed-bottom bg-grey-2 q-py-md"
         v-if="!$route.fullPath.includes('/event/')"
       >
         <div class="col">
