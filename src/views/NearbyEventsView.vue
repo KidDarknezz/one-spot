@@ -159,7 +159,7 @@ export default {
       mapCenter: null,
       selectedEvent: null,
       filterDialog: false,
-      filterRange: 1,
+      filterRange: 2,
       selectedCategory: "",
       categories: [
         { label: "Todas", value: "" },

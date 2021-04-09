@@ -13,7 +13,7 @@ const state = {
   createdRecently: [],
   userLocation: null,
   nearByEvents: [],
-  searchRadius: 1,
+  searchRadius: 2,
 };
 const mutations = {
   setMainCoverEvent(state, payload) {
