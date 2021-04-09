@@ -190,7 +190,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("homeStore", ["nearByEvents"]),
+    ...mapState("homeStore", ["nearByEvents", "searchRadius"]),
   },
   methods: {
     ...mapActions("homeStore", [
@@ -231,6 +231,7 @@ export default {
     },
   },
   mounted() {
+    this.filterRange = this.searchRadius;
     if (!navigator.geolocation) {
       console.log("Geolocation is not supported by your browser");
     } else {
