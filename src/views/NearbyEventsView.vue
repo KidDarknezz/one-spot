@@ -1,11 +1,11 @@
 <template>
   <q-page>
-    <div style="height: 400px;">
+    <div>
       <GmapMap
         v-if="userLocation"
         :center="mapCenter"
         :zoom="12"
-        style="width: 100%; height: 400px"
+        style="width: 100%; height: 65vh"
         class="absolute-top"
       >
         <GmapMarker :position="userLocation"> </GmapMarker>
