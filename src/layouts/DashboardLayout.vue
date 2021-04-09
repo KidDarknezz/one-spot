@@ -18,52 +18,60 @@
     >
       <!-- drawer content -->
       <q-list>
-        <q-item
-          clickable
-          v-ripple
+        <router-link
           to="/review-events"
+          custom
+          v-slot="{ navigate }"
           v-if="activeUser && activeUser.role == 'admin'"
         >
-          <q-item-section avatar>
-            <q-icon color="black" name="event" />
-          </q-item-section>
-          <q-item-section class="text-black"
-            >Eventos en Revision</q-item-section
-          >
-        </q-item>
-        <q-item
-          clickable
-          v-ripple
+          <q-item clickable v-ripple @click="navigate" role="link">
+            <q-item-section avatar>
+              <q-icon color="black" name="event" />
+            </q-item-section>
+            <q-item-section class="text-black"
+              >Eventos en Revision</q-item-section
+            >
+          </q-item>
+        </router-link>
+        <router-link
           to="/dashboard"
+          custom
+          v-slot="{ navigate }"
           v-if="activeUser && activeUser.role == 'client'"
         >
-          <q-item-section avatar>
-            <q-icon color="black" name="event" />
-          </q-item-section>
-          <q-item-section class="text-black">Mis Eventos</q-item-section>
-        </q-item>
-        <q-item
-          clickable
-          v-ripple
+          <q-item clickable v-ripple @click="navigate" role="link">
+            <q-item-section avatar>
+              <q-icon color="black" name="event" />
+            </q-item-section>
+            <q-item-section class="text-black">Mis Eventos</q-item-section>
+          </q-item>
+        </router-link>
+        <router-link
           to="/clients-accounts"
+          custom
+          v-slot="{ navigate }"
           v-if="activeUser && activeUser.role == 'admin'"
         >
-          <q-item-section avatar>
-            <q-icon color="black" name="supervised_user_circle" />
-          </q-item-section>
-          <q-item-section class="text-black">Clientes</q-item-section>
-        </q-item>
-        <q-item
-          clickable
-          v-ripple
+          <q-item clickable v-ripple @click="navigate" role="link">
+            <q-item-section avatar>
+              <q-icon color="black" name="supervised_user_circle" />
+            </q-item-section>
+            <q-item-section class="text-black">Clientes</q-item-section>
+          </q-item>
+        </router-link>
+        <router-link
           to="/admins-accounts"
+          custom
+          v-slot="{ navigate }"
           v-if="activeUser && activeUser.role == 'admin'"
         >
-          <q-item-section avatar>
-            <q-icon color="black" name="manage_accounts" />
-          </q-item-section>
-          <q-item-section class="text-black">Administradores</q-item-section>
-        </q-item>
+          <q-item clickable v-ripple @click="navigate" role="link">
+            <q-item-section avatar>
+              <q-icon color="black" name="manage_accounts" />
+            </q-item-section>
+            <q-item-section class="text-black">Administradores</q-item-section>
+          </q-item>
+        </router-link>
       </q-list>
     </q-drawer>
 

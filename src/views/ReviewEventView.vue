@@ -145,14 +145,6 @@
           map-type-id="roadmap"
           style="width: 100%; height: 400px"
         >
-          <!-- <GmapMarker
-            :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
-            :clickable="true"
-            :draggable="true"
-            @click="center = m.position"
-          /> -->
           <GmapMarker :position="selectedEvent.coords" />
         </GmapMap>
       </div>
