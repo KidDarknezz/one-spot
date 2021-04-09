@@ -4,8 +4,8 @@
       <GmapMap
         v-if="userLocation"
         :center="mapCenter"
-        :zoom="12"
-        style="width: 100%; height: 65vh"
+        :zoom="13"
+        style="width: 100%; height: 600px;"
         class="absolute-top"
       >
         <GmapMarker :position="userLocation"> </GmapMarker>
