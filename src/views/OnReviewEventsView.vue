@@ -38,24 +38,6 @@
         </q-card>
       </div>
     </div>
-    <div class="row q-px-lg q-mt-xl">
-      <div class="col-lg-4">
-        <GmapMap
-          :center="mapCenter"
-          :zoom="13"
-          style="width: 100%; height: 600px"
-        >
-          <GmapMarker
-            :key="index"
-            v-for="(m, index) in nearByEvents"
-            :position="m.coords"
-            :clickable="true"
-            @click="mapCenter = m.coords"
-          >
-          </GmapMarker>
-        </GmapMap>
-      </div>
-    </div>
   </q-page>
 </template>
 
@@ -67,12 +49,7 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   data() {
-    return {
-      mapCenter: {
-        lat: 8.9834698,
-        lng: -79.5170736,
-      },
-    };
+    return {};
   },
   methods: {
     ...mapActions("dashboardStore", ["getOnReviewEvents", "getGeoEvents"]),
@@ -92,12 +69,11 @@ export default {
     },
   },
   computed: {
-    ...mapState("dashboardStore", ["onReviewEvents", "nearByEvents"]),
+    ...mapState("dashboardStore", ["onReviewEvents"]),
   },
 
   mounted() {
     this.getOnReviewEvents();
-    this.getGeoEvents();
   },
 };
 </script>

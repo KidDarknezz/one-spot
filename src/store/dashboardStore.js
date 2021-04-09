@@ -19,7 +19,6 @@ const state = {
   clientsAccounts: [],
   adminsAccounts: [],
   onReviewEvents: [],
-  nearByEvents: [],
 };
 const mutations = {
   setLoadingStatus(state, payload) {
@@ -42,9 +41,6 @@ const mutations = {
   },
   setOnReviewEvents(state, payload) {
     state.onReviewEvents = payload;
-  },
-  setNearByEvents(state, payload) {
-    state.nearByEvents.push(payload);
   },
 };
 const actions = {
@@ -196,46 +192,6 @@ const actions = {
             ev.id = change.doc.id;
             commit("setAddNewEvent", ev);
           }
-        });
-      });
-  },
-  getGeoEvents({ commit }) {
-    //8.986327, -79.514733
-    const center = [8.986327, -79.514733];
-    const radiusInM = 5 * 1000;
-    const bounds = geohashQueryBounds(center, radiusInM);
-    const promises = [];
-    for (const b of bounds) {
-      const q = firebase
-        .firestore()
-        .collection("events")
-        .orderBy("geohash")
-        .startAt(b[0])
-        .endAt(b[1]);
-
-      promises.push(q.get());
-    }
-    Promise.all(promises)
-      .then((snapshots) => {
-        const matchingDocs = [];
-        for (const snap of snapshots) {
-          for (const doc of snap.docs) {
-            const lat = doc.data().coords.lat;
-            const lng = doc.data().coords.lng;
-            const distanceInKm = distanceBetween([lat, lng], center);
-            console.log(distanceInKm);
-            const distanceInM = distanceInKm * 1000;
-            if (distanceInM <= radiusInM) {
-              matchingDocs.push(doc);
-            }
-          }
-        }
-        return matchingDocs;
-      })
-      .then((matchingDocs) => {
-        matchingDocs.forEach((match) => {
-          commit("setNearByEvents", match.data());
-          // console.log(match.data());
         });
       });
   },

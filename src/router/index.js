@@ -6,17 +6,22 @@ import AuthLayout from "@/layouts/AuthLayout";
 import OneSpotLayout from "@/layouts/OneSpotLayout";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
-//VIEWS
-import Home from "../views/Home.vue";
-import EventDetails from "@/views/EventDetails";
+//VIEWS AUTH
 import LoginView from "@/views/LoginView";
 import RegisterView from "@/views/RegisterView";
+
+//VIEWS - DASHBOARD
 import MyEventsViews from "@/views/MyEventsView";
 import ClientsAccountsView from "@/views/ClientsAccountsView";
 import AdminsAccountsView from "@/views/AdminsAccountsView";
 import onReviewEventsView from "@/views/OnReviewEventsView";
 import ReviewEventView from "@/views/ReviewEventView";
 import EditMyEventView from "@/views/EditMyEventView";
+
+// VIEWS APP
+import Home from "../views/Home.vue";
+import EventDetails from "@/views/EventDetails";
+import NearbyEventsView from "@/views/NearbyEventsView";
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -57,6 +62,14 @@ const routes = [
         path: "/event/:eventId",
         name: "Event Details",
         component: EventDetails,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/nearby",
+        name: "NearbyEvents",
+        component: NearbyEventsView,
         meta: {
           requiresAuth: true,
         },
