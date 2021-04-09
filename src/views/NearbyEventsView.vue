@@ -3,7 +3,7 @@
     <GmapMap
       v-if="userLocation"
       :center="mapCenter"
-      :zoom="13"
+      :zoom="12.6"
       style="width: 100%; height: 60vh"
     >
       <GmapMarker :position="userLocation"> </GmapMarker>
@@ -24,7 +24,7 @@
       </div>
     </GmapMap>
     <div class="row q-px-lg q-py-md bg-grey-2 q-mb-md">
-      <div>
+      <div class="col">
         <div class="text-caption os-semibold on-left">
           Distancia: <span class="text-pink">{{ filterRange }}</span> km
         </div>
@@ -35,15 +35,26 @@
           }}</span>
         </div>
       </div>
-      <q-space />
-      <q-btn
-        icon="filter_list"
-        flat
-        color="pink"
-        round
-        @click="filterDialog = true"
-        size="sm"
-      />
+      <div class="flex flex-center">
+        <q-btn
+          label="Limpiar filtros"
+          flat
+          color="grey-7"
+          rounded
+          size="sm"
+          class="on-left"
+          icon="clear_all"
+          @click="clearFilter()"
+        />
+        <q-btn
+          icon="filter_list"
+          flat
+          color="pink"
+          round
+          size="sm"
+          @click="filterDialog = true"
+        />
+      </div>
     </div>
     <div class="q-px-lg q-mb-md" v-if="selectedEvent != null">
       <q-card class="os-rounded-border">
@@ -243,6 +254,11 @@ export default {
       this.getGeoEvents(this.userLocation);
       this.selectedEvent = null;
       this.mapCenter = this.userLocation;
+    },
+    clearFilter() {
+      this.selectedCategory = "";
+      this.mapCenter = this.userLocation;
+      this.selectedEvent = null;
     },
   },
   mounted() {
