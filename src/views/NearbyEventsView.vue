@@ -23,7 +23,7 @@
         </GmapMarker>
       </div>
     </GmapMap>
-    <div class="row q-px-lg q-py-md">
+    <div class="row q-px-lg q-py-md bg-grey-2 q-mb-md">
       <div>
         <div class="text-caption os-semibold on-left">
           Distancia: <span class="text-pink">{{ filterRange }}</span> km
@@ -35,7 +35,6 @@
           }}</span>
         </div>
       </div>
-
       <q-space />
       <q-btn
         icon="filter_list"
@@ -43,9 +42,10 @@
         color="pink"
         round
         @click="filterDialog = true"
+        size="sm"
       />
     </div>
-    <div class="q-pa-lg" v-if="selectedEvent != null">
+    <div class="q-px-lg q-mb-md" v-if="selectedEvent != null">
       <q-card class="os-rounded-border">
         <q-card-section>
           <div class="row">
@@ -80,7 +80,7 @@
         </q-card-section>
       </q-card>
     </div>
-    <div class="q-pa-lg">
+    <div class="q-px-lg q-mb-lg">
       <div
         class="row q-py-sm"
         v-for="(event, i) in nearByEvents"
