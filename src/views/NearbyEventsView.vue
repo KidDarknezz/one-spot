@@ -16,9 +16,7 @@
             selectEvent(index);
           "
           :icon="{ url: require('@/assets/MapMarker.png') }"
-          v-if="
-            !selectedCategory || m.selectedCategories.includes(selectedCategory)
-          "
+          v-if="filterEvent(m)"
         >
         </GmapMarker>
       </div>
@@ -27,6 +25,10 @@
       <div class="col">
         <div class="text-caption os-semibold on-left">
           Distancia: <span class="text-pink">{{ filterRange }}</span> km
+        </div>
+        <div class="text-caption os-semibold">
+          Fecha:
+          <span class="text-pink">{{ filterDate ? filterDate : "-" }}</span>
         </div>
         <div class="text-caption os-semibold">
           Categoria:
@@ -96,10 +98,7 @@
         class="row q-py-sm"
         v-for="(event, i) in nearByEvents"
         :key="i"
-        v-show="
-          event.selectedCategories.includes(selectedCategory) ||
-            !selectedCategory
-        "
+        v-show="filterEvent(event)"
       >
         <div class="col-xs-2 q-pr-sm">
           <img
@@ -116,7 +115,7 @@
           <div class="text-caption text-grey-7">{{ event.subtitle }}</div>
           <div class="text-caption text-grey-7">{{ event.ownerName }}</div>
           <div class="text-caption text-grey-7">
-            {{ event.selectedCategories }}
+            {{ event.dateAndTime }}
           </div>
         </div>
       </div>
@@ -149,10 +148,42 @@
             v-model="selectedCategory"
             emit-value
             map-options
+            class="q-mb-md"
           />
+          <q-input
+            filled
+            v-model="filterDate"
+            mask="date"
+            :rules="['date']"
+            color="pink"
+          >
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-popup-proxy
+                  ref="qDateProxy"
+                  transition-show="scale"
+                  transition-hide="scale"
+                >
+                  <q-date v-model="filterDate" color="pink">
+                    <div class="row items-center justify-end">
+                      <q-btn v-close-popup label="Close" color="primary" flat />
+                    </div>
+                  </q-date>
+                </q-popup-proxy>
+              </q-icon>
+            </template>
+          </q-input>
         </q-card-section>
         <q-card-actions>
           <q-space />
+          <q-btn
+            label="Cancelar"
+            no-caps
+            flat
+            rounded
+            class="os-font os-semibold"
+            v-close-popup
+          />
           <q-btn
             label="Aceptar"
             no-caps
@@ -187,6 +218,7 @@ export default {
       filterDialog: false,
       filterRange: 2,
       selectedCategory: "",
+      filterDate: this.returnTodayDate(),
       categories: [
         { label: "Todas", value: "" },
         { label: "Musica", value: "music" },
@@ -257,8 +289,33 @@ export default {
     },
     clearFilter() {
       this.selectedCategory = "";
+      this.filterDate = "";
       this.mapCenter = this.userLocation;
       this.selectedEvent = null;
+    },
+    filterEvent(event) {
+      if (
+        (event.selectedCategories.includes(this.selectedCategory) ||
+          !this.selectedCategory) &&
+        this.returnShouldDisplayByDate(event.dateAndTime)
+      )
+        return true;
+      else return false;
+    },
+    returnShouldDisplayByDate(dates) {
+      if (!this.filterDate) return true;
+      for (let i of dates) {
+        if (i.startDate == this.filterDate) return true;
+      }
+    },
+    returnTodayDate() {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+      var yyyy = today.getFullYear();
+
+      today = `${yyyy}/${mm}/${dd}`;
+      return today;
     },
   },
   mounted() {
