@@ -354,7 +354,7 @@ export default {
     },
     async postEvent() {
       let ev = this.newEvent;
-      ev.coords = this.markers[0].position;
+      ev.coords = this.location;
       await this.createEvent({ event: ev, owner: this.activeUser });
       this.$emit("closeNewEventDialog");
     },
