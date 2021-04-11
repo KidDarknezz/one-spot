@@ -2,6 +2,8 @@ export default {
   methods: {
     categoryName(cat) {
       switch (cat) {
+        case "":
+          return "Todas";
         case "music":
           return "Musica";
         case "party":

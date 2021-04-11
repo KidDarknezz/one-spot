@@ -32,9 +32,7 @@
         </div>
         <div class="text-caption os-semibold">
           Categoria:
-          <span class="text-pink">{{
-            selectedCategory ? categoryName(selectedCategory) : "-"
-          }}</span>
+          <span class="text-pink">{{ categoryName(selectedCategory) }}</span>
         </div>
       </div>
       <div class="flex flex-center">
