@@ -114,9 +114,6 @@
           </div>
           <div class="text-caption text-grey-7">{{ event.subtitle }}</div>
           <div class="text-caption text-grey-7">{{ event.ownerName }}</div>
-          <div class="text-caption text-grey-7">
-            {{ event.dateAndTime }}
-          </div>
         </div>
       </div>
     </div>
