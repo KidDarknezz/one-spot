@@ -33,7 +33,7 @@
         <div class="text-caption os-semibold">
           Categoria:
           <span class="text-pink">{{
-            selectedCategory ? selectedCategory : "-"
+            selectedCategory ? categoryName(selectedCategory) : "-"
           }}</span>
         </div>
       </div>
@@ -208,6 +208,7 @@ import {
   geohashQueryBounds,
   distanceBetween,
 } from "geofire-common";
+import returnCategoryName from "@/mixins/returnCategoryName";
 
 export default {
   data() {
@@ -318,6 +319,7 @@ export default {
       return today;
     },
   },
+  mixins: [returnCategoryName],
   mounted() {
     this.filterRange = this.searchRadius;
     if (!navigator.geolocation) {
