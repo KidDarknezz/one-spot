@@ -17,6 +17,7 @@
       <div class="text-h5 os-semibold">
         Event name
       </div>
+      <q-btn label="test" @click="testInfo()" />
     </div>
     <div class="row">
       <div class="col-lg-4 q-px-sm">
@@ -25,31 +26,24 @@
             <q-input
               label="Nombre"
               filled
-              readonly
               v-model="selectedEvent.name"
               class="q-mb-md"
+              color="pink"
             />
             <q-input
               label="Subtitulo"
               filled
-              readonly
               v-model="selectedEvent.subtitle"
               class="q-mb-md"
+              color="pink"
             />
             <q-input
               label="Descripcion"
               filled
-              readonly
+              color="pink"
               type="textarea"
               rows="4"
               v-model="selectedEvent.description"
-              class="q-mb-md"
-            />
-            <q-input
-              label="Organizador"
-              filled
-              readonly
-              v-model="selectedEvent.ownerName"
               class="q-mb-md"
             />
             <div v-for="(dateTime, i) in selectedEvent.dateAndTime" :key="i">
@@ -102,7 +96,7 @@
                 v-for="cat in selectedEvent.selectedCategories"
                 :key="cat"
               >
-                {{ cat }}
+                {{ categoryName(cat) }}
               </div>
             </div>
           </q-card-section>
@@ -114,7 +108,7 @@
             <q-input
               label="Lugar"
               filled
-              readonly
+              color="pink"
               v-model="selectedEvent.place"
               class="q-mb-md"
             />
@@ -129,7 +123,7 @@
           map-type-id="roadmap"
           style="width: 100%; height: 400px"
         >
-          <GmapMarker :position="selectedEvent.coords" />
+          <GmapMarker :position="selectedEvent.coords" :editable="true" />
         </GmapMap>
       </div>
       <div class="col-lg-3 q-px-sm">
@@ -153,6 +147,7 @@
 import { mapState, mapActions } from "vuex";
 import firebase from "firebase/app";
 import "firebase/storage";
+import categoriesMixin from "@/mixins/categoriesMixin";
 
 export default {
   data() {
@@ -176,7 +171,11 @@ export default {
           console.log(err);
         });
     },
+    testInfo() {
+      console.log(this.selectedEvent);
+    },
   },
+  mixins: [categoriesMixin],
   computed: {
     ...mapState("dashboardStore", ["selectedEvent"]),
   },
