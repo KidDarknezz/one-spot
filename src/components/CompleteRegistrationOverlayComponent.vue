@@ -112,7 +112,7 @@
             <div class="row" style="height: 50vh; overflow-y: scroll">
               <div
                 class="col-xs-4 q-pa-xs"
-                v-for="cat in categoriesOptions"
+                v-for="cat in allEventCategories"
                 :key="cat.value"
               >
                 <div
@@ -147,6 +147,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import categoriesMixin from "@/mixins/categoriesMixin";
 
 export default {
   props: {
@@ -169,31 +170,6 @@ export default {
       registrationStep: 0,
       profile: null,
       selected: [],
-      categoriesOptions: [
-        { label: "Musica", value: "music" },
-        { label: "Fiestas", value: "party" },
-        { label: "Deportes", value: "sports" },
-        { label: "Cultura", value: "culture" },
-        { label: "Teatro", value: "theatre" },
-        { label: "Conciertos", value: "concerts" },
-        { label: "Ferias", value: "carnivals" },
-        { label: "Aire Libre", value: "open-air" },
-        { label: "Familia", value: "family" },
-        { label: "Arte", value: "art" },
-        { label: "Turismo", value: "tourism" },
-        { label: "Discotecas", value: "clubs" },
-        { label: "Bares", value: "bars" },
-        { label: "Nightlife", value: "nightlife" },
-        { label: "Festivales", value: "festivals" },
-        { label: "Motivacional", value: "motivational" },
-        { label: "Conferencias", value: "conferences" },
-        { label: "Seminarios", value: "seminars" },
-        { label: "Networking", value: "networking" },
-        { label: "Expos", value: "expos" },
-        { label: "Galas", value: "galas" },
-        { label: "Gaming", value: "gaming" },
-        { label: "Trending", value: "trending" },
-      ],
     };
   },
   methods: {
@@ -241,6 +217,7 @@ export default {
       });
     },
   },
+  mixins: [categoriesMixin],
   computed: {
     ...mapState("authStore", ["loadingStatus"]),
   },

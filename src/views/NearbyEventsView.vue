@@ -203,7 +203,7 @@ import {
   geohashQueryBounds,
   distanceBetween,
 } from "geofire-common";
-import returnCategoryName from "@/mixins/returnCategoryName";
+import categoriesMixin from "@/mixins/categoriesMixin";
 
 export default {
   data() {
@@ -288,7 +288,7 @@ export default {
       return today;
     },
   },
-  mixins: [returnCategoryName],
+  mixins: [categoriesMixin],
   mounted() {
     this.filterRange = this.searchRadius;
     if (!navigator.geolocation) {

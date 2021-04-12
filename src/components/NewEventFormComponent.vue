@@ -37,7 +37,7 @@
           filled
           v-model="newEvent.selectedCategories"
           multiple
-          :options="categories"
+          :options="allEventCategories"
           counter
           max-values="5"
           hint="Max 5 selecciones"
@@ -286,6 +286,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import GoogleMaps from "@/components/GoogleMaps";
+import categoriesMixin from "@/mixins/categoriesMixin";
 
 export default {
   data() {
@@ -311,31 +312,6 @@ export default {
       markers: [],
       center: {},
       locationVerified: false,
-      categories: [
-        { label: "Musica", value: "music" },
-        { label: "Fiestas", value: "party" },
-        { label: "Deportes", value: "sports" },
-        { label: "Cultura", value: "culture" },
-        { label: "Teatro", value: "theatre" },
-        { label: "Conciertos", value: "concerts" },
-        { label: "Ferias", value: "carnivals" },
-        { label: "Aire Libre", value: "open-air" },
-        { label: "Familia", value: "family" },
-        { label: "Arte", value: "art" },
-        { label: "Turismo", value: "tourism" },
-        { label: "Discotecas", value: "clubs" },
-        { label: "Bares", value: "bars" },
-        { label: "Nightlife", value: "nightlife" },
-        { label: "Festivales", value: "festivals" },
-        { label: "Motivacional", value: "motivational" },
-        { label: "Conferencias", value: "conferences" },
-        { label: "Seminarios", value: "seminars" },
-        { label: "Networking", value: "networking" },
-        { label: "Expos", value: "expos" },
-        { label: "Galas", value: "galas" },
-        { label: "Gaming", value: "gaming" },
-        { label: "Trending", value: "trending" },
-      ],
     };
   },
   methods: {
@@ -389,6 +365,7 @@ export default {
       console.log(this.markers);
     },
   },
+  mixins: [categoriesMixin],
   computed: {
     ...mapState("authStore", ["activeUser"]),
   },
