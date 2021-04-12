@@ -2,7 +2,7 @@
   <q-page class="q-pa-lg">
     <div class="row q-mb-xl">
       <div class="text-h5 os-semibold">
-        Mis Eventos Proximos ({{ myEvents.length }})
+        Mis Eventos en Revision ({{ returnOnReviewEvents.length }})
       </div>
       <q-space />
       <q-btn
@@ -16,11 +16,61 @@
         @click="newEventDialog = true"
       />
     </div>
-
     <div class="row q-mb-lg">
       <div
         class="col-lg-2 col-xs-12"
-        v-for="(openEvent, i) in myEvents"
+        v-for="(pendingEvent, i) in returnOnReviewEvents"
+        :key="i"
+      >
+        <div class="row">
+          <div class="col-lg-4 col-xs-3 q-mb-lg">
+            <img
+              :src="
+                returnEventAsset(
+                  pendingEvent.owner,
+                  pendingEvent.flyer,
+                  pendingEvent.id
+                )
+              "
+              :id="pendingEvent.id"
+              width="100%"
+              class="os-rounded-border"
+              style="cursor: pointer"
+              @click="$router.push(`/review-my-event/${pendingEvent.id}`)"
+            />
+          </div>
+          <div class="col-lg-8 q-pl-sm">
+            <div
+              :class="
+                `text-caption os-semibold text-${
+                  returnStatusNameAndColor(pendingEvent.status).color
+                }`
+              "
+            >
+              {{ returnStatusNameAndColor(pendingEvent.status).status }}
+            </div>
+            <div class="text-subtitle2 os-semibold">
+              {{ pendingEvent.name }}
+            </div>
+            <div class="text-caption text-grey-9">
+              {{ pendingEvent.subtitle }}
+            </div>
+            <div class="text-caption text-grey-6">
+              {{ pendingEvent.dateAndTime[0].startDate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row q-mb-xl">
+      <div class="text-h5 os-semibold">
+        Mis Eventos Activos ({{ returnPublicEvents.length }})
+      </div>
+    </div>
+    <div class="row q-mb-lg">
+      <div
+        class="col-lg-2 col-xs-12"
+        v-for="(openEvent, i) in returnPublicEvents"
         :key="i"
       >
         <div class="row">
@@ -59,23 +109,51 @@
         </div>
       </div>
     </div>
-    <div class="text-h5 os-semibold q-mb-xl">Eventos Pasados (8)</div>
+    <div class="text-h5 os-semibold q-mb-xl">
+      Mis Eventos Culminados o Rechazados ({{ returnClosedEvents.length }})
+    </div>
     <div class="row q-mb-lg">
-      <div class="col-lg-2 col-xs-12" v-for="(openEvent, i) in 8" :key="i">
+      <div
+        class="col-lg-2 col-xs-12"
+        v-for="(closedEvent, i) in returnClosedEvents"
+        :key="i"
+      >
         <div class="row">
           <div class="col-lg-4 col-xs-3 q-mb-lg">
             <img
-              src="@/assets/event_4_thumbnail.webp"
+              :src="
+                returnEventAsset(
+                  closedEvent.owner,
+                  closedEvent.flyer,
+                  closedEvent.id
+                )
+              "
+              :id="closedEvent.id"
               width="100%"
               class="os-rounded-border"
+              style="cursor: pointer"
+              @click="$router.push(`/review-my-event/${closedEvent.id}`)"
             />
           </div>
           <div class="col-lg-8 q-pl-sm">
-            <div class="text-subtitle2 os-semibold">Event Title</div>
-            <div class="text-caption text-grey-9">
-              Event Sub-Title
+            <div
+              :class="
+                `text-caption os-semibold text-${
+                  returnStatusNameAndColor(closedEvent.status).color
+                }`
+              "
+            >
+              {{ returnStatusNameAndColor(closedEvent.status).status }}
             </div>
-            <div class="text-caption text-grey-6">24 de enero 2022</div>
+            <div class="text-subtitle2 os-semibold">
+              {{ closedEvent.name }}
+            </div>
+            <div class="text-caption text-grey-9">
+              {{ closedEvent.subtitle }}
+            </div>
+            <div class="text-caption text-grey-6">
+              {{ closedEvent.dateAndTime[0].startDate }}
+            </div>
           </div>
         </div>
       </div>
@@ -157,6 +235,29 @@ export default {
   },
   computed: {
     ...mapState("dashboardStore", ["myEvents"]),
+
+    returnPublicEvents() {
+      let publicEvents = [];
+      this.myEvents.forEach((event) => {
+        if (event.status == "public") publicEvents.push(event);
+      });
+      return publicEvents;
+    },
+    returnOnReviewEvents() {
+      let onReviewEvents = [];
+      this.myEvents.forEach((event) => {
+        if (event.status == "review") onReviewEvents.push(event);
+      });
+      return onReviewEvents;
+    },
+    returnClosedEvents() {
+      let closedEvents = [];
+      this.myEvents.forEach((event) => {
+        if (event.status == "rejected" || event.status == "ended")
+          closedEvents.push(event);
+      });
+      return closedEvents;
+    },
   },
   mounted() {
     if (this.myEvents.length <= 0) this.getMyEvents();
