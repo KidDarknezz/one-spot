@@ -30,11 +30,11 @@ const mutations = {
   setAllMyEvents(state, payload) {
     state.myEvents = payload;
   },
-  // setAddNewEvent(state, payload) {
-  //   state.myEvents.push(payload);
-  // },
   setMyEvents(state, payload) {
     state.myEvents = payload;
+  },
+  setNewEvent(state, payload) {
+    state.myEvents.push(payload);
   },
   setClientsAccounts(state, payload) {
     state.clientsAccounts = payload;
@@ -175,28 +175,19 @@ const actions = {
           }`
         );
       await storageRef.put(payload.event.flyer);
-      await firebase
+      firebase
         .firestore()
         .collection("events")
-        .add(event);
-      commit("setLoadingStatus", false);
+        .add(event)
+        .then((resp) => {
+          event.id = resp.id;
+          commit("setNewEvent", event);
+          commit("setLoadingStatus", false);
+        });
     }
   },
   getMyEvents({ commit }) {
     const uid = firebase.auth().currentUser.uid;
-    // firebase
-    //   .firestore()
-    //   .collection("events")
-    //   .where("owner", "==", uid)
-    //   .onSnapshot((snapshot) => {
-    //     snapshot.docChanges().forEach((change) => {
-    //       if (change.type == "added") {
-    //         let ev = change.doc.data();
-    //         ev.id = change.doc.id;
-    //         commit("setAddNewEvent", ev);
-    //       }
-    //     });
-    //   });
     let events = [];
     firebase
       .firestore()
