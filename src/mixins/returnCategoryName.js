@@ -1,4 +1,33 @@
 export default {
+  data() {
+    return {
+      allEventCategories: [
+        { label: "Musica", value: "music" },
+        { label: "Fiestas", value: "party" },
+        { label: "Deportes", value: "sports" },
+        { label: "Cultura", value: "culture" },
+        { label: "Teatro", value: "theatre" },
+        { label: "Conciertos", value: "concerts" },
+        { label: "Ferias", value: "carnivals" },
+        { label: "Aire Libre", value: "open-air" },
+        { label: "Familia", value: "family" },
+        { label: "Arte", value: "art" },
+        { label: "Turismo", value: "tourism" },
+        { label: "Discotecas", value: "clubs" },
+        { label: "Bares", value: "bars" },
+        { label: "Nightlife", value: "nightlife" },
+        { label: "Festivales", value: "festivals" },
+        { label: "Motivacional", value: "motivational" },
+        { label: "Conferencias", value: "conferences" },
+        { label: "Seminarios", value: "seminars" },
+        { label: "Networking", value: "networking" },
+        { label: "Expos", value: "expos" },
+        { label: "Galas", value: "galas" },
+        { label: "Gaming", value: "gaming" },
+        { label: "Trending", value: "trending" },
+      ],
+    };
+  },
   methods: {
     categoryName(cat) {
       switch (cat) {
