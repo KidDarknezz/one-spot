@@ -33,6 +33,18 @@
           updateEventStatus({ event: $route.params.id, status: 'public' })
         "
       />
+      <q-btn
+        label="Rechazar"
+        no-caps
+        rounded
+        icon="close"
+        flat
+        dense
+        size="sm"
+        color="red-7"
+        unelevated
+        class="os-semibold q-mr-lg"
+      />
     </div>
     <div class="row">
       <div class="col-lg-4 q-px-sm">
