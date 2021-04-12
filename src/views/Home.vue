@@ -159,7 +159,9 @@
     <!-- RECOMMENDED -->
     <div class="q-pa-lg">
       <div class="row q-mb-lg">
-        <div class="text-h5 os-semibold">Recomendado</div>
+        <div class="text-h5 os-semibold">
+          Recomendado
+        </div>
         <q-space />
         <q-btn
           flat
@@ -172,7 +174,11 @@
           no-caps
         />
       </div>
-      <div class="row q-mb-md" v-for="(recommended, i) in 4" :key="i">
+      <div
+        class="row q-mb-md"
+        v-for="(recommended, i) in recommendedEvents.slice(0, 4)"
+        :key="i"
+      >
         <div class="col-4">
           <img
             src="@/assets/event_2_thumbnail.webp"
@@ -181,9 +187,11 @@
           />
         </div>
         <div class="col-8 q-pa-md">
-          <div class="text-subtitle2 os-semibold">Event Title</div>
-          <div class="text-caption text-grey-9">Event Sub-Title</div>
-          <div class="text-caption text-grey-6">24 de enero 2022</div>
+          <div class="text-subtitle2 os-semibold">{{ recommended.name }}</div>
+          <div class="text-caption text-grey-9">{{ recommended.subtitle }}</div>
+          <div class="text-caption text-grey-6">
+            {{ recommended.dateAndTime[0].startDate }}
+          </div>
         </div>
       </div>
     </div>
@@ -204,14 +212,16 @@ export default {
     };
   },
   methods: {
-    ...mapActions("homeStore", ["getHomeEvents"]),
+    ...mapActions("homeStore", ["getHomeEvents", "getRecommendedEvents"]),
   },
   computed: {
     ...mapState("homeStore", [
+      "recommendedEvents",
       "mainCover",
       "sponsoredEvents",
       "createdRecently",
     ]),
+    ...mapState("authStore", ["activeUser"]),
     showLoading() {
       if (
         this.mainCover &&
@@ -222,7 +232,7 @@ export default {
       else return false;
     },
   },
-  mounted() {
+  async mounted() {
     // if (this.sponsoredEvents.length == 0) this.getHomeEvents();
     // const searchbox = document.querySelector("#search-box");
     // window.addEventListener("scroll", () => {
@@ -230,6 +240,7 @@ export default {
     //   searchbox.style.backgroundColor = `rgba(255, 255, 255, ${scroll})`;
     //   searchbox.style.boxShadow = `0 1px 5px 0px rgba(156, 156, 156, ${scroll})`;
     // });
+    await this.getRecommendedEvents(this.activeUser.interests);
   },
 };
 </script>

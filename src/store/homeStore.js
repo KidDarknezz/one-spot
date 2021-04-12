@@ -11,6 +11,8 @@ const state = {
   mainCover: null,
   sponsoredEvents: [],
   createdRecently: [],
+  //
+  recommendedEvents: [],
   userLocation: null,
   nearByEvents: [],
   searchRadius: 2,
@@ -26,11 +28,8 @@ const mutations = {
   setRecentEvents(state, payload) {
     state.createdRecently.push(payload);
   },
-  setUserLocation(state, payload) {
-    state.userLocation = {
-      lat: payload.coords.latitude,
-      lng: payload.coords.longitude,
-    };
+  setRecommendedEvents(state, payload) {
+    state.recommendedEvents = payload;
   },
   setNearByEvents(state, payload) {
     state.nearByEvents = payload;
@@ -110,6 +109,30 @@ const actions = {
         });
       });
   },
+  getRecommendedEvents({ commit }, payload) {
+    console.log(payload);
+    let recommendedEvents = [];
+    payload.forEach((interest) => {
+      firebase
+        .firestore()
+        .collection("events")
+        .where("status", "==", "public")
+        .where("selectedCategories", "array-contains", interest)
+        .orderBy("publishedAt", "desc")
+        .get()
+        .then((snapshot) => {
+          snapshot.docs.forEach((event) => {
+            let ev = event.data();
+            ev.id = event.id;
+            if (
+              !recommendedEvents.some((recommended) => recommended.id === ev.id)
+            )
+              recommendedEvents.push(ev);
+          });
+        });
+    });
+    commit("setRecommendedEvents", recommendedEvents);
+  },
   getGeoEvents({ commit }, payload) {
     const center = [payload.lat, payload.lng];
     const radiusInM = state.searchRadius * 1000;
@@ -123,7 +146,6 @@ const actions = {
         .orderBy("geohash")
         .startAt(b[0])
         .endAt(b[1]);
-
       promises.push(q.get());
     }
     Promise.all(promises)

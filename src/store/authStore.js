@@ -14,7 +14,8 @@ const mutations = {
     state.loadingStatus = payload;
   },
   setActiveUser(state, payload) {
-    payload.emailVerification = firebase.auth().currentUser.emailVerified;
+    if (payload)
+      payload.emailVerification = firebase.auth().currentUser.emailVerified;
     state.activeUser = payload;
   },
   setUserRole(state, payload) {

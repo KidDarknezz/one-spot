@@ -61,13 +61,15 @@ const actions = {
     commit("setSelectedEvent", null);
   },
   updateEventStatus({ commit }, payload) {
+    let updateValues = { status: payload.status };
+    if (payload.status == "public") updateValues.publishedAt = Date.now();
     if (confirm("Deseas modificar el status de este evento?")) {
       commit("setLoadingStatus", true);
       firebase
         .firestore()
         .collection("events")
         .doc(payload.event)
-        .update({ status: payload.status })
+        .update(updateValues)
         .then((resp) => {
           commit("setLoadingStatus", false);
           router.push("/review-events");
