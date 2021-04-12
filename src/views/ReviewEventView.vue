@@ -44,6 +44,9 @@
         color="red-7"
         unelevated
         class="os-semibold q-mr-lg"
+        @click="
+          updateEventStatus({ event: $route.params.id, status: 'rejected' })
+        "
       />
     </div>
     <div class="row">
