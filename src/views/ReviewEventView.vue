@@ -130,7 +130,7 @@
                 v-for="cat in selectedEvent.selectedCategories"
                 :key="cat"
               >
-                {{ cat }}
+                {{ categoryName(cat) }}
               </div>
             </div>
           </q-card-section>
@@ -183,6 +183,8 @@ import "firebase/storage";
 
 import { mapActions, mapState } from "vuex";
 
+import categoriesMixin from "@/mixins/categoriesMixin";
+
 export default {
   data() {
     return {};
@@ -204,6 +206,7 @@ export default {
         });
     },
   },
+  mixins: [categoriesMixin],
   computed: {
     ...mapState("dashboardStore", ["selectedEvent"]),
   },
