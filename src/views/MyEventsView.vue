@@ -22,7 +22,11 @@
         v-for="(pendingEvent, i) in returnOnReviewEvents"
         :key="i"
       >
-        <div class="row">
+        <div
+          class="row"
+          style="cursor: pointer"
+          @click="$router.push(`/review-my-event/${pendingEvent.id}`)"
+        >
           <div class="col-lg-4 col-xs-3 q-mb-lg">
             <img
               :src="
@@ -35,8 +39,6 @@
               :id="pendingEvent.id"
               width="100%"
               class="os-rounded-border"
-              style="cursor: pointer"
-              @click="$router.push(`/review-my-event/${pendingEvent.id}`)"
             />
           </div>
           <div class="col-lg-8 q-pl-sm">
@@ -73,7 +75,11 @@
         v-for="(openEvent, i) in returnPublicEvents"
         :key="i"
       >
-        <div class="row">
+        <div
+          class="row"
+          style="cursor: pointer"
+          @click="$router.push(`/review-my-event/${openEvent.id}`)"
+        >
           <div class="col-lg-4 col-xs-3 q-mb-lg">
             <img
               :src="
@@ -82,8 +88,6 @@
               :id="openEvent.id"
               width="100%"
               class="os-rounded-border"
-              style="cursor: pointer"
-              @click="$router.push(`/review-my-event/${openEvent.id}`)"
             />
           </div>
           <div class="col-lg-8 q-pl-sm">
@@ -118,7 +122,11 @@
         v-for="(closedEvent, i) in returnClosedEvents"
         :key="i"
       >
-        <div class="row">
+        <div
+          class="row"
+          style="cursor: pointer"
+          @click="$router.push(`/review-my-event/${closedEvent.id}`)"
+        >
           <div class="col-lg-4 col-xs-3 q-mb-lg">
             <img
               :src="
@@ -131,8 +139,6 @@
               :id="closedEvent.id"
               width="100%"
               class="os-rounded-border"
-              style="cursor: pointer"
-              @click="$router.push(`/review-my-event/${closedEvent.id}`)"
             />
           </div>
           <div class="col-lg-8 q-pl-sm">
