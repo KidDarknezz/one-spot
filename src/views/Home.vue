@@ -85,11 +85,6 @@
         </div>
       </div>
     </div>
-    <!-- <img
-      :src="mainCover.assets.cover"
-      class="text-white text-bold q-mb-md os-main-cover full-width"
-      v-if="mainCover"
-    /> -->
     <!-- /HERO -->
 
     <!-- SPOTLIGHT -->
@@ -196,7 +191,6 @@
       </div>
     </div>
     <!-- /RECOMMENDED -->
-    <loading-overlay :display="showLoading" />
   </q-page>
 </template>
 
@@ -215,32 +209,11 @@ export default {
     ...mapActions("homeStore", ["getHomeEvents", "getRecommendedEvents"]),
   },
   computed: {
-    ...mapState("homeStore", [
-      "recommendedEvents",
-      "mainCover",
-      "sponsoredEvents",
-      "createdRecently",
-    ]),
+    ...mapState("homeStore", ["recommendedEvents"]),
     ...mapState("authStore", ["activeUser"]),
-    showLoading() {
-      if (
-        this.mainCover &&
-        this.sponsoredEvents.length > 0 &&
-        this.createdRecently.length > 0
-      )
-        return false;
-      else return false;
-    },
   },
-  async mounted() {
-    // if (this.sponsoredEvents.length == 0) this.getHomeEvents();
-    // const searchbox = document.querySelector("#search-box");
-    // window.addEventListener("scroll", () => {
-    //   let scroll = (window.scrollY || window.pageYOffset) / 150;
-    //   searchbox.style.backgroundColor = `rgba(255, 255, 255, ${scroll})`;
-    //   searchbox.style.boxShadow = `0 1px 5px 0px rgba(156, 156, 156, ${scroll})`;
-    // });
-    await this.getRecommendedEvents(this.activeUser.interests);
+  mounted() {
+    this.getRecommendedEvents(this.activeUser.interests);
   },
 };
 </script>

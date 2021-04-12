@@ -64,16 +64,20 @@
       />
       <!-- /BOTTOM SPACE -->
     </q-page-container>
+    <LoadingOverlayComponent :display="displayLoading" />
   </q-layout>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
 import CompleteRegistrationOverlayComponent from "@/components/CompleteRegistrationOverlayComponent";
+import LoadingOverlayComponent from "@/components/LoadingOverlayComponent";
 
 export default {
   data() {
-    return {};
+    return {
+      displayLoading: true,
+    };
   },
   methods: {
     ...mapActions("authStore", ["logoutUser", "getUserData"]),
@@ -97,8 +101,14 @@ export default {
   beforeMount() {
     this.getUserData();
   },
+  mounted() {
+    setTimeout(() => {
+      this.displayLoading = false;
+    }, 2000);
+  },
   components: {
     CompleteRegistrationOverlayComponent,
+    LoadingOverlayComponent,
   },
 };
 </script>

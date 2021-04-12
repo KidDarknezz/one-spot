@@ -110,7 +110,6 @@ const actions = {
       });
   },
   getRecommendedEvents({ commit }, payload) {
-    console.log(payload);
     let recommendedEvents = [];
     payload.forEach((interest) => {
       firebase
