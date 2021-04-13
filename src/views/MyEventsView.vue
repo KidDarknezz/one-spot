@@ -29,13 +29,7 @@
         >
           <div class="col-lg-4 col-xs-3 q-mb-lg">
             <img
-              :src="
-                returnEventAsset(
-                  pendingEvent.owner,
-                  pendingEvent.flyer,
-                  pendingEvent.id
-                )
-              "
+              :src="pendingEvent.flyer"
               :id="pendingEvent.id"
               width="100%"
               class="os-rounded-border"
@@ -82,9 +76,7 @@
         >
           <div class="col-lg-4 col-xs-3 q-mb-lg">
             <img
-              :src="
-                returnEventAsset(openEvent.owner, openEvent.flyer, openEvent.id)
-              "
+              :src="openEvent.flyer"
               :id="openEvent.id"
               width="100%"
               class="os-rounded-border"
@@ -129,13 +121,7 @@
         >
           <div class="col-lg-4 col-xs-3 q-mb-lg">
             <img
-              :src="
-                returnEventAsset(
-                  closedEvent.owner,
-                  closedEvent.flyer,
-                  closedEvent.id
-                )
-              "
+              :src="closedEvent.flyer"
               :id="closedEvent.id"
               width="100%"
               class="os-rounded-border"
@@ -198,9 +184,6 @@
 </template>
 
 <script>
-import firebase from "firebase/app";
-import "firebase/storage";
-
 import { mapState, mapActions } from "vuex";
 import NewEventFormComponent from "@/components/NewEventFormComponent";
 
@@ -224,19 +207,6 @@ export default {
         case "rejected":
           return { status: "Rechazado", color: "red-7" };
       }
-    },
-    returnEventAsset(owner, ref, id) {
-      firebase
-        .storage()
-        .ref()
-        .child(`events-assets/${owner}/${ref}`)
-        .getDownloadURL()
-        .then((url) => {
-          document.getElementById(id).setAttribute("src", url);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
   computed: {

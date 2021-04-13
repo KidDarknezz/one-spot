@@ -164,17 +164,7 @@
         </GmapMap>
       </div>
       <div class="col-lg-3 q-px-sm">
-        <img
-          :alt="
-            returnEventAsset(
-              selectedEvent.owner,
-              selectedEvent.flyer,
-              $route.params.id
-            )
-          "
-          :id="$route.params.id"
-          width="100%"
-        />
+        <img :src="selectedEvent.flyer" :id="$route.params.id" width="100%" />
       </div>
     </div>
   </q-page>

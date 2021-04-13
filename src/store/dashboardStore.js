@@ -76,7 +76,7 @@ const actions = {
         });
     }
   },
-  async createManagerAccount({ commit }, payload) {
+  createManagerAccount({ commit }, payload) {
     commit("setLoadingStatus", true);
     let accData = {
       email: payload.email,
@@ -90,17 +90,28 @@ const actions = {
       const storageRef = firebase
         .storage()
         .ref(`clients-profile/${accData.profile}`);
-      await storageRef.put(payload.profile);
+      storageRef.put(payload.profile).then((resp) => {
+        resp.ref.getDownloadURL().then((url) => {
+          accData.profile = url;
+          commit("setLoadingStatus", false);
+          const createAccount = firebase
+            .functions()
+            .httpsCallable("createUser");
+          createAccount(accData).then((result) => {
+            console.log(result);
+          });
+        });
+      });
     } else {
       accData.profile = "";
+      commit("setLoadingStatus", false);
+      const createAccount = firebase.functions().httpsCallable("createUser");
+      createAccount(accData).then((result) => {
+        console.log(result);
+      });
     }
-    commit("setLoadingStatus", false);
-    const createAccount = firebase.functions().httpsCallable("createUser");
-    createAccount(accData).then((result) => {
-      console.log(result);
-    });
   },
-  getClientsAccounts({ commit }, payload) {
+  getClientsAccounts({ commit }) {
     let clients = [];
     firebase
       .firestore()
@@ -116,7 +127,7 @@ const actions = {
       });
     commit("setClientsAccounts", clients);
   },
-  getOnReviewEvents({ commit }, payload) {
+  getOnReviewEvents({ commit }) {
     let reviewEvents = [];
     firebase
       .firestore()
@@ -132,7 +143,7 @@ const actions = {
       });
     commit("setOnReviewEvents", reviewEvents);
   },
-  getAdminsAccounts({ commit }, payload) {
+  getAdminsAccounts({ commit }) {
     let admins = [];
     firebase
       .firestore()
@@ -148,7 +159,7 @@ const actions = {
       });
     commit("setAdminsAccounts", admins);
   },
-  async createEvent({ commit }, payload) {
+  createEvent({ commit }, payload) {
     if (confirm("Esta seguro que desea crear este evento?")) {
       commit("setLoadingStatus", true);
       const event = {
@@ -158,7 +169,7 @@ const actions = {
         selectedCategories: payload.event.selectedCategories,
         dateAndTime: payload.event.dateAndTime,
         status: "review",
-        flyer: payload.event.flyer.name,
+        // flyer: payload.event.flyer.name,
         owner: firebase.auth().currentUser.uid,
         ownerName: payload.owner.name,
         ownerProfile: payload.owner.profile,
@@ -176,16 +187,20 @@ const actions = {
             payload.event.flyer.name
           }`
         );
-      await storageRef.put(payload.event.flyer);
-      firebase
-        .firestore()
-        .collection("events")
-        .add(event)
-        .then((resp) => {
-          event.id = resp.id;
-          commit("setNewEvent", event);
-          commit("setLoadingStatus", false);
+      storageRef.put(payload.event.flyer).then((resp) => {
+        resp.ref.getDownloadURL().then((url) => {
+          event.flyer = url;
+          firebase
+            .firestore()
+            .collection("events")
+            .add(event)
+            .then((resp) => {
+              event.id = resp.id;
+              commit("setNewEvent", event);
+              commit("setLoadingStatus", false);
+            });
         });
+      });
     }
   },
   getMyEvents({ commit }) {

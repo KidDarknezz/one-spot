@@ -27,10 +27,7 @@
           @click="$router.push(`/review-events/${event.id}`)"
           style="cursor: pointer"
         >
-          <img
-            :alt="returnEventAsset(event.owner, event.flyer, event.id)"
-            :id="event.id"
-          />
+          <img :src="event.flyer" />
           <q-card-section>
             <div class="text-subtitle2 os-semibold">{{ event.name }}</div>
             <div class="text-caption">{{ event.ownerName }}</div>
@@ -42,9 +39,6 @@
 </template>
 
 <script>
-import firebase from "firebase/app";
-import "firebase/storage";
-
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -53,20 +47,6 @@ export default {
   },
   methods: {
     ...mapActions("dashboardStore", ["getOnReviewEvents", "getGeoEvents"]),
-
-    returnEventAsset(owner, ref, id) {
-      firebase
-        .storage()
-        .ref()
-        .child(`events-assets/${owner}/${ref}`)
-        .getDownloadURL()
-        .then((url) => {
-          document.getElementById(id).setAttribute("src", url);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
   },
   computed: {
     ...mapState("dashboardStore", ["onReviewEvents"]),

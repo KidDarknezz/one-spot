@@ -127,17 +127,7 @@
         </GmapMap>
       </div>
       <div class="col-lg-3 q-px-sm">
-        <img
-          :alt="
-            returnEventAsset(
-              selectedEvent.owner,
-              selectedEvent.flyer,
-              $route.params.id
-            )
-          "
-          :id="$route.params.id"
-          width="100%"
-        />
+        <img :src="selectedEvent.flyer" :id="$route.params.id" width="100%" />
       </div>
     </div>
   </q-page>
@@ -158,19 +148,6 @@ export default {
   methods: {
     ...mapActions("dashboardStore", ["getSelectedEvent"]),
 
-    returnEventAsset(owner, ref, id) {
-      firebase
-        .storage()
-        .ref()
-        .child(`events-assets/${owner}/${ref}`)
-        .getDownloadURL()
-        .then((url) => {
-          document.getElementById(id).setAttribute("src", url);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
     testInfo() {
       console.log(this.selectedEvent);
     },
