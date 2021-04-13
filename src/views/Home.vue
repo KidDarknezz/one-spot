@@ -178,9 +178,10 @@
       >
         <div class="col-4">
           <img
-            src="@/assets/event_2_thumbnail.webp"
+            :src="recommended.flyer"
             width="100%"
             class="os-rounded-border"
+            style="width: 100%;"
           />
         </div>
         <div class="col-8 q-pa-md">

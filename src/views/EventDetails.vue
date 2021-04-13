@@ -3,8 +3,8 @@
     <div v-if="selectedEvent">
       <!-- EVEMT FLYER -->
       <div style="height: 60vh">
-        <!-- <q-img
-          :src="selectedEvent.assets.cover"
+        <q-img
+          :src="selectedEvent.flyer"
           class="text-white text-bold fixed-top"
           id="eventCover"
         >
@@ -17,7 +17,7 @@
               <q-btn icon="o_notifications" flat round />
             </div>
           </div>
-        </q-img> -->
+        </q-img>
       </div>
       <!-- /EVENT FLYER -->
 
