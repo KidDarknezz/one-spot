@@ -184,20 +184,6 @@ export default {
   },
   methods: {
     ...mapActions("dashboardStore", ["getSelectedEvent", "updateEventStatus"]),
-
-    returnEventAsset(owner, ref, id) {
-      firebase
-        .storage()
-        .ref()
-        .child(`events-assets/${owner}/${ref}`)
-        .getDownloadURL()
-        .then((url) => {
-          document.getElementById(id).setAttribute("src", url);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
   },
   mixins: [categoriesMixin],
   computed: {

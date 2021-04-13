@@ -30,10 +30,7 @@
                 <q-avatar
                   v-if="props.row.profile || props.row.profile != 'img'"
                 >
-                  <img
-                    :id="props.row.id"
-                    :alt="returnClientProfile(props.row.profile, props.row.id)"
-                  />
+                  <img :src="props.row.profile" />
                 </q-avatar>
               </q-td>
               <q-td v-for="col in props.cols" :key="col.name" :props="props">
@@ -198,21 +195,6 @@ export default {
         profile: null,
       };
       this.newAccountDialog = false;
-    },
-    returnClientProfile(file, id) {
-      // console.log(file);
-      // return file.row.profile;
-      firebase
-        .storage()
-        .ref()
-        .child(`clients-profile/${file}`)
-        .getDownloadURL()
-        .then((url) => {
-          document.getElementById(id).setAttribute("src", url);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
   computed: {

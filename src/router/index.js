@@ -67,14 +67,14 @@ const routes = [
           requiresAuth: true,
         },
       },
-      {
-        path: "/nearby",
-        name: "NearbyEvents",
-        component: NearbyEventsView,
-        meta: {
-          requiresAuth: true,
-        },
-      },
+      // {
+      //   path: "/nearby",
+      //   name: "NearbyEvents",
+      //   component: NearbyEventsView,
+      //   meta: {
+      //     requiresAuth: true,
+      //   },
+      // },
       {
         path: "/recommended",
         name: "Recommended Events",
