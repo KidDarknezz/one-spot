@@ -167,12 +167,14 @@
           color="pink"
           class="q-px-sm os-semibold"
           no-caps
+          to="/recommended"
         />
       </div>
       <div
         class="row q-mb-md"
         v-for="(recommended, i) in recommendedEvents.slice(0, 4)"
         :key="i"
+        @click="$router.push(`/event/${recommended.id}`)"
       >
         <div class="col-4">
           <img
@@ -213,7 +215,8 @@ export default {
     ...mapState("authStore", ["activeUser"]),
   },
   mounted() {
-    this.getRecommendedEvents(this.activeUser.interests);
+    if (this.recommendedEvents.length <= 0)
+      this.getRecommendedEvents(this.activeUser.interests);
   },
 };
 </script>

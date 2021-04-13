@@ -13,6 +13,7 @@ const state = {
   createdRecently: [],
   //
   recommendedEvents: [],
+  selectedEvent: null,
   userLocation: null,
   nearByEvents: [],
   searchRadius: 2,
@@ -28,6 +29,7 @@ const mutations = {
   setRecentEvents(state, payload) {
     state.createdRecently.push(payload);
   },
+  //
   setRecommendedEvents(state, payload) {
     state.recommendedEvents = payload;
   },
@@ -36,6 +38,9 @@ const mutations = {
   },
   setNewSearchRadius(state, payload) {
     state.searchRadius = payload;
+  },
+  setSelectedEvent(state, payload) {
+    state.selectedEvent = payload;
   },
 };
 const actions = {
@@ -131,6 +136,19 @@ const actions = {
         });
     });
     commit("setRecommendedEvents", recommendedEvents);
+  },
+  getSelectedEvent({ commit }, payload) {
+    firebase
+      .firestore()
+      .collection("events")
+      .doc(payload)
+      .get()
+      .then((snapshot) => {
+        commit("setSelectedEvent", snapshot.data());
+      });
+  },
+  emptySelectedEvent() {
+    commit("setSelectedEvent", null);
   },
   getGeoEvents({ commit }, payload) {
     const center = [payload.lat, payload.lng];

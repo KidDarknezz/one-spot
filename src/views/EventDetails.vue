@@ -3,7 +3,7 @@
     <div v-if="selectedEvent">
       <!-- EVEMT FLYER -->
       <div style="height: 60vh">
-        <q-img
+        <!-- <q-img
           :src="selectedEvent.assets.cover"
           class="text-white text-bold fixed-top"
           id="eventCover"
@@ -17,7 +17,7 @@
               <q-btn icon="o_notifications" flat round />
             </div>
           </div>
-        </q-img>
+        </q-img> -->
       </div>
       <!-- /EVENT FLYER -->
 
@@ -27,8 +27,10 @@
           <div class="text-h6">
             {{ selectedEvent.name }}
           </div>
-          <div class="text-subtitle">DJ NAME - DJ NAME</div>
-          <div class="text-caption">24 de Enero 2022</div>
+          <div class="text-subtitle">{{ selectedEvent.subtitle }}</div>
+          <div class="text-caption">
+            {{ selectedEvent.dateAndTime[0].startDate }}
+          </div>
         </q-card-section>
         <q-separator />
         <q-card-section>
@@ -47,9 +49,7 @@
         </q-card-section>
         <q-card-section>
           <div class="text-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque
-            ante, pharetra vitae risus nec, cursus laoreet purus. Etiam quis
-            faucibus turpis, ut aliquet sem.
+            {{ selectedEvent.description }}
           </div>
         </q-card-section>
         <q-card-section>
@@ -77,7 +77,7 @@
       </q-card>
       <!-- /EVENT DETAILS -->
     </div>
-    <loading-overlay :display="showLoading" />
+    <!-- <loading-overlay :display="loadingStatus" /> -->
   </q-page>
 </template>
 
@@ -86,10 +86,10 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   methods: {
-    ...mapActions("eventStore", ["getSelectedEvent", "emptySelectedEvent"]),
+    ...mapActions("homeStore", ["getSelectedEvent"]),
   },
   computed: {
-    ...mapState("eventStore", ["selectedEvent"]),
+    ...mapState("homeStore", ["selectedEvent", "emptySelectedEvent"]),
 
     showLoading() {
       if (this.selectedEvent) return false;
@@ -101,7 +101,7 @@ export default {
     this.getSelectedEvent(this.$route.params.eventId);
   },
   beforeDestroy() {
-    this.emptySelectedEvent();
+    // this.emptySelectedEvent();
   },
 };
 </script>

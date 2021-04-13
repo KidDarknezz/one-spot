@@ -22,6 +22,7 @@ import EditMyEventView from "@/views/EditMyEventView";
 import Home from "../views/Home.vue";
 import EventDetails from "@/views/EventDetails";
 import NearbyEventsView from "@/views/NearbyEventsView";
+import RecommendedView from "@/views/RecommendedView";
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -74,6 +75,14 @@ const routes = [
       //     requiresAuth: true,
       //   },
       // },
+      {
+        path: "/recommended",
+        name: "Recommended Events",
+        component: RecommendedView,
+        meta: {
+          requiresAuth: true,
+        },
+      },
     ],
   },
   {
