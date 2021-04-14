@@ -5,7 +5,9 @@
       <div class="col-xs-9">
         <div class="row q-mb-xl">
           <q-space />
-          <div class="text-h4">one<br />spot</div>
+          <div class="text-h4 animate__animated animate__bounce">
+            one<br />spot
+          </div>
           <q-space />
         </div>
         <div class="row q-mb-md">
