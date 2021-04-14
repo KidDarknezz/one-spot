@@ -26,10 +26,10 @@
         <div class="text-caption os-semibold on-left">
           Distancia: <span class="text-pink">{{ filterRange }}</span> km
         </div>
-        <div class="text-caption os-semibold">
+        <!-- <div class="text-caption os-semibold">
           Fecha:
           <span class="text-pink">{{ filterDate ? filterDate : "-" }}</span>
-        </div>
+        </div> -->
         <div class="text-caption os-semibold">
           Categoria:
           <span class="text-pink">{{ categoryName(selectedCategory) }}</span>
@@ -62,13 +62,7 @@
           <div class="row">
             <div class="col-xs-2 q-pr-sm">
               <img
-                :src="
-                  returnEventAsset(
-                    nearByEvents[selectedEvent].owner,
-                    nearByEvents[selectedEvent].flyer,
-                    `${nearByEvents[selectedEvent].id}_s`
-                  )
-                "
+                :src="nearByEvents[selectedEvent].flyer"
                 :id="`${nearByEvents[selectedEvent].id}_s`"
                 width="100%"
                 class=""
@@ -97,14 +91,10 @@
         v-for="(event, i) in nearByEvents"
         :key="i"
         v-show="filterEvent(event)"
+        @click="$router.push(`/event/${event.id}`)"
       >
         <div class="col-xs-2 q-pr-sm">
-          <img
-            :src="returnEventAsset(event.owner, event.flyer, event.id)"
-            :id="event.id"
-            width="100%"
-            class=""
-          />
+          <img :src="event.flyer" :id="event.id" width="100%" class="" />
         </div>
         <div class="col">
           <div class="text-subtitle2 os-semibold">
@@ -145,7 +135,7 @@
             map-options
             class="q-mb-md"
           />
-          <q-input
+          <!-- <q-input
             filled
             v-model="filterDate"
             mask="date"
@@ -167,7 +157,7 @@
                 </q-popup-proxy>
               </q-icon>
             </template>
-          </q-input>
+          </q-input> -->
         </q-card-section>
         <q-card-actions>
           <q-space />
@@ -230,19 +220,6 @@ export default {
     selectEvent(index) {
       this.selectedEvent = index;
     },
-    returnEventAsset(owner, ref, id) {
-      firebase
-        .storage()
-        .ref()
-        .child(`events-assets/${owner}/${ref}`)
-        .getDownloadURL()
-        .then((url) => {
-          document.getElementById(id).setAttribute("src", url);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
     calculateDistance(coords) {
       let distance = distanceBetween(
         [coords.lat, coords.lng],
@@ -259,7 +236,7 @@ export default {
     },
     clearFilter() {
       this.selectedCategory = "";
-      this.filterDate = "";
+      // this.filterDate = "";
       this.mapCenter = this.userLocation;
       this.selectedEvent = null;
     },
