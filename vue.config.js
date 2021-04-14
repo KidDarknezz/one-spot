@@ -16,7 +16,7 @@ module.exports = {
       icons: [
         {
           src: "img/icons/maskable_icon.png",
-          sizes: "556x556",
+          sizes: "512x512",
           type: "image/png",
           purpose: "maskable",
         },
