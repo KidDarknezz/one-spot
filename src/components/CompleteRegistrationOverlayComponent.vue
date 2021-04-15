@@ -130,10 +130,11 @@
           </q-card-section>
           <q-card-actions>
             <q-btn
-              color="pink"
+              color="pink os-font os-semibold"
               class="full-width"
               push
               @click="submitCompleteRegistration()"
+              :disable="loadingStatus"
             >
               <template v-if="!loadingStatus"> Finalizar </template>
               <q-spinner-dots color="white" size="1em" v-else />

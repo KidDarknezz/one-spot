@@ -114,11 +114,9 @@ const actions = {
         }
       );
   },
-  async completeUserRegistration({ commit }, payload) {
+  completeUserRegistration({ commit }, payload) {
     commit("setLoadingStatus", true);
-    let pp = "";
     if (payload.profilePic != null) {
-      pp = payload.profilePic.name;
       const storageRef = firebase
         .storage()
         .ref(
@@ -126,18 +124,31 @@ const actions = {
             payload.profilePic.name
           }`
         );
-      await storageRef.put(payload.profilePic);
-    }
-    await firebase
-      .firestore()
-      .collection("users")
-      .doc(firebase.auth().currentUser.uid)
-      .update({
-        completeRegistration: true,
-        interests: payload.selectedCategories,
-        profilePic: pp,
+      storageRef.put(payload.profilePic).then((resp) => {
+        resp.ref.getDownloadURL().then((url) => {
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .update({
+              completeRegistration: true,
+              interests: payload.selectedCategories,
+              profilePic: url,
+            });
+          commit("setLoadingStatus", false);
+        });
       });
-    commit("setLoadingStatus", false);
+    } else {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .update({
+          completeRegistration: true,
+          interests: payload.selectedCategories,
+          profilePic: "",
+        });
+    }
   },
 };
 const getters = {};
