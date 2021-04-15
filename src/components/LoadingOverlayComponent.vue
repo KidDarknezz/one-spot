@@ -6,18 +6,20 @@
     transition-show="fade"
     transition-hide="fade"
   >
-    <q-card class="bg-white">
+    <q-card class="bg-pink">
       <div class="row flex flex-center" style="height: 100vh">
         <q-space />
         <div class="col-xs-9">
           <div class="row q-mb-lg">
             <q-space />
-            <div class="text-h4">one<br />spot</div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-5">
+              <img src="@/assets/splash_logo.png" style="width: 100%" />
+            </div>
             <q-space />
           </div>
           <div class="row">
             <q-space />
-            <q-spinner-dots color="black" size="3em" />
+            <q-spinner-dots color="white" size="3em" />
             <q-space />
           </div>
         </div>
