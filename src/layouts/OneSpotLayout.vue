@@ -41,14 +41,12 @@
         </div>
         <div class="col">
           <div class="justify-center row">
-            <q-btn
-              flat
-              round
-              dense
-              icon="o_account_circle"
-              color="black"
-              @click="logoutUser()"
-            />
+            <q-btn flat round dense color="black" @click="logoutUser()">
+              <q-avatar size="24px" v-if="activeUser && activeUser.profilePic">
+                <img :src="activeUser.profilePic" />
+              </q-avatar>
+              <q-icon name="o_account_circle" v-else />
+            </q-btn>
           </div>
         </div>
       </div>
