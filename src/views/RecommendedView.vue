@@ -32,13 +32,14 @@
       {{ recommendedEvents.length }} eventos recomendados en base a tus gustos.
     </div>
     <div class="text-caption os-semibold text-center">
-      <span
-        class="os-cat-cta q-mx-xs"
+      <div
+        class="os-cat-cta q-mx-xs q-my-sm"
         v-for="interest of activeUser.interests"
         :key="interest"
+        style="display: inline-block"
       >
         {{ categoryName(interest) }}
-      </span>
+      </div>
     </div>
   </q-page>
 </template>
