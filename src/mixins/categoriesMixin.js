@@ -67,7 +67,7 @@ export default {
           return "Motivacional";
         case "conferences":
           return "Conferencias";
-        case "serminars":
+        case "seminars":
           return "Seminarios";
         case "networking":
           return "Networking";

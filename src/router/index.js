@@ -24,6 +24,7 @@ import EventDetails from "@/views/EventDetails";
 import NearbyEventsView from "@/views/NearbyEventsView";
 import RecommendedView from "@/views/RecommendedView";
 import SearchEventsView from "@/views/SearchEventsView";
+import AccountProfileView from "@/views/AccountProfileView";
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -86,8 +87,16 @@ const routes = [
       },
       {
         path: "/recommended",
-        name: "Recommended Events",
+        name: "RecommendedEvents",
         component: RecommendedView,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/profile",
+        name: "AccountProfile",
+        component: AccountProfileView,
         meta: {
           requiresAuth: true,
         },

@@ -45,7 +45,7 @@
         </div>
         <div class="col">
           <div class="justify-center row">
-            <q-btn flat round dense color="black" @click="logoutUser()">
+            <q-btn flat round dense color="black" to="/profile">
               <q-avatar size="24px" v-if="activeUser && activeUser.profilePic">
                 <img :src="activeUser.profilePic" />
               </q-avatar>
@@ -83,7 +83,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("authStore", ["logoutUser", "getUserData"]),
+    ...mapActions("authStore", ["getUserData"]),
   },
   computed: {
     ...mapState("authStore", ["activeUser"]),
