@@ -3,7 +3,10 @@
     <!-- HERO -->
     <div style="height: 100vh" class="q-px-md">
       <div class="q-pa-lg">
-        <div class="row bg-grey-3 q-pa-md os-rounded-border">
+        <div
+          class="row bg-grey-3 q-pa-md os-rounded-border"
+          @click="$router.push('/search')"
+        >
           <div class="flex flex-center">
             <q-icon name="search" color="grey-6" class="q-mr-sm" />
             <div class="text-body2 text-grey-6">
@@ -12,7 +15,9 @@
           </div>
         </div>
       </div>
-      <div class="text-h5 text-bold q-px-lg">Lo más HOT</div>
+      <div class="text-h5 text-bold q-px-lg" @click="reload()">
+        Lo más HOT
+      </div>
       <q-carousel
         animated
         v-model="slide"
@@ -216,6 +221,10 @@ export default {
   },
   methods: {
     ...mapActions("homeStore", ["getHomeEvents", "getRecommendedEvents"]),
+
+    reload() {
+      location.reload();
+    },
   },
   computed: {
     ...mapState("homeStore", ["recommendedEvents"]),

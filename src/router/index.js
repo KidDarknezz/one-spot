@@ -23,6 +23,7 @@ import Home from "../views/Home.vue";
 import EventDetails from "@/views/EventDetails";
 import NearbyEventsView from "@/views/NearbyEventsView";
 import RecommendedView from "@/views/RecommendedView";
+import SearchEventsView from "@/views/SearchEventsView";
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -55,6 +56,14 @@ const routes = [
         path: "/",
         name: "OneSpot",
         component: Home,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/search",
+        name: "SearchEvent",
+        component: SearchEventsView,
         meta: {
           requiresAuth: true,
         },
