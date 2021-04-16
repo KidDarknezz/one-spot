@@ -112,7 +112,6 @@ export default {
     setTimeout(() => {
       this.displayLoading = false;
     }, 2000);
-    console.log(Platform.is.iphone);
   },
   components: {
     CompleteRegistrationOverlayComponent,
