@@ -13,7 +13,7 @@
   font-family: "Poppins", sans-serif;
 }
 .os-bold {
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 .os-semibold {
   font-weight: 600 !important;

@@ -159,7 +159,7 @@
       <q-card>
         <div class="row">
           <q-space />
-          <div class="col-lg-5">
+          <div class="col-lg-9">
             <q-card-actions>
               <q-space />
               <q-btn
