@@ -106,7 +106,7 @@
             </div>
             <div class="row q-mb-md">
               <div class="text-subtitle2 text-grey-7 text-center full-width">
-                {{ selected.length }}/5
+                {{ selected.length }}/6
               </div>
             </div>
             <div class="row" style="height: 50vh; overflow-y: scroll">
@@ -196,8 +196,8 @@ export default {
     },
     addRemoveCategoryToList(cat) {
       if (!this.selected.includes(cat)) {
-        if (this.selected.length == 5) {
-          alert("Solo puedes elegir 5 categorias.");
+        if (this.selected.length == 6) {
+          alert("Solo puedes elegir 6 categorias.");
           return;
         }
         this.selected.push(cat);

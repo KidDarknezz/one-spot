@@ -39,8 +39,8 @@
           multiple
           :options="allEventCategories"
           counter
-          max-values="5"
-          hint="Max 5 selecciones"
+          max-values="3"
+          hint="Max 3 selecciones"
           class="q-px-sm q-mb-md"
           :rules="[(val) => val.length > 0 || 'Este campo es requerido']"
           map-options
