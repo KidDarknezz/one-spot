@@ -9,8 +9,8 @@ module.exports = {
   pwa: {
     name: "OneSpot",
     short_name: "OneSpot",
-    themeColor: "#ffffff",
+    themeColor: "#fff",
     msTileColor: "#ffffff",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fff",
   },
 };
