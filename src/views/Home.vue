@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="text-h5 text-bold q-px-lg" @click="reload()">
-        Lo más HOTT
+        Lo más HOT
       </div>
       <q-carousel
         animated

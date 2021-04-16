@@ -9,7 +9,11 @@
         "
       />
       <div
-        class="row fixed-bottom bg-grey-2 q-pb-lg q-pt-sm"
+        :class="
+          checkIfIphone
+            ? 'row fixed-bottom bg-grey-2 q-pb-lg q-pt-sm'
+            : 'row fixed-bottom bg-grey-2 q-py-sm'
+        "
         v-if="!$route.fullPath.includes('/event/')"
       >
         <div class="col">
@@ -70,6 +74,7 @@
 import { mapActions, mapState } from "vuex";
 import CompleteRegistrationOverlayComponent from "@/components/CompleteRegistrationOverlayComponent";
 import LoadingOverlayComponent from "@/components/LoadingOverlayComponent";
+import { Platform } from "quasar";
 
 export default {
   data() {
@@ -82,6 +87,10 @@ export default {
   },
   computed: {
     ...mapState("authStore", ["activeUser"]),
+
+    checkIfIphone() {
+      return Platform.is.iphone;
+    },
 
     displayCompleteRegistrationDialog() {
       try {
@@ -103,6 +112,7 @@ export default {
     setTimeout(() => {
       this.displayLoading = false;
     }, 2000);
+    console.log(Platform.is.iphone);
   },
   components: {
     CompleteRegistrationOverlayComponent,
