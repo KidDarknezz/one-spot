@@ -1,88 +1,94 @@
 <template>
   <q-page>
     <!-- HERO -->
-    <div style="height: 100vh">
-      <div class="q-px-md flex flex-center" style="height: 100%">
-        <div>
-          <div class="text-h5 text-bold q-mb-lg q-px-md">Lo más HOT</div>
-          <q-carousel
-            animated
-            v-model="slide"
-            navigation
-            swipeable
-            infinite
-            style="height: auto; padding-bottom: 15px;"
-            transition-prev="slide-right"
-            transition-next="slide-left"
-            control-color="pink"
-            :autoplay="true"
-            navigation-icon="radio_button_unchecked"
-            navigation-active-icon="radio_button_checked"
-          >
-            <q-carousel-slide :name="1" class="">
-              <q-card class="os-rounded-border q-mb-lg" flat>
-                <q-card-section>
-                  <img
-                    src="@/assets/event_2_thumbnail.webp"
-                    width="100%"
-                    class="os-rounded-border"
-                  />
-                </q-card-section>
-                <q-card-section>
-                  <div class="row">
-                    <div>
-                      <div class="text-subtitle2 os-semibold">Event Title</div>
-                      <div class="text-caption text-grey-9">
-                        Event Sub-Title
-                      </div>
-                    </div>
-                    <q-space />
-                    <div class="text-caption text-grey-6">24 de enero 2022</div>
-                  </div>
-                </q-card-section>
-                <q-card-section class="q-pt-none">
-                  <div class="text-caption os-semibold">
-                    Lorem ipsum, or lipsum as it is sometimes known, is dummy
-                    text used in laying out print, graphic or web designs.
-                  </div>
-                </q-card-section>
-              </q-card>
-            </q-carousel-slide>
-            <q-carousel-slide :name="2" class="">
-              <q-card class="os-rounded-border q-mb-lg" flat>
-                <q-card-section>
-                  <img
-                    src="@/assets/event_1_thumbnail.webp"
-                    width="100%"
-                    class="os-rounded-border"
-                  />
-                </q-card-section>
-                <q-card-section>
-                  <div class="row">
-                    <div>
-                      <div class="text-subtitle2 os-semibold">Event Title</div>
-                      <div class="text-caption text-grey-9">
-                        Event Sub-Title
-                      </div>
-                    </div>
-                    <q-space />
-                    <div class="text-caption text-grey-6">24 de enero 2022</div>
-                  </div>
-                </q-card-section>
-                <q-card-section class="q-pt-none">
-                  <div class="text-caption os-semibold">
-                    Lorem ipsum, or lipsum as it is sometimes known, is dummy
-                    text used in laying out print, graphic or web designs.
-                  </div>
-                </q-card-section>
-              </q-card>
-            </q-carousel-slide>
-          </q-carousel>
-          <div class="text-subtitle2 q-px-md">
-            Quote del día: Sal y disfruta lo más que puedas que en un parpadeo
-            es lunes denuevo
+    <div style="height: 100vh" class="q-px-md">
+      <div class="q-pa-lg">
+        <div class="row bg-grey-3 q-pa-md os-rounded-border">
+          <div class="flex flex-center">
+            <q-icon name="search" color="grey-6" class="q-mr-sm" />
+            <div class="text-body2 text-grey-6">
+              Buscar...
+            </div>
           </div>
         </div>
+      </div>
+      <div class="text-h5 text-bold q-px-lg">Lo más HOT</div>
+      <q-carousel
+        animated
+        v-model="slide"
+        navigation
+        swipeable
+        infinite
+        style="height: auto; padding-bottom: 15px;"
+        transition-prev="slide-right"
+        transition-next="slide-left"
+        control-color="pink"
+        :autoplay="true"
+        navigation-icon="radio_button_unchecked"
+        navigation-active-icon="radio_button_checked"
+      >
+        <q-carousel-slide :name="1" class="">
+          <q-card class="os-rounded-border q-mb-lg" flat>
+            <q-card-section>
+              <img
+                src="@/assets/event_2_thumbnail.webp"
+                width="100%"
+                class="os-rounded-border"
+              />
+            </q-card-section>
+            <q-card-section>
+              <div class="row">
+                <div>
+                  <div class="text-subtitle2 os-semibold">Event Title</div>
+                  <div class="text-caption text-grey-9">
+                    Event Sub-Title
+                  </div>
+                </div>
+                <q-space />
+                <div class="text-caption text-grey-6">24 de enero 2022</div>
+              </div>
+            </q-card-section>
+            <q-card-section class="q-pt-none">
+              <div class="text-caption os-semibold">
+                Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+                used in laying out print, graphic or web designs.
+              </div>
+            </q-card-section>
+          </q-card>
+        </q-carousel-slide>
+        <q-carousel-slide :name="2" class="">
+          <q-card class="os-rounded-border q-mb-lg" flat>
+            <q-card-section>
+              <img
+                src="@/assets/event_1_thumbnail.webp"
+                width="100%"
+                class="os-rounded-border"
+              />
+            </q-card-section>
+            <q-card-section>
+              <div class="row">
+                <div>
+                  <div class="text-subtitle2 os-semibold">Event Title</div>
+                  <div class="text-caption text-grey-9">
+                    Event Sub-Title
+                  </div>
+                </div>
+                <q-space />
+                <div class="text-caption text-grey-6">24 de enero 2022</div>
+              </div>
+            </q-card-section>
+            <q-card-section class="q-pt-none">
+              <div class="text-caption os-semibold">
+                Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+                used in laying out print, graphic or web designs.
+              </div>
+            </q-card-section>
+          </q-card>
+        </q-carousel-slide>
+      </q-carousel>
+      <div class="text-subtitle2 q-px-md">
+        Quote del día: Sal y disfruta lo más que puedas que en un parpadeo es
+        lunes denuevo
       </div>
     </div>
     <!-- /HERO -->
