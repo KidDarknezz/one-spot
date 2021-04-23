@@ -29,6 +29,7 @@
             <q-input
               label="Correo electronico"
               color="pink"
+              type="email"
               filled
               class="q-mb-md"
               v-model="registerForm.email"

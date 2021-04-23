@@ -15,6 +15,7 @@
           <q-input
             label="Email Address"
             filled
+            type="email"
             color="black"
             dense
             class="full-width"
