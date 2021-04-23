@@ -8,7 +8,7 @@
           <!-- <div class="text-h4 animate__animated animate__bounce">
             one<br />spot
           </div> -->
-          <AnimationComponent :animation="'pin-animation'" :size="'25em'" />
+          <animation-component :animation="'pin-animation'" :size="'25em'" />
           <q-space />
         </div>
         <div class="row q-mb-md">
@@ -65,7 +65,6 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import AnimationComponent from "@/components/AnimationComponent";
 
 export default {
   data() {
@@ -81,9 +80,6 @@ export default {
   },
   computed: {
     ...mapState("authStore", ["loadingStatus"]),
-  },
-  components: {
-    AnimationComponent,
   },
 };
 </script>

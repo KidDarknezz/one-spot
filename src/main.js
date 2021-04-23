@@ -9,6 +9,7 @@ import firebase from "firebase/app";
 import * as VueGoogleMaps from "vue2-google-maps";
 
 import LoadingOverlay from "@/components/LoadingOverlayComponent";
+import AnimationComponent from "@/components/AnimationComponent";
 
 Vue.config.productionTip = false;
 
@@ -31,6 +32,7 @@ Vue.use(VueGoogleMaps, {
 firebase.initializeApp(firebaseConfig);
 
 Vue.component("loading-overlay", LoadingOverlay);
+Vue.component("animation-component", AnimationComponent);
 
 new Vue({
   router,
