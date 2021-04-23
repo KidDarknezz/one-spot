@@ -8,7 +8,7 @@
           <!-- <div class="text-h4 animate__animated animate__bounce">
             one<br />spot
           </div> -->
-          <div id="animation" style="width: 250px;"></div>
+          <AnimationComponent :animation="'pin-animation'" :size="'25em'" />
           <q-space />
         </div>
         <div class="row q-mb-md">
@@ -65,7 +65,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import lottie from "lottie-web";
+import AnimationComponent from "@/components/AnimationComponent";
 
 export default {
   data() {
@@ -82,15 +82,8 @@ export default {
   computed: {
     ...mapState("authStore", ["loadingStatus"]),
   },
-  mounted() {
-    let el = document.getElementById("animation");
-    lottie.loadAnimation({
-      container: el, // the dom element that will contain the animation
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      animationData: require("@/assets/new-animation.json"), // the path to the animation json
-    });
+  components: {
+    AnimationComponent,
   },
 };
 </script>
