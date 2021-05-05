@@ -165,7 +165,7 @@
             width="100%"
             class="os-rounded-border q-mb-sm"
           />
-          <div class="text-subtitle2 os-semibold">Event Title</div>
+          <div class="text-subtitle2 os-semibold">Event Title {{ i }}</div>
           <div class="text-caption">Event Sub-Title</div>
         </div>
       </VueSlickCarousel>
@@ -277,7 +277,8 @@ export default {
 .os-event-thumbnail {
   border-radius: 15px;
 }
-.slick-slide {
-  outline: none;
+
+.slick-slide * {
+  outline: none !important;
 }
 </style>
