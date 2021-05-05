@@ -165,7 +165,7 @@
             width="100%"
             class="os-rounded-border q-mb-sm"
           />
-          <div class="text-subtitle2 os-semibold">Event Title {{ i }}</div>
+          <div class="text-subtitle2 os-semibold">Event Title</div>
           <div class="text-caption">Event Sub-Title</div>
         </div>
       </VueSlickCarousel>
@@ -221,7 +221,7 @@
 import { mapState, mapActions } from "vuex";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
-import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+// import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 
 export default {
   data() {

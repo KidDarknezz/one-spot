@@ -39,6 +39,14 @@
   font-family: "Poppins", sans-serif;
   font-size: 12px;
 }
+.os-cat-tag {
+  border: solid 1px black;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+}
 .text-os-pink {
   color: #fa3c5e !important;
 }

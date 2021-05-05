@@ -5,11 +5,11 @@
       <div class="col-xs-11">
         <div class="row q-mb-xl">
           <q-space />
-          <div>
+          <!-- <div>
             <img src="@/assets/os-login-logo.svg" style="width: 40vw" />
             <div class="text-caption text-center text-bold">Panam&aacute;</div>
-          </div>
-          <!-- <animation-component :animation="'Movin4'" :size="'25em'" /> -->
+          </div> -->
+          <animation-component :animation="'data1'" :size="'15em'" />
           <q-space />
         </div>
         <div class="row q-mb-md">

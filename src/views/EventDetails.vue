@@ -4,8 +4,9 @@
       <!-- EVEMT FLYER -->
       <div style="height: 60vh">
         <q-img
-          :src="selectedEvent.flyer"
+          :src="require(`@/assets/4_5_flyer.webp`)"
           class="text-white text-bold fixed-top"
+          style="width: 100%"
           id="eventCover"
         >
           <div class="row full-width">
@@ -22,35 +23,120 @@
       <!-- /EVENT FLYER -->
 
       <!-- EVENT DETAILS -->
-      <q-card class="q-pa-md bg-grey-2 os-event-details">
+      <q-card class="bg-grey-2 os-event-details">
         <q-card-section>
-          <div class="text-h6">
-            {{ selectedEvent.name }}
+          <q-separator
+            style="height: 5px; width: 50px; margin: 0 auto; border-radius: 2px;"
+          />
+        </q-card-section>
+        <q-card-section>
+          <div class="row q-mb-md">
+            <div class="col-xs-9">
+              <div class="text-h6 os-bold text-os-grey-dark">
+                Music Party International World
+              </div>
+              <div class="text-caption text-os-grey-dark">
+                Event subtitle
+              </div>
+            </div>
+            <q-space />
+            <div class="col-xs-3">
+              <q-btn
+                round
+                icon="favorite_border"
+                flat
+                size="sm"
+                color="os-grey-dark"
+                class="q-ml-xs float-right"
+              />
+              <q-btn
+                round
+                icon="o_share"
+                flat
+                size="sm"
+                color="os-grey-dark"
+                class="q-mr-xs float-right"
+              />
+            </div>
           </div>
-          <div class="text-subtitle">{{ selectedEvent.subtitle }}</div>
-          <div class="text-caption">
-            {{ selectedEvent.dateAndTime[0].startDate }}
+          <div class="row">
+            <q-avatar>
+              <img src="https://cdn.quasar.dev/img/avatar.png" />
+            </q-avatar>
+            <div
+              class="text-caption os-bold text-os-grey-dark flex flex-center on-right"
+            >
+              Event organizer
+            </div>
+            <q-space />
+            <div class="flex flex-center">
+              <q-btn
+                label="Follow"
+                no-caps
+                color="os-pink"
+                push
+                unelevated
+                size="sm"
+                class="os-bold q-px-md"
+              />
+            </div>
           </div>
         </q-card-section>
-        <q-separator />
+        <q-separator class="q-mx-lg" color="os-grey-dark" />
+        <q-card-section>
+          <div class="text-caption">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut brie
+            brie bibendum laoreet mi vel sollicitudin. Vestibulum scelerisque de
+            ccosa si no commodo leo sit amet rutrum. Suspendisse finibus sem a
+            augue dictum condimentum.
+          </div>
+        </q-card-section>
+        <q-card-section>
+          <div class="row">
+            <div class="col-xs-4 q-pa-xs" v-for="(tag, i) in 4" :key="i">
+              <div
+                class="bg-grey-3 q-py-sm q-px-md os-rounded-border  text-caption os-semibold text-os-grey-dark text-center"
+              >
+                Musica
+              </div>
+            </div>
+          </div>
+        </q-card-section>
         <q-card-section>
           <div>
-            <q-icon name="o_sell" class="on-left" />
-            <span class="text-caption">Music - Food & Drink - Nightlife</span>
+            <q-icon name="calendar_today" class="on-left" />
+            <span class="text-caption">Sábado, 24 de enero</span>
           </div>
           <div>
-            <q-icon name="o_schedule" class="on-left" />
+            <q-icon name="watch_later" class="on-left" />
             <span class="text-caption">9:30 p.m. - 2:00 a.m.</span>
           </div>
           <div>
-            <q-icon name="o_location_on" class="on-left" />
-            <span class="text-caption">14 km</span>
+            <q-icon name="paid" class="on-left" />
+            <span class="text-caption"
+              ><span class="os-semibold">Preventa</span> $50.00</span
+            >
+          </div>
+          <div>
+            <q-icon name="paid" class="on-left" />
+            <span class="text-caption"
+              ><span class="os-semibold">Precio regular</span> $50.00</span
+            >
+          </div>
+          <div>
+            <q-icon name="place" class="on-left" />
+            <span class="text-caption"
+              >Centro de Convenciones Atlapa | 16km</span
+            >
+          </div>
+          <div>
+            <q-icon name="people" class="on-left" />
+            <span class="text-caption">18+</span>
           </div>
         </q-card-section>
+        <q-separator class="q-mx-lg" color="os-grey-dark" />
         <q-card-section>
-          <div class="text-body">
-            {{ selectedEvent.description }}
-          </div>
+          <div class="text-subtitle2 q-mb-md">Patrocinadores</div>
         </q-card-section>
         <q-card-section>
           <div class="text-subtitle2 q-mb-md">Ubicacion</div>
@@ -85,6 +171,17 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
+  data() {
+    return {
+      settings: {
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        variableWidth: true,
+        arrows: false,
+      },
+    };
+  },
   methods: {
     ...mapActions("homeStore", ["getSelectedEvent"]),
   },
