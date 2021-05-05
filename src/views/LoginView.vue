@@ -2,13 +2,14 @@
   <q-page>
     <div class="row flex flex-center" style="height: 100vh">
       <q-space />
-      <div class="col-xs-9">
-        <div class="row">
+      <div class="col-xs-11">
+        <div class="row q-mb-xl">
           <q-space />
-          <!-- <div class="text-h4 animate__animated animate__bounce">
-            one<br />spot
-          </div> -->
-          <animation-component :animation="'pin-animation'" :size="'25em'" />
+          <div>
+            <img src="@/assets/os-login-logo.svg" style="width: 40vw" />
+            <div class="text-caption text-center text-bold">Panam&aacute;</div>
+          </div>
+          <!-- <animation-component :animation="'Movin4'" :size="'25em'" /> -->
           <q-space />
         </div>
         <div class="row q-mb-md">
@@ -33,10 +34,9 @@
             v-model="loginData.password"
           />
         </div>
-        <div class="row q-mb-md">
+        <div class="row q-mb-xl">
           <q-btn
-            color="pink"
-            rounded
+            color="os-pink"
             push
             class="full-width"
             @click="loginUser(loginData)"
@@ -45,15 +45,20 @@
             <q-spinner-dots color="white" size="1em" v-else />
           </q-btn>
         </div>
-        <div class="row q-mb-lg">
-          <router-link to="/login" class="text-grey-7 text-center full-width">
+        <div class="row q-mb-sm">
+          <router-link
+            to="/login"
+            class="text-grey-7 text-center full-width os-semibold"
+            style="text-decoration: none"
+          >
             Forgot password
           </router-link>
         </div>
         <div class="row">
           <router-link
             to="/register"
-            class="text-grey-7 text-center full-width"
+            class="text-grey-7 text-center full-width os-semibold"
+            style="text-decoration: none"
           >
             Register here
           </router-link>

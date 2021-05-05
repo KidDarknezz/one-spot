@@ -1,22 +1,25 @@
 <template>
   <q-page>
     <!-- HERO -->
-    <div style="height: 100vh" class="q-px-md">
-      <div class="q-pa-lg">
+    <div class="q-px-md q-py-lg">
+      <div class="q-mb-lg">
         <div
           class="row bg-grey-3 q-pa-md os-rounded-border"
           @click="$router.push('/search')"
         >
           <div class="flex flex-center">
             <q-icon name="search" color="grey-6" class="q-mr-sm" />
-            <div class="text-body2 text-grey-6">
-              Buscar...
+            <div class="text-body2 text-grey-6 os-semibold">
+              Buscar evento
             </div>
           </div>
         </div>
       </div>
-      <div class="text-h5 text-bold q-px-lg" @click="reload()">
-        Lo más HOT
+      <div class="text-h6 text-bold">
+        Bienvenido a One Spot
+      </div>
+      <div class="text-subtitle text-bold q-mb-lg">
+        Disfruta, explora y descubre
       </div>
       <q-carousel
         animated
@@ -27,14 +30,15 @@
         style="height: auto; padding-bottom: 15px;"
         transition-prev="slide-right"
         transition-next="slide-left"
-        control-color="pink"
+        control-color="os-pink"
         :autoplay="true"
         navigation-icon="radio_button_unchecked"
         navigation-active-icon="radio_button_checked"
+        class="shadow-4 os-rounded-border"
       >
-        <q-carousel-slide :name="1" class="">
+        <q-carousel-slide :name="1" class="q-pa-none">
           <q-card class="os-rounded-border q-mb-lg" flat>
-            <q-card-section>
+            <q-card-section class="q-pa-sm">
               <img
                 src="@/assets/event_2_thumbnail.webp"
                 width="100%"
@@ -61,7 +65,7 @@
             </q-card-section>
           </q-card>
         </q-carousel-slide>
-        <q-carousel-slide :name="2" class="">
+        <!-- <q-carousel-slide :name="2" class="">
           <q-card class="os-rounded-border q-mb-lg" flat>
             <q-card-section>
               <img
@@ -89,9 +93,9 @@
               </div>
             </q-card-section>
           </q-card>
-        </q-carousel-slide>
+        </q-carousel-slide> -->
       </q-carousel>
-      <div class="text-subtitle2 q-px-md">
+      <div class="text-body q-px-md text-center os-semibold q-py-lg">
         Quote del día: Sal y disfruta lo más que puedas que en un parpadeo es
         lunes denuevo
       </div>
