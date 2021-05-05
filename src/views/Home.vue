@@ -40,7 +40,7 @@
           <q-card class="os-rounded-border q-mb-lg" flat>
             <q-card-section class="q-pa-sm">
               <img
-                src="@/assets/event_2_thumbnail.webp"
+                src="@/assets/4_5_flyer.webp"
                 width="100%"
                 class="os-rounded-border"
               />
@@ -129,12 +129,12 @@
             :key="i"
           >
             <img
-              src="@/assets/event_4_thumbnail.webp"
+              src="@/assets/4_5_flyer.webp"
               width="100%"
               class="os-rounded-border"
             />
             <div class="text-subtitle2 os-semibold">Event Title</div>
-            <div class="text-caption">Event Sub-Title</div>
+            <!-- <div class="text-caption">Event Sub-Title</div> -->
           </div>
         </div>
       </div>
@@ -158,14 +158,14 @@
           class="q-px-md text-white q-mb-lg"
           v-for="(highlight, i) in 5"
           :key="i"
-          style="width: 43vw;"
+          style="width: 43vw; outline: none;"
         >
           <img
-            src="@/assets/event_4_thumbnail.webp"
+            src="@/assets/4_5_flyer.webp"
             width="100%"
             class="os-rounded-border q-mb-sm"
           />
-          <div class="text-subtitle2 os-semibold">Event Title {{ i }}</div>
+          <div class="text-subtitle2 os-semibold">Event Title</div>
           <div class="text-caption">Event Sub-Title</div>
         </div>
       </VueSlickCarousel>
