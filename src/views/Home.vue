@@ -158,7 +158,7 @@
           class="q-px-md text-white q-mb-lg"
           v-for="(highlight, i) in 5"
           :key="i"
-          style="width: 43vw; outline: none;"
+          style="width: 43vw;"
         >
           <img
             src="@/assets/4_5_flyer.webp"
@@ -276,5 +276,8 @@ export default {
 }
 .os-event-thumbnail {
   border-radius: 15px;
+}
+.slick-slide {
+  outline: none;
 }
 </style>
