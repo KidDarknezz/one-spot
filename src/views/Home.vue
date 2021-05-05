@@ -102,9 +102,43 @@
     </div>
     <!-- /HERO -->
 
-    <!-- SPOTLIGHT -->
-    <div class="bg-pink q-px-lg ">
-      <div class="row q-py-lg q-px-sm">
+    <!-- THIS WEEK & SPOTLIGHT -->
+    <div class="bg-os-grey-medium">
+      <div
+        class="bg-os-grey-dark q-py-lg os-rounded-border"
+        style="border-top-left-radius: 0 !important; border-top-right-radius: 0 !important"
+      >
+        <div class="row q-mb-lg q-px-md">
+          <div class="text-white text-subtitle2 os-semibold">Esta semana</div>
+          <q-space />
+          <q-btn
+            flat
+            rounded
+            label="Ver mas"
+            dense
+            size="sm"
+            color="white"
+            class="q-px-sm os-semibold"
+            no-caps
+          />
+        </div>
+        <div class="row">
+          <div
+            class="col-4 q-px-md q-mb-md text-white"
+            v-for="(highlight, i) in 6"
+            :key="i"
+          >
+            <img
+              src="@/assets/event_4_thumbnail.webp"
+              width="100%"
+              class="os-rounded-border"
+            />
+            <div class="text-subtitle2 os-semibold">Event Title</div>
+            <div class="text-caption">Event Sub-Title</div>
+          </div>
+        </div>
+      </div>
+      <div class="row q-px-md q-py-lg">
         <div class="text-white text-subtitle2 os-semibold">Destacados</div>
         <q-space />
         <q-btn
@@ -120,8 +154,8 @@
       </div>
       <div class="row q-pb-lg">
         <div
-          class="col-6 q-px-sm q-mb-md text-white"
-          v-for="(highlight, i) in 6"
+          class="col-5 q-px-md text-white"
+          v-for="(highlight, i) in 2"
           :key="i"
         >
           <img
@@ -134,42 +168,12 @@
         </div>
       </div>
     </div>
-    <!-- /SPOTLIGHT -->
-
-    <!-- THIS WEEK -->
-    <div class="os-recent-section q-my-md q-mx-lg q-mt-lg text-white">
-      <div class="row q-pa-md">
-        <div class="text-subtitle2  os-semibold">Esta semana</div>
-        <q-space />
-        <q-btn
-          flat
-          rounded
-          label="Ver mas"
-          dense
-          size="sm"
-          color="white"
-          class="q-px-sm os-semibold"
-          no-caps
-        />
-      </div>
-
-      <div class="row">
-        <div class="col-xs-4 q-pa-md" v-for="(event, i) in 6" :key="i">
-          <img
-            src="@/assets/event_3_thumbnail.webp"
-            class="os-event-thumbnail q-mb-sm full-width"
-          />
-          <div class="text-caption">Event Title</div>
-          <div class="text-caption text-grey-6">Event SubTitle</div>
-        </div>
-      </div>
-    </div>
-    <!-- /THIS WEEK -->
+    <!-- /THIS WEEK & SPOTLIGHT -->
 
     <!-- RECOMMENDED -->
-    <div class="q-pa-lg">
+    <div class="q-px-md q-py-lg">
       <div class="row q-mb-lg">
-        <div class="text-h5 os-semibold">
+        <div class="text-subtitle2 os-semibold">
           Recomendado
         </div>
         <q-space />
@@ -179,7 +183,7 @@
           label="Ver mas"
           dense
           size="sm"
-          color="pink"
+          color="os-grey-dark"
           class="q-px-sm os-semibold"
           no-caps
           to="/recommended"
