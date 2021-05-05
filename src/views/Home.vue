@@ -109,7 +109,7 @@
         style="border-top-left-radius: 0 !important; border-top-right-radius: 0 !important"
       >
         <div class="row q-mb-lg q-px-md">
-          <div class="text-white text-subtitle2 os-semibold">Esta semana</div>
+          <div class="text-white text-h6 os-semibold">Esta semana</div>
           <q-space />
           <q-btn
             flat
@@ -139,7 +139,7 @@
         </div>
       </div>
       <div class="row q-px-md q-py-lg">
-        <div class="text-white text-subtitle2 os-semibold">Destacados</div>
+        <div class="text-white text-h6 os-semibold">Destacados</div>
         <q-space />
         <q-btn
           flat
@@ -152,28 +152,30 @@
           no-caps
         />
       </div>
-      <div class="row q-pb-lg">
+
+      <VueSlickCarousel v-bind="settings">
         <div
-          class="col-5 q-px-md text-white"
-          v-for="(highlight, i) in 2"
+          class="q-px-md text-white q-mb-lg"
+          v-for="(highlight, i) in 5"
           :key="i"
+          style="width: 43vw;"
         >
           <img
             src="@/assets/event_4_thumbnail.webp"
             width="100%"
-            class="os-rounded-border"
+            class="os-rounded-border q-mb-sm"
           />
-          <div class="text-subtitle2 os-semibold">Event Title</div>
+          <div class="text-subtitle2 os-semibold">Event Title {{ i }}</div>
           <div class="text-caption">Event Sub-Title</div>
         </div>
-      </div>
+      </VueSlickCarousel>
     </div>
     <!-- /THIS WEEK & SPOTLIGHT -->
 
     <!-- RECOMMENDED -->
     <div class="q-px-md q-py-lg">
       <div class="row q-mb-lg">
-        <div class="text-subtitle2 os-semibold">
+        <div class="text-h6 os-semibold">
           Recomendado
         </div>
         <q-space />
@@ -198,7 +200,6 @@
         <div class="col-4">
           <img
             :src="recommended.flyer"
-            width="100%"
             class="os-rounded-border"
             style="width: 100%;"
           />
@@ -218,6 +219,9 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import VueSlickCarousel from "vue-slick-carousel";
+import "vue-slick-carousel/dist/vue-slick-carousel.css";
+import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 
 export default {
   data() {
@@ -225,6 +229,13 @@ export default {
       searchDialog: false,
       slides: 7,
       slide: 1,
+      settings: {
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 2,
+        variableWidth: true,
+        arrows: false,
+      },
     };
   },
   methods: {
@@ -238,6 +249,7 @@ export default {
     ...mapState("homeStore", ["recommendedEvents"]),
     ...mapState("authStore", ["activeUser"]),
   },
+  components: { VueSlickCarousel },
   mounted() {
     if (this.recommendedEvents.length <= 0)
       this.getRecommendedEvents(this.activeUser.interests);
