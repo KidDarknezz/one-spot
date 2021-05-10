@@ -23,7 +23,7 @@
       <!-- /EVENT FLYER -->
 
       <!-- EVENT DETAILS -->
-      <q-card class="bg-white os-event-details">
+      <q-card class="bg-white os-event-details q-pb-md">
         <q-card-section>
           <q-separator
             style="height: 5px; width: 50px; margin: 0 auto; border-radius: 2px;"
@@ -218,11 +218,32 @@
         </q-card-section>
         <q-card-actions>
           <q-btn
-            label="Guardar"
-            class="full-width"
+            label="Get a ride"
+            class="full-width q-mb-sm q-py-xs q-px-md"
+            rounded
             no-caps
-            color="accent"
-            push
+            color="black"
+            unelevated
+            align="left"
+            icon="fab fa-uber"
+          />
+          <q-btn
+            label="This is the way"
+            class="full-width q-mb-sm q-py-xs q-px-md"
+            no-caps
+            rounded
+            color="light-blue-4"
+            unelevated
+            align="left"
+            icon="fab fa-waze"
+          />
+          <q-btn
+            label="Share with friends"
+            class="full-width q-mb-sm q-py-xs q-px-md"
+            no-caps
+            rounded
+            color="os-pink"
+            unelevated
           />
         </q-card-actions>
       </q-card>
