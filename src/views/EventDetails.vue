@@ -2,7 +2,7 @@
   <q-page>
     <div v-if="selectedEvent">
       <!-- EVEMT FLYER -->
-      <div style="height: 60vh">
+      <div style="height: 55vh">
         <q-img
           :src="require(`@/assets/4_5_flyer.webp`)"
           class="text-white text-bold fixed-top"
@@ -216,7 +216,7 @@
             tabindex="0"
           ></iframe>
         </q-card-section>
-        <q-card-actions>
+        <q-card-actions class="q-px-md">
           <q-btn
             label="Get a ride"
             class="full-width q-mb-sm q-py-xs q-px-md"
