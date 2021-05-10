@@ -9,7 +9,11 @@
             <img src="@/assets/os-login-logo.svg" style="width: 40vw" />
             <div class="text-caption text-center text-bold">Panam&aacute;</div>
           </div> -->
-          <animation-component :animation="'data1'" :size="'15em'" />
+          <animation-component
+            :animation="'data1'"
+            :size="'15em'"
+            :loop="false"
+          />
           <q-space />
         </div>
         <div class="row q-mb-md">

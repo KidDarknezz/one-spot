@@ -23,7 +23,7 @@
       <!-- /EVENT FLYER -->
 
       <!-- EVENT DETAILS -->
-      <q-card class="bg-grey-2 os-event-details">
+      <q-card class="bg-white os-event-details">
         <q-card-section>
           <q-separator
             style="height: 5px; width: 50px; margin: 0 auto; border-radius: 2px;"
@@ -137,6 +137,71 @@
         <q-separator class="q-mx-lg" color="os-grey-dark" />
         <q-card-section>
           <div class="text-subtitle2 q-mb-md">Patrocinadores</div>
+          <div class="row">
+            <div class="col-xs-2 q-px-sm flex flex-center">
+              <img
+                src="@/assets/sponsor/Cable_Onda.png"
+                style="width: 100%"
+                class="q-mb-md"
+              />
+            </div>
+            <div class="col-xs-2 q-px-sm flex flex-center">
+              <img
+                src="@/assets/sponsor/Cerveceria.jpg"
+                style="width: 100%"
+                class="q-mb-md"
+              />
+            </div>
+            <div class="col-xs-2 q-px-sm flex flex-center">
+              <img
+                src="@/assets/sponsor/DelMonte.png"
+                style="width: 100%"
+                class="q-mb-md"
+              />
+            </div>
+            <div class="col-xs-2 q-px-sm flex flex-center">
+              <img
+                src="@/assets/sponsor/Durex-Logo.png"
+                style="width: 100%"
+                class="q-mb-md"
+              />
+            </div>
+            <div class="col-xs-2 q-px-sm flex flex-center">
+              <img
+                src="@/assets/sponsor/Goldmills.png"
+                style="width: 100%"
+                class="q-mb-md"
+              />
+            </div>
+            <div class="col-xs-2 q-px-sm flex flex-center">
+              <img
+                src="@/assets/sponsor/Logo_Tigo.svg.png"
+                style="width: 100%"
+                class="q-mb-md"
+              />
+            </div>
+            <div class="col-xs-2 q-px-sm flex flex-center">
+              <img
+                src="@/assets/sponsor/Metro.png"
+                style="width: 100%"
+                class="q-mb-md"
+              />
+            </div>
+            <div class="col-xs-2 q-px-sm flex flex-center">
+              <img
+                src="@/assets/sponsor/PioPio.webp"
+                style="width: 100%"
+                class="q-mb-md"
+              />
+            </div>
+            <div class="col-xs-2 q-px-sm flex flex-center">
+              <img
+                src="@/assets/sponsor/Wigo.png"
+                style="width: 100%"
+                class="q-mb-md"
+              />
+            </div>
+          </div>
         </q-card-section>
         <q-card-section>
           <div class="text-subtitle2 q-mb-md">Ubicacion</div>
