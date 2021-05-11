@@ -95,7 +95,9 @@ export default {
       }, 1000);
     },
   },
-
+  mounted() {
+    window.scrollTo(0, 0);
+  },
   beforeDestroy() {
     clearTimeout(this.timer);
   },
