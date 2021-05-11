@@ -23,12 +23,7 @@
         </div>
         <div class="col">
           <div class="justify-center row">
-            <q-btn flat round dense icon="chat_bubble_outline" color="black" />
-          </div>
-        </div>
-        <div class="col">
-          <div class="justify-center row">
-            <q-btn flat round dense icon="favorite_border" color="black" />
+            <q-btn flat round dense icon="o_explore" color="black" />
           </div>
         </div>
         <div class="col">
@@ -37,7 +32,19 @@
               flat
               round
               dense
-              icon="o_location_on"
+              icon="favorite_border"
+              color="black"
+              to="/favorites"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="justify-center row">
+            <q-btn
+              flat
+              round
+              dense
+              icon="o_near_me"
               color="black"
               to="/nearby"
             />

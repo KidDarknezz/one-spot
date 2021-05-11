@@ -276,7 +276,7 @@ export default {
 
     showLoading() {
       if (this.selectedEvent) return false;
-      else return true;
+      else return false;
     },
   },
   mounted() {
