@@ -26,6 +26,7 @@ import RecommendedView from "@/views/RecommendedView";
 import SearchEventsView from "@/views/SearchEventsView";
 import AccountProfileView from "@/views/AccountProfileView";
 import FavoritesView from '@/views/FavoritesView'
+import BrowseView from '@/views/BrowseView'
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -58,6 +59,14 @@ const routes = [
         path: "/",
         name: "OneSpot",
         component: Home,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/browse",
+        name: "BrowseView",
+        component: BrowseView,
         meta: {
           requiresAuth: true,
         },

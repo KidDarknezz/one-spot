@@ -23,7 +23,14 @@
         </div>
         <div class="col">
           <div class="justify-center row">
-            <q-btn flat round dense icon="o_explore" color="black" />
+            <q-btn
+              flat
+              round
+              dense
+              icon="o_explore"
+              color="black"
+              to="/browse"
+            />
           </div>
         </div>
         <div class="col">
