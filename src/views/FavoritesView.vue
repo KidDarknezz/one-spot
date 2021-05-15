@@ -20,7 +20,7 @@
 
       <q-separator />
 
-      <q-tab-panels v-model="tab" animated swipeable>
+      <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="favorites" class="q-px-none">
           <event-row />
           <event-row />

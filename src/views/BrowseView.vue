@@ -43,7 +43,7 @@
         <q-tab name="promoter" label="Promotor" no-caps class="q-py-sm" />
       </q-tabs>
 
-      <q-tab-panels v-model="tab" animated swipeable>
+      <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="events" class="q-pa-none">
           <div class="row bg-os-grey-medium q-pa-md">
             <div class="text-h6 os-semibold text-white">Descatados</div>
