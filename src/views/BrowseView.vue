@@ -50,11 +50,13 @@
             <q-space />
             <q-btn
               label="Ver más"
+              dense
               rounded
+              size="sm"
               flat
               color="white"
               no-caps
-              class="os-semibold"
+              class="q-px-sm os-semibold"
             />
           </div>
           <div class="bg-os-grey-dark">
@@ -76,11 +78,13 @@
             <q-space />
             <q-btn
               label="Ver más"
+              dense
               rounded
+              size="sm"
               flat
               color="white"
               no-caps
-              class="os-semibold"
+              class="q-px-sm os-semibold"
             />
           </div>
           <div class="bg-os-grey-dark">
@@ -120,8 +124,10 @@
               <q-btn
                 label="Ver más"
                 rounded
+                dense
+                size="sm"
                 flat
-                color="os-grey-dark"
+                color="q-px-sm os-grey-dark"
                 no-caps
                 class="os-semibold"
               />

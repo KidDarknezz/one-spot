@@ -18,7 +18,14 @@
       >
         <div class="col">
           <div class="justify-center row">
-            <q-btn flat round dense icon="o_home" color="black" to="/" />
+            <q-btn
+              flat
+              round
+              dense
+              :icon="$route.fullPath == '/' ? 'home' : 'o_home'"
+              :color="$route.fullPath == '/' ? 'os-pink' : 'os-grey-dark'"
+              to="/"
+            />
           </div>
         </div>
         <div class="col">
@@ -27,8 +34,8 @@
               flat
               round
               dense
-              icon="o_explore"
-              color="black"
+              :icon="$route.fullPath == '/browse' ? 'explore' : 'o_explore'"
+              :color="$route.fullPath == '/browse' ? 'os-pink' : 'os-grey-dark'"
               to="/browse"
             />
           </div>
@@ -39,8 +46,12 @@
               flat
               round
               dense
-              icon="favorite_border"
-              color="black"
+              :icon="
+                $route.fullPath == '/favorites' ? 'favorite' : 'favorite_border'
+              "
+              :color="
+                $route.fullPath == '/favorites' ? 'os-pink' : 'os-grey-dark'
+              "
               to="/favorites"
             />
           </div>
@@ -51,8 +62,8 @@
               flat
               round
               dense
-              icon="o_near_me"
-              color="black"
+              :icon="$route.fullPath == '/nearby' ? 'near_me' : 'o_near_me'"
+              :color="$route.fullPath == '/nearby' ? 'os-pink' : 'os-grey-dark'"
               to="/nearby"
             />
           </div>
@@ -63,7 +74,17 @@
               <q-avatar size="24px" v-if="activeUser && activeUser.profilePic">
                 <img :src="activeUser.profilePic" />
               </q-avatar>
-              <q-icon name="o_account_circle" v-else />
+              <q-icon
+                :name="
+                  $route.fullPath == '/nearby'
+                    ? 'o_account_circle'
+                    : 'account_circle'
+                "
+                :color="
+                  $route.fullPath == '/profile' ? 'os-pink' : 'os-grey-dark'
+                "
+                v-else
+              />
             </q-btn>
           </div>
         </div>
