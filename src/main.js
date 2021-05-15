@@ -10,7 +10,8 @@ import * as VueGoogleMaps from "vue2-google-maps";
 
 import LoadingOverlay from "@/components/LoadingOverlayComponent";
 import AnimationComponent from "@/components/AnimationComponent";
-import EventRowComponent from '@/components/EventRowComponent'
+import EventRowComponent from "@/components/EventRowComponent";
+import EventColumnComponent from "@/components/EventColumnComponent";
 
 Vue.config.productionTip = false;
 
@@ -35,6 +36,7 @@ firebase.initializeApp(firebaseConfig);
 Vue.component("loading-overlay", LoadingOverlay);
 Vue.component("animation-component", AnimationComponent);
 Vue.component("event-row", EventRowComponent);
+Vue.component("event-column", EventColumnComponent);
 
 new Vue({
   router,
