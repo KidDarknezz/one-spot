@@ -154,20 +154,11 @@
       </div>
 
       <VueSlickCarousel v-bind="settings">
-        <div
-          class="q-px-md text-white q-mb-lg"
+        <event-column
+          style="width: 43vw;"
           v-for="(highlight, i) in 5"
           :key="i"
-          style="width: 43vw;"
-        >
-          <img
-            src="@/assets/4_5_flyer.webp"
-            width="100%"
-            class="os-rounded-border q-mb-sm"
-          />
-          <div class="text-subtitle2 os-semibold">Event Title</div>
-          <div class="text-caption">Event Sub-Title</div>
-        </div>
+        />
       </VueSlickCarousel>
     </div>
     <!-- /THIS WEEK & SPOTLIGHT -->
@@ -226,7 +217,6 @@ export default {
   data() {
     return {
       searchDialog: false,
-      slides: 7,
       slide: 1,
       settings: {
         infinite: true,
