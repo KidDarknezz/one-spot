@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="q-pa-md">
-      <div class="text-subtitle2 os-semibold text-os-grey-dark q-mb-sm">
+      <div class="text-subtitle2 os-semibold text-os-grey-dark">
         Acerca
       </div>
       <div class="text-body2 q-mb-md">
@@ -53,19 +53,19 @@
         suscipit ullamcorper purus et varius. Quisque fringilla vestibulum
         gravida.
       </div>
-      <div class="text-subtitle2 os-semibold text-os-grey-dark q-mb-sm">
+      <div class="text-subtitle2 os-semibold text-os-grey-dark">
         Ubicación
       </div>
       <div class="text-body2 q-mb-md">
         Calle 50
       </div>
-      <div class="text-subtitle2 os-semibold text-os-grey-dark q-mb-sm">
+      <div class="text-subtitle2 os-semibold text-os-grey-dark">
         Contacto
       </div>
       <div class="text-body2 q-mb-md">
         +507 236-1111 / contacto@showpro.com
       </div>
-      <div class="text-subtitle2 os-semibold text-os-grey-dark q-mb-sm">
+      <div class="text-subtitle2 os-semibold text-os-grey-dark">
         Website
       </div>
       <div class="text-body2 q-mb-md">
@@ -74,7 +74,7 @@
     </div>
     <q-separator />
     <div class="text-h6 os-semibold text-os-grey-dark q-pa-md">
-      Eventos proximos
+      Proximos eventos
     </div>
     <event-row />
     <event-row />
