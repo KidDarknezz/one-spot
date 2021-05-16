@@ -179,7 +179,13 @@
         </q-tab-panel>
         <q-tab-panel name="promoter" class="q-pa-none">
           <q-list>
-            <q-item clickable v-ripple v-for="(promoter, i) in 5" :key="i">
+            <q-item
+              clickable
+              v-ripple
+              v-for="(promoter, i) in 5"
+              :key="i"
+              to="/promoter"
+            >
               <q-item-section avatar>
                 <q-avatar size="50px">
                   <img src="https://cdn.quasar.dev/img/avatar.png" />
@@ -261,6 +267,9 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0);
+    const urlParams = window.location.search;
+    const params = new URLSearchParams(urlParams);
+    if (params.get("tab") == "promoter") this.tab = "promoter";
   },
 };
 </script>

@@ -25,8 +25,9 @@ import NearbyEventsView from "@/views/NearbyEventsView";
 import RecommendedView from "@/views/RecommendedView";
 import SearchEventsView from "@/views/SearchEventsView";
 import AccountProfileView from "@/views/AccountProfileView";
-import FavoritesView from '@/views/FavoritesView'
-import BrowseView from '@/views/BrowseView'
+import FavoritesView from "@/views/FavoritesView";
+import BrowseView from "@/views/BrowseView";
+import PromoterProfile from "@/views/PromoterProfileView";
 
 //FIREBASE
 import firebase from "firebase/app";
@@ -115,6 +116,14 @@ const routes = [
         path: "/profile",
         name: "AccountProfile",
         component: AccountProfileView,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/promoter",
+        name: "PromoterProfile",
+        component: PromoterProfile,
         meta: {
           requiresAuth: true,
         },
