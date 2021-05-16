@@ -178,7 +178,23 @@
           </q-list>
         </q-tab-panel>
         <q-tab-panel name="promoter" class="q-pa-none">
-          promoter
+          <q-list>
+            <q-item clickable v-ripple v-for="(promoter, i) in 5" :key="i">
+              <q-item-section avatar>
+                <q-avatar size="50px">
+                  <img src="https://cdn.quasar.dev/img/avatar.png" />
+                </q-avatar>
+              </q-item-section>
+              <q-item-section>
+                <div class="text-h6 os-bold text-os-grey-dark">
+                  SHOW PRO PANAMA
+                </div>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-icon color="os-grey-dark" name="navigate_next" />
+              </q-item-section>
+            </q-item>
+          </q-list>
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
