@@ -215,7 +215,7 @@ export default {
   data() {
     return {
       search: null,
-      tab: "events",
+      tab: this.returnTab(),
       settings: {
         infinite: true,
         slidesToShow: 1,
@@ -262,14 +262,19 @@ export default {
       ],
     };
   },
+  methods: {
+    returnTab() {
+      const urlParams = window.location.search;
+      const params = new URLSearchParams(urlParams);
+      if (params.get("tab")) return params.get("tab");
+      else return "events";
+    },
+  },
   components: {
     VueSlickCarousel,
   },
   mounted() {
     window.scrollTo(0, 0);
-    const urlParams = window.location.search;
-    const params = new URLSearchParams(urlParams);
-    if (params.get("tab") == "promoter") this.tab = "promoter";
   },
 };
 </script>
