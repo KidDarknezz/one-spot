@@ -138,7 +138,44 @@
           </div>
         </q-tab-panel>
         <q-tab-panel name="categories" class="q-pa-none">
-          categories
+          <div class="text-h6 text-os-grey-dark os-semibold q-pa-md">Tags</div>
+          <div class="row q-px-sm q-mb-lg">
+            <div class="col q-px-sm">
+              <div class="os-cat-cta">Aire Libre</div>
+            </div>
+            <div class="col q-px-sm">
+              <div class="os-cat-cta">Discotecas</div>
+            </div>
+            <div class="col q-px-sm">
+              <div class="os-cat-cta">Bares</div>
+            </div>
+            <div class="col q-px-sm">
+              <div class="os-cat-cta-selected">Ver más</div>
+            </div>
+          </div>
+          <q-list>
+            <q-item
+              clickable
+              v-ripple
+              v-for="category in categories"
+              :key="category.value"
+            >
+              <q-item-section avatar>
+                <img
+                  :src="require(`@/assets/categories/${category.image}`)"
+                  class="os-rounded-border"
+                />
+              </q-item-section>
+              <q-item-section>
+                <div class="text-h6 os-bold text-os-grey-dark">
+                  {{ category.label }}
+                </div>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-icon color="os-grey-dark" name="navigate_next" />
+              </q-item-section>
+            </q-item>
+          </q-list>
         </q-tab-panel>
         <q-tab-panel name="promoter" class="q-pa-none">
           promoter
@@ -164,6 +201,43 @@ export default {
         variableWidth: true,
         arrows: false,
       },
+      categories: [
+        {
+          value: "concerts",
+          label: "Conciertos",
+          image: "OS21_APP_Categories_Conciertos.png",
+        },
+        {
+          value: "family",
+          label: "Familia",
+          image: "OS21_APP_Categories_Familia.png",
+        },
+        {
+          value: "sports",
+          label: "Deportes",
+          image: "OS21_APP_Categories_Deportes.png",
+        },
+        {
+          value: "theatre",
+          label: "Teatro",
+          image: "OS21_APP_Categories_Teatro.png",
+        },
+        {
+          value: "culture",
+          label: "Cultura",
+          image: "OS21_APP_Categories_Cultura.png",
+        },
+        {
+          value: "conferences",
+          label: "Conferencias",
+          image: "OS21_APP_Categories_Conferencias.png",
+        },
+        {
+          value: "nightlife",
+          label: "Nightlife",
+          image: "OS21_APP_Categories_Night-Life.png",
+        },
+      ],
     };
   },
   components: {
